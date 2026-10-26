@@ -1,66 +1,95 @@
-# 复现步骤
+# 续训、参数与常见问题
 
-## 已测试环境
+安装、数据准备、训练、评估和视频导出的完整步骤见 [README](../README.md)。以下补充续训命令和排查时常用的配置位置。
 
-Linux、Python 3.12、RTX 4090 24 GB；训练使用 MJWarp，CPU 评估使用 MuJoCo。
-核心版本：UniLab 1.5.1、UniSim Core 2.1.1、MuJoCo / MuJoCo Warp 3.11.0、Warp 1.16.0、PyTorch 2.14.1（CUDA 13.0 构建）。精确包快照见 [requirements-tested-cloud.txt](../requirements-tested-cloud.txt)。原上游 `uv.lock` 保留作上游记录，不等于本次云端环境的锁文件。
+## 续训
 
-```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-# PyTorch/CUDA 构建按本机驱动选取；快照记录了本次训练版本。
-python -m pip install -r requirements-tested-cloud.txt
-python -m pip install -e .
-python -m pip install scipy osqp
-```
+`last.pt` 保存优化器等状态，用于接着同一个训练阶段继续训练。`ckpt_*.pt` 只保存世界模型和策略权重，用于评估或初始化另一阶段。
 
-该项目直接运行仿真，不需要连接 RDK。RPO 的 MJWarp 训练和 CPU MuJoCo 评估经过测试；未验证 RPO 耦合模型的 Motrix 后端。
-
-## 数据准备
-
-源数据受各自条款限制，仓库没有附带参考 CSV 或权重。先阅读 [THIRD_PARTY.md](../THIRD_PARTY.md)，从原始提供方获得使用/转换授权后准备：
-
-- 跑步：Lafan1_retarget 的 G1 `run1_subject2.csv`（30 Hz）。
-- 后空翻：chunwan-flip 的 G1 `90_19_stageii_unitree_g1.csv`（30 Hz；CMU 90_19 / AMASS）。
-
-这两条路径由使用者指定；脚本不会代为接受数据许可。G1→RPO 使用命名关节 IK、足部净空保持与约束时间平滑。后空翻的“人体→G1”由源数据提供方使用 GMR 完成，本项目执行“G1→RPO”，不声称直接使用 GMR 完成人体到 RPO 的训练。
+例如，将后空翻的并联踝微调接着训练到 5000 iterations：
 
 ```bash
-python tools/rpo/retarget_public_motions.py   --run-source /path/to/authorized/run1_subject2.csv   --backflip-source /path/to/authorized/90_19_stageii_unitree_g1.csv
+CUDA_VISIBLE_DEVICES=0 unisupermimic-train \
+  task=rpo_super_mimic/mjwarp \
+  algo.resume=true \
+  algo.load_run=runs/rpo_backflip_v2 \
+  algo.checkpoint=last.pt \
+  algo.iterations=5000 \
+  algo.num_envs=1024 \
+  'algo.wm_hidden=[1024,1024,1024]' \
+  'algo.policy_hidden=[1024,512,256,128]' \
+  algo.wm_batch=1024 algo.pi_batch=1024 algo.wm_batches=10 \
+  algo.wm_only_iters=500 algo.ckpt_every=500 algo.log_every=25 \
+  env.scene.model_file=src/unisupermimic/assets/robots/rpo/scene_supermimic_coupled.xml \
+  env.commands.motion.mjcf_path=src/unisupermimic/assets/robots/rpo/supermimic_coupled.xml \
+  'env.commands.motion.motion_files=[src/unisupermimic/assets/motions/rpo/backflip_reference.csv]'
 ```
 
-输出位于 `src/unisupermimic/assets/motions/rpo/`：50 Hz、每帧 30 列，依次为 root XYZ、root quaternion XYZW、23 个命名关节角。关节顺序见 `results/reference_manifest.json`，与电机零点/硬件总线顺序不能直接混用。并联电机参考转速平滑上限 7 rad/s 是参考生成约束，不保证实际动力学转速始终满足。
+`algo.iterations=5000` 是这一阶段的总迭代数。续训沿用原来的模型、动作、网络与采样参数；修改过参数的 run，以它自己的 `run_config.json` 为准。续训时不传 `training.init_checkpoint`。
 
-## 训练
+基线到耦合模型的微调使用 `training.init_checkpoint`：只加载网络权重，优化器和采样缓冲区重新建立。`tools/rpo/train_rpo.sh` 会在 `initializers/` 找到对应权重后添加这个参数；没有找到时会从头训练耦合模型。
 
-此次实验先进行独立执行器基线，再从基线热启动耦合模型微调。以下命令重现阶段与参数，训练数值不保证逐位相同；两个任务分别使用独立权重。
+## 参数位置
 
-```bash
-bash tools/rpo/train_rpo.sh run 6000 independent
-bash tools/rpo/train_rpo.sh backflip 5000 independent
-mkdir -p initializers
-cp runs/rpo_run_v1/last.pt initializers/rpo_run_v1_last.pt
-cp runs/rpo_backflip_v1/last.pt initializers/rpo_backflip_v1_last.pt
-bash tools/rpo/train_rpo.sh run 2500 coupled
-bash tools/rpo/train_rpo.sh backflip 2500 coupled
-```
+| 修改内容 | 文件 |
+| --- | --- |
+| 关节顺序、默认角度、PD 增益、动作缩放 | [robot.py](../src/unisupermimic/tasks/motion_tracking/rpo/supermimic/robot.py) |
+| 世界模型/策略网络、batch、环境数、checkpoint 间隔 | [train_rpo.sh](../tools/rpo/train_rpo.sh) |
+| 动作路径、采样频率、随机化、终止条件 | [base.yaml](../src/unisupermimic/conf/supermimic/task/rpo_super_mimic/base.yaml) |
+| 参考数据字段与插值 | [motion.py](../src/unisupermimic/tasks/motion_tracking/rpo/supermimic/motion.py) |
+| 可微奖励与关节/转速惩罚 | [mdp.py](../src/unisupermimic/tasks/motion_tracking/rpo/supermimic/mdp.py) |
+| 并联踝几何与 ±27 Nm 电机扭矩限幅 | [parallel.py](../src/unisupermimic/tasks/motion_tracking/rpo/supermimic/parallel.py) |
+| 每个 4 ms 子步的 PD 控制 | [coupled_backend.py](../src/unisupermimic/tasks/motion_tracking/rpo/supermimic/coupled_backend.py) |
+| 质量、惯量、碰撞、关节范围 | [RPO 模型目录](../src/unisupermimic/assets/robots/rpo/) |
 
-每任务 1024 环境；世界模型 `[1024,1024,1024]`，策略 `[1024,512,256,128]`；历史 10 帧、未来参考 10 帧；物理步长 4 ms、控制步长 20 ms。耦合阶段每物理子步计算 PD，并在并联电机空间作 ±27 Nm 饱和后映射回关节。工作空间无效会终止，转速使用惩罚项，尚未构建实测转矩-转速包络。
+23 个策略关节不等于硬件电机编号；并联踝由两个电机共同驱动。参考 CSV 使用模型关节角，不能直接作为电机零点角度下发。
 
-本次两任务在一张 4090 上并行训练，基线加微调至停止约 79.8 分钟，选中两份微调第 2500 次 checkpoint；不包含环境搭建、模型适配、重定向和验收时间。
+## 扰动测试
 
-## 本地权重复播与评估
+`evaluate_trials.py --trials 8 --scale 0.15` 使用 seed 101–108，从参考首帧开始测试。初始扰动范围：
 
-自行训练后，将所选 checkpoint 和同目录 `run_config.json`、`policy_contract.json` 复制到 `results/running/` 或 `results/backflip/`；文件名使用 `ckpt_002500.pt`。保留本地参考 CSV，确保与 `motion_provenance.json`/SHA256 对应。
+| 项目 | 范围 |
+| --- | --- |
+| 关节角 | ±0.015 rad |
+| 根部 roll / pitch | ±0.015 rad |
+| 根部 yaw | ±0.03 rad |
+| 根部 X / Y 位置 | ±0.0075 m |
+| 根部 XYZ 线速度 | ±[0.075, 0.075, 0.03] m/s |
+| 根部 XYZ 角速度 | ±[0.078, 0.078, 0.117] rad/s |
 
-```bash
-bash tools/rpo/replay_result.sh run eval
-bash tools/rpo/replay_result.sh backflip video
-python tools/rpo/evaluate_trials.py   --ckpt results/backflip/ckpt_002500.pt --trials 8 --scale 0.15   --output outputs/backflip_acceptance.json
-```
+两个动作都要求执行完整段、没有提前终止，另有动作判据：
 
-评估固定从参考首帧开始，不依赖随机挑选有利帧。8 次试验使用 seed 101–108：关节 ±0.015 rad，根部 roll/pitch ±0.015 rad、yaw ±0.03 rad，XY ±7.5 mm，以及轻微根部初速度。跑步要求完成全片且沿参考方向进度 >80%；后空翻要求完成全片、累计身体 pitch 旋转 <−5 rad、末 0.5 秒平均根部速度 <0.25 m/s。这些只覆盖轻微初始扰动。
+- 跑步：沿参考位移方向的进度超过参考的 80%。
+- 后空翻：累计身体 pitch 旋转小于 −5 rad，末 0.5 秒平均根部速度小于 0.25 m/s。
 
-## 当前边界
+这组测试检查轻微初始扰动下的动作完成情况，不覆盖外力推搡和实机误差。原始结果见 [acceptance_summary.json](../results/acceptance_summary.json)。
 
-这是固定动作参考跟踪，不是摇杆速度指令跑步控制器；后空翻以蹲姿结束，没有起身恢复。尚未导出/接入 RDK，没有实机后空翻测试。实际仿真中踝电机瞬时速度会超过 URDF 标称 8 rad/s；电机转矩-转速曲线、间隙、柔性和惯量细节仍需辨识。请把这里的结果用于仿真研究。
+## 常见问题
+
+### 找不到参考 CSV
+
+先运行重定向脚本，确认 `src/unisupermimic/assets/motions/rpo/` 下有 `run_reference.csv`、`backflip_reference.csv`。`results/` 中的 JSON 是实验记录，不包含参考数据。
+
+### 启动后加载了 G1
+
+`unisupermimic-train` 默认任务仍是上游 G1。RPO 训练使用 `tools/rpo/train_rpo.sh`，或在完整训练命令中指定 `task=rpo_super_mimic/mjwarp`。上游的 `unisupermimic-eval` 和 `unisupermimic-video` 也是 G1 入口；RPO 使用 README 中的 Python 模块入口。
+
+### 微调没有加载基线
+
+检查文件名是否为 `initializers/rpo_run_v1_last.pt` 或 `initializers/rpo_backflip_v1_last.pt`。成功加载时终端会显示 `Warm start from iteration ...`。
+
+### 评估提示模型、动作或网络配置不一致
+
+保留 checkpoint 同目录的 `run_config.json`、`policy_contract.json`，并使用对应的参考 CSV。不要把 `results/` 中另一份实验配置覆盖到新权重目录。修改过模型、参考动作或关节顺序后，需要重新核对策略输入输出。
+
+### 显存不足
+
+在 `tools/rpo/train_rpo.sh` 中调低 `algo.num_envs`、`algo.wm_batch`、`algo.pi_batch`。改动后属于新的训练配置，保存对应日志即可。
+
+### 视频导出提示 EGL 初始化失败
+
+先检查 `nvidia-smi` 与 NVIDIA EGL/OpenGL 驱动是否可用。无显示器的 GPU 服务器使用 `MUJOCO_GL=egl`；有桌面显示环境时可尝试 `MUJOCO_GL=glfw`。
+
+### 需要把自己训练的权重放到 results 下复播
+
+README 中的评估和导出命令可以直接使用 `runs/` 内的 checkpoint。已有的 `replay_result.sh` 是本次实验的快捷入口，固定读取 `results/running/ckpt_002500.pt` 和 `results/backflip/ckpt_002500.pt`；使用它时，也要复制同一次训练的配置和契约。
