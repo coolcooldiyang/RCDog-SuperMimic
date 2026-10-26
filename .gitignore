@@ -18,3 +18,17 @@ outputs/
 *.pt
 src/unisupermimic/assets/robots/g1/assets/
 src/unisupermimic/assets/motions/
+
+# Research inputs and local outputs are not part of the public release.
+data/source/
+initializers/
+results/**/*.pt
+results/**/*.npz
+*.so
+.env
+.env.*
+*.pem
+*.key
+*.tar.gz
+torchinductor_cache/
+triton_cache/

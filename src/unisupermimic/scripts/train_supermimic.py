@@ -1,3 +1,4 @@
+# Modified 2026-10-26 for RPO motion tracking; see CHANGES_RPO.md.
 """SuperMimic training and deterministic full-library evaluation entrypoint."""
 
 from __future__ import annotations
@@ -150,6 +151,7 @@ def main(cfg: DictConfig) -> None:
                     str(cfg.training.sim_backend), env_override
                 ),
                 "seed": seed_info.to_dict(),
+                "init_checkpoint": OmegaConf.select(cfg, 'training.init_checkpoint'),
             },
             full_cfg=cfg,
             contract_snapshot=extract_contract_snapshot(cfg),
@@ -187,6 +189,16 @@ def main(cfg: DictConfig) -> None:
             device=str(device),
             backend=str(cfg.training.sim_backend),
         )
+        initial = OmegaConf.select(cfg, 'training.init_checkpoint')
+        if initial is not None:
+            if checkpoint is not None:
+                raise ValueError('init_checkpoint and resume are mutually exclusive')
+            weights = torch.load(Path(str(initial)), map_location=device, weights_only=True)
+            learner.wm.load_state_dict(weights['wm'])
+            learner.pi.load_state_dict(weights['pi'])
+            if 'critic' in weights:
+                learner.critic.load_state_dict(weights['critic'])
+            print(f"Warm start from iteration {weights['iteration']}; new physics replay and optimizer state.")
         summary = learner.train(resume=checkpoint)
         print(json.dumps(summary, indent=2))
     finally:

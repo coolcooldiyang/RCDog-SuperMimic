@@ -1,0 +1,15 @@
+{
+  "norm_return": 0.8809219002723694,
+  "norm_return_framew": 0.8809219002723694,
+  "n_failed": 0,
+  "failed": [],
+  "per_clip": {
+    "run_reference": {
+      "norm_return": 0.8809219002723694,
+      "steps": 398,
+      "failed": false
+    }
+  },
+  "iteration": 2500,
+  "train_wall_h": 0.36784168481826784
+}

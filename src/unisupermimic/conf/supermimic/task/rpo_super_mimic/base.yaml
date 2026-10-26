@@ -1,0 +1,180 @@
+# @package _global_
+env:
+  seed: null
+  scene:
+    model_file: src/unisupermimic/assets/robots/rpo/scene_supermimic.xml
+    default_keyframe_name: stand
+    entities:
+      robot:
+        root_body_name: base_link
+        joint_names:
+        - left_thigh_yaw_joint
+        - left_thigh_roll_joint
+        - left_thigh_pitch_joint
+        - left_knee_joint
+        - left_ankle_pitch_joint
+        - left_ankle_roll_joint
+        - right_thigh_yaw_joint
+        - right_thigh_roll_joint
+        - right_thigh_pitch_joint
+        - right_knee_joint
+        - right_ankle_pitch_joint
+        - right_ankle_roll_joint
+        - torso_joint
+        - left_arm_pitch_joint
+        - left_arm_roll_joint
+        - left_arm_yaw_joint
+        - left_elbow_pitch_joint
+        - left_elbow_yaw_joint
+        - right_arm_pitch_joint
+        - right_arm_roll_joint
+        - right_arm_yaw_joint
+        - right_elbow_pitch_joint
+        - right_elbow_yaw_joint
+        actuator_names:
+        - left_thigh_yaw_joint
+        - left_thigh_roll_joint
+        - left_thigh_pitch_joint
+        - left_knee_joint
+        - left_ankle_pitch_joint
+        - left_ankle_roll_joint
+        - right_thigh_yaw_joint
+        - right_thigh_roll_joint
+        - right_thigh_pitch_joint
+        - right_knee_joint
+        - right_ankle_pitch_joint
+        - right_ankle_roll_joint
+        - torso_joint
+        - left_arm_pitch_joint
+        - left_arm_roll_joint
+        - left_arm_yaw_joint
+        - left_elbow_pitch_joint
+        - left_elbow_yaw_joint
+        - right_arm_pitch_joint
+        - right_arm_roll_joint
+        - right_arm_yaw_joint
+        - right_elbow_pitch_joint
+        - right_elbow_yaw_joint
+        body_names:
+        - base_link
+        - left_thigh_roll_link
+        - left_knee_link
+        - left_ankle_roll_link
+        - right_thigh_roll_link
+        - right_knee_link
+        - right_ankle_roll_link
+        - torso_link
+        - left_arm_roll_link
+        - left_elbow_pitch_link
+        - left_elbow_yaw_link
+        - right_arm_roll_link
+        - right_elbow_pitch_link
+        - right_elbow_yaw_link
+      ground:
+        geom_names:
+        - floor
+  sim_dt: 0.004
+  ctrl_dt: 0.02
+  max_episode_seconds: 10.0
+  auto_reset: true
+  scale_rewards_by_dt: false
+  observations:
+    policy:
+      enable_corruption: false
+      terms:
+        obs:
+          func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_obs
+          params:
+            command_name: motion
+    future:
+      enable_corruption: false
+      terms:
+        goal:
+          func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_goal
+          params:
+            command_name: motion
+            num_frames: 10
+  actions:
+    joint_pos:
+      _target_: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.SuperMimicActionCfg
+      entity_name: robot
+      command_name: motion
+  commands:
+    motion:
+      _target_: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.SuperMimicCommandCfg
+      entity_name: robot
+      mjcf_path: src/unisupermimic/assets/robots/rpo/supermimic.xml
+      eval_mode: false
+      gamma: 0.99
+      src_fps: 50
+      reset_noise: true
+      max_episode_steps: 500
+      goal_frames: 10
+      context_dim: 27
+      resampling_time_range:
+      - 1.0e9
+      - 1.0e9
+      motion_files:
+      - src/unisupermimic/assets/motions/rpo/run_reference.csv
+  events:
+    startup_context:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.SuperMimicContextEvent
+      mode: startup
+      params:
+        command_name: motion
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+        ground_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: ground
+          geom_names:
+          - floor
+    reset_context:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.SuperMimicContextEvent
+      mode: reset
+      params:
+        command_name: motion
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+        ground_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: ground
+          geom_names:
+          - floor
+    joint_offsets:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.SuperMimicJointOffsetEvent
+      mode: reset
+      params:
+        command_name: motion
+  terminations:
+    hard:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_termination
+      params:
+        command_name: motion
+    timeout:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_timeout
+      time_out: true
+      params:
+        command_name: motion
+    clip_end:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_clip_end
+      time_out: true
+      params:
+        command_name: motion
+  policy_observation_group: policy
+  critic_observation_group: future
+reward:
+  tracking:
+    _target_: unilab.managers.RewardTermCfg
+    func: unisupermimic.tasks.motion_tracking.rpo.supermimic.manager_terms.supermimic_reward
+    weight: 1.0
+    params:
+      command_name: motion

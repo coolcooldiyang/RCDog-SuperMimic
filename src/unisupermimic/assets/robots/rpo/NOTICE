@@ -1,0 +1,16 @@
+RPO model sources: RoboParty / RPO contributors.
+Source locations:
+https://github.com/Roboparty/rpo_description
+https://github.com/Roboparty/roboto_origin
+https://github.com/Roboparty/roboparty_train
+
+The robot visual meshes and model geometry originate from RoboParty's RPO
+models. Preserve CERN-OHL-W-2.0 for the model geometry and the RoboLab
+BSD-3-Clause notices for the training URDF source. These assets are not
+relicensed by the software package's GPL or upstream Apache license.
+
+Modified 2026-10-26 for this RPO experiment: floating root, 23 actuated joints,
+training collision groups, hand tracking sites, official joint ranges and
+coupled motor-actuation variants. Original mesh geometry is retained.
+The modified MJCF, mesh files and source URDF are included in this directory.
+License copies are supplied under LICENSES/ at repository root.

@@ -1,0 +1,7 @@
+{
+  "jacobian_max_abs_error": 9.769962616701378e-15,
+  "valid_comparisons": 600,
+  "nonfinite_cpp_rejected": 0,
+  "saturated_torque_max_error_Nm": 2.842170943040401e-14,
+  "torque_comparisons": 200
+}

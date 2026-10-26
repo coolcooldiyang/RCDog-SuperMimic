@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /task/rpo_super_mimic/base
+  - _self_
+
+training:
+  task_name: RPOSuperMimic
+  sim_backend: motrix
+
+env:
+  events:
+    startup_context:
+      params:
+        randomize_friction: false
+    reset_context:
+      params:
+        randomize_friction: false

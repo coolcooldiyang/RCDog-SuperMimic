@@ -1,0 +1,69 @@
+{
+  "target": "RPO 23-DoF",
+  "framework": "Uni-SuperMimic",
+  "framework_commit": "faf7818e8abac3ec6abb8f00e6e904d3577f800b",
+  "data_sources": {
+    "running": {
+      "repository": "https://github.com/wenconggan/Lafan1_retarget",
+      "commit": "57e5a1921417bf826697f87ba33adb248d4d177f",
+      "clip": "run1_subject2",
+      "source_frames": [
+        4110,
+        4350
+      ]
+    },
+    "backflip": {
+      "repository": "https://github.com/lez666/chunwan-flip",
+      "commit": "c493a897f2ca81153e980a65ee6f0faf7cb07487",
+      "clip": "90_19_stageii_unitree_g1",
+      "origin": "CMU/AMASS via GMR"
+    }
+  },
+  "training_data": "publicly accessible; no BONES-SEED credentials or restricted data used",
+  "gpu": "one NVIDIA RTX 4090 24 GB",
+  "training": {
+    "separate_motion_policies": true,
+    "num_envs": 1024,
+    "wm_hidden": [
+      1024,
+      1024,
+      1024
+    ],
+    "policy_hidden": [
+      1024,
+      512,
+      256,
+      128
+    ],
+    "initial_iterations_per_motion": 12000,
+    "checkpoint_every": 500,
+    "active_version": "v2",
+    "initial_weights": {
+      "running": "v1 iteration 6000",
+      "backflip": "v1 iteration 5000"
+    },
+    "motor_model": "PD at every 4 ms physics substep; RDK parallel Jacobian and 27 Nm motor-space saturation",
+    "additional_constraints": [
+      "invalid parallel workspace terminates the episode",
+      "nominal motor speed and workspace penalties"
+    ],
+    "status": "completed_in_simulation",
+    "selected_iteration": 2500,
+    "early_stop_reason": "Both selected policies passed 8 seeded perturbation trials and semantic action checks."
+  },
+  "validation": {
+    "math": "data/math_validation.json",
+    "runtime": "cloud smoke_mujoco.log, smoke_mjwarp.log, smoke_learner.log",
+    "parallel_reference_speed": "data/parallel_ankle_reference_check.json",
+    "parallel_torch": "data/torch_parallel_validation.json",
+    "coupled_runtime": "CPU 50 substeps vs deployed C++ mapping: max qpos error 1.37e-7, max qvel error 5.60e-6; GPU 100-step and learner backprop smoke tests pass"
+  },
+  "limitations": [
+    "Reference IK is kinematic; a valid reference is not proof of dynamic tracking.",
+    "Motor inertia, backlash, compliance and measured torque-speed curves are not identified.",
+    "URDF nominal velocity limits are metadata, not a measured electrical motor model.",
+    "No real robot validation or deployment in this task."
+  ],
+  "hardware_ready": false,
+  "results": "results/acceptance_summary.json"
+}

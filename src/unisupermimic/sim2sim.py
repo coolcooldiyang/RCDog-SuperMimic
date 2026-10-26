@@ -1,3 +1,4 @@
+# Modified 2026-10-26 for RPO motion tracking; see CHANGES_RPO.md.
 """SuperMimic policy-I/O contract snapshots and strict evaluation checks."""
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ from unilab.utils.sim2sim import (
 )
 
 SUPERMIMIC_DENYLIST = [
+    "env.scene.model_file",
     "algo.goal_frames",
     "algo.hist",
     "algo.z_dim",
@@ -96,7 +98,7 @@ def _asset_identity(value: Any) -> Any:
 
 def _normalize_contract_value(path: str, value: Any) -> Any:
     normalized = _normalize(value)
-    if path == "env.commands.motion.mjcf_path":
+    if path in ("env.commands.motion.mjcf_path", "env.scene.model_file"):
         return _asset_identity(normalized)
     if path == "env.commands.motion.motion_files" and isinstance(normalized, list):
         return [_asset_identity(item) for item in normalized]
@@ -136,7 +138,17 @@ def _read_snapshot(run_dir: Path) -> dict[str, Any]:
     snapshot = parsed.get("contract_snapshot")
     if not isinstance(snapshot, dict):
         raise _unsupported_snapshot(run_dir, "contract_snapshot is missing or is not a mapping.")
+    # Older snapshots omitted the scene path even though it selects actuator
+    # physics. Recover it only from the recorded full configuration.
+    if 'env.scene.model_file' not in snapshot:
+        model_file=parsed.get('config',{}).get('env',{}).get('scene',{}).get('model_file')
+        if model_file is not None:
+            snapshot['env.scene.model_file']=model_file
     return snapshot
+
+
+def read_contract_snapshot(run_dir: str | Path) -> dict[str, Any]:
+    return _read_snapshot(Path(run_dir))
 
 
 def resolve_sim2sim_config(
@@ -200,4 +212,5 @@ __all__ = [
     "extract_contract_snapshot",
     "policy_load_dim_guard",
     "resolve_sim2sim_config",
+    "read_contract_snapshot",
 ]

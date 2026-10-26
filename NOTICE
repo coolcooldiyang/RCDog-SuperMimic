@@ -11,3 +11,12 @@ preserved in LICENSES/MIT-supermimic.txt.
 SuperMimic paper:
 "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable
 World Model", Qiayuan Liao et al., https://supermimic.github.io
+
+RPO parallel ankle geometry (parallel.py): adapted from Roboparty decouple_rpo.cpp, Copyright (C) 2025-2026 Luo1imasi, GPL-3.0. See LICENSES/GPL-3.0-RPO-geometry.txt.
+
+RPO experiment adaptation, 2026-10-26.
+The combined RPO software release is distributed under GPL-3.0-only.
+Original Uni-SuperMimic portions retain their Apache-2.0 notices.
+RPO model geometry retains CERN-OHL-W-2.0; RoboLab URDF notices are retained.
+See THIRD_PARTY.md and CHANGES_RPO.md for sources, modifications and scope.
+Motion datasets and trained weights are not redistributed in this release.

@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /task/rpo_super_mimic/base
+  - _self_
+
+training:
+  task_name: RPOSuperMimic
+  sim_backend: mujoco
