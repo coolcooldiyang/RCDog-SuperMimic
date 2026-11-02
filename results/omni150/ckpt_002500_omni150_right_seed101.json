@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "completed": true,
+  "hard_termination": false,
+  "seed": 101,
+  "noise_rad": 0.0,
+  "frames": 451,
+  "target_twist": [
+    0.0,
+    -1.5,
+    0.0
+  ],
+  "measured_twist": [
+    -0.0009501858969254369,
+    -1.4994146811156963,
+    -0.0005577572298289731
+  ],
+  "displacement_xy_yaw": [
+    0.01179383544904901,
+    -8.647525434038595,
+    -0.04434835524323133
+  ],
+  "reference_displacement_xy_yaw": [
+    0.0,
+    -8.699999999999962,
+    0.0
+  ],
+  "speed_ok": true,
+  "displacement_ok": true,
+  "drift_ok": true,
+  "acceptance_fraction": 0.1,
+  "norm_return": 0.9412303631504376,
+  "diagonal_contact_agreement": 1.0,
+  "stance_phase_accuracy": 0.9722222222222222,
+  "air_fraction": [
+    0.4305555555555556,
+    0.42592592592592593,
+    0.42592592592592593,
+    0.4305555555555556
+  ],
+  "p95_clearance_m": [
+    0.023143881208703355,
+    0.024221235521607206,
+    0.02289743007964577,
+    0.028357340254737493
+  ],
+  "lift_events": [
+    16,
+    15,
+    15,
+    16
+  ],
+  "nonfoot_ground_frames": 0,
+  "max_joint_speed_rad_s": [
+    16.729634927601346,
+    8.41644267401488,
+    14.424341700044753,
+    16.204513340912936,
+    7.565861174480337,
+    14.056551626915029,
+    17.679704839877523,
+    8.216539745811549,
+    13.962149398423072,
+    15.795351621335328,
+    8.194848704470036,
+    14.438853315416228
+  ],
+  "max_joint_torque_Nm": [
+    23.7,
+    11.723751329455666,
+    25.45378979996421,
+    23.7,
+    12.857153874354314,
+    27.57034818987872,
+    23.7,
+    12.384611007201066,
+    23.075938748106726,
+    23.7,
+    12.65642191268291,
+    27.515502861572255
+  ],
+  "clip": "omni150_right",
+  "checkpoint": "results/omni150/ckpt_002500.pt",
+  "iteration": 2500,
+  "checkpoint_sha256": "6bcbcb23c3ce2717c7b48588f5c0959b7b7ed45ee091fe4cdad01d4e63d44fe6",
+  "reference_file": "src/unisupermimic/assets/motions/rcdog/omni150_right.csv",
+  "rollout_file": "local_sim2sim/omni150/ckpt_002500_omni150_right_seed101.npz",
+  "mujoco_version": "3.11.0",
+  "torch_version": "2.14.1+cu130",
+  "hardware_ready": false
+}

@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /task/rcdog_super_mimic/base
+  - _self_
+
+training:
+  task_name: RCDogSuperMimic
+  sim_backend: mjwarp
+
+env:
+  mjwarp_nconmax: 128
+  mjwarp_njmax: 500

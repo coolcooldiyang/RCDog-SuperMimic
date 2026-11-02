@@ -1,0 +1,53 @@
+{
+  "checkpoint": "results/omni150/ckpt_002500.pt",
+  "checkpoint_sha256": "6bcbcb23c3ce2717c7b48588f5c0959b7b7ed45ee091fe4cdad01d4e63d44fe6",
+  "clips": [
+    "omni150_forward",
+    "omni150_forward_left",
+    "omni150_left",
+    "omni150_back_left",
+    "omni150_back",
+    "omni150_back_right",
+    "omni150_right",
+    "omni150_forward_right",
+    "omni150_ccw",
+    "omni150_cw"
+  ],
+  "input_shapes": {
+    "obs_hist": [
+      1,
+      10,
+      48
+    ],
+    "goal": [
+      1,
+      390
+    ]
+  },
+  "output_shape": [
+    1,
+    12
+  ],
+  "verification_samples": 100,
+  "torchscript_max_abs_error": 0.0,
+  "hardware_ready": false,
+  "onnx_max_abs_error": 5.960464477539062e-07,
+  "onnx_opset": 17,
+  "onnxruntime": "1.23.2",
+  "files_sha256": {
+    "actor_fp32.onnx": "5b8571082f409833ee428f30ca134950bc5c5881080686d81e3918648a75987b",
+    "policy_contract.json": "7ebbd707cd18902484d8b3b8b13a3824993a047cd139bcf717caccef35a1b7c0",
+    "actor_fp32.ts": "524e0ece8755fa58b515a803f838c51af1a9a0884050641639cb068052c771e3",
+    "golden_inputs.npz": "508df3d9450330f87d0b5f3ed66abce1a2903e87acaf3e23e559d327ba1425f1",
+    "references/omni150_left.npz": "d4486121468436286f90b74e5041ecdd5d449543b6814dfcd1b611b11807867b",
+    "references/omni150_right.npz": "e507f7cc0096efd013f818e9151d40aab60df4c42e50ae29a7516b65a7bdb279",
+    "references/omni150_back_right.npz": "69ff4ce7ca3bf9b43c7e5a574d04a30054b55966db63ba9370e323499deb16ee",
+    "references/omni150_forward_left.npz": "6845ba2f4a56a12bde68f6ad6ab2645d0525202b8c5938736f5b038d11e03cc3",
+    "references/omni150_forward.npz": "857d55cf0255f749e6a80299ce84a5cc7a78e1c829d11994d254d711eae031f0",
+    "references/omni150_cw.npz": "a86e840da475f3a999254612c0b80e706e9c31cc6a946f9bee8e13aaa0deeaf9",
+    "references/omni150_back.npz": "a6fae44a5ea648518aec5ac76cd21cffb52ae8128c5395eea74a6962c93fb325",
+    "references/omni150_ccw.npz": "10b56218958177fd7c2a4a12f2580920fdd9dc15408861a1a6f9ac1dda7322b8",
+    "references/omni150_back_left.npz": "79e0408e853afa4ef857253e16e6c4d08fa4cfb5d463ddc768cdcb4a5e3dd18e",
+    "references/omni150_forward_right.npz": "ab7e32c08b87097d134f44e1002bfec6b2ac63cfc4945eedf6c0afd1b60c45ea"
+  }
+}

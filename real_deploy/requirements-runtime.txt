@@ -1,0 +1,6 @@
+# Offline ONNX verification and hardware-config checking; no motor controller.
+numpy==2.2.6
+onnxruntime==1.23.2
+PyYAML
+# Only needed to use the copied HI12 monitor.
+pyserial

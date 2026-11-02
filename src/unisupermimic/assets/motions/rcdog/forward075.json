@@ -1,0 +1,58 @@
+{
+  "name": "forward075",
+  "stage": "forward075",
+  "target_twist_world": [
+    0.75,
+    0.0,
+    0.0
+  ],
+  "period_seconds": 0.42,
+  "duty_factor": 0.6,
+  "clearance_m": 0.045,
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "steady_interval_seconds": [
+    2.0,
+    7.2
+  ],
+  "reference_displacement": [
+    4.649999999999971,
+    0.0,
+    0.0
+  ],
+  "max_ik_error_m": 2.9403183755518005e-09,
+  "max_joint_speed_rad_s": [
+    0.0483803556462453,
+    9.521832274104753,
+    6.522945120282243,
+    0.0539714925669882,
+    9.994031420448616,
+    6.483626964397075,
+    0.047784876754759266,
+    9.998355889695024,
+    6.480924263019184,
+    0.054644494298322716,
+    9.516482080225941,
+    6.525549088858611
+  ],
+  "leg_order": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "diagonal_pairs": [
+    [
+      "fl",
+      "rr"
+    ],
+    [
+      "fr",
+      "rl"
+    ]
+  ],
+  "source": "user URDF; procedural foot trajectories; bounded IK",
+  "sha256": "9ab0be395920b049ef02e0773fdb54ad425c90d5e3de8944f14bfb439e62abae",
+  "hardware_ready": false
+}

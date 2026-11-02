@@ -1,0 +1,267 @@
+{
+  "checkpoint": "results/omni150/ckpt_002500.pt",
+  "checkpoint_sha256": "6bcbcb23c3ce2717c7b48588f5c0959b7b7ed45ee091fe4cdad01d4e63d44fe6",
+  "joint_names": [
+    "rr_hip_joint",
+    "rr_thigh_joint",
+    "rr_calf_joint",
+    "rl_hip_joint",
+    "rl_thigh_joint",
+    "rl_calf_joint",
+    "fr_hip_joint",
+    "fr_thigh_joint",
+    "fr_calf_joint",
+    "fl_hip_joint",
+    "fl_thigh_joint",
+    "fl_calf_joint"
+  ],
+  "joint_order_legs": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "motor_id_per_leg": {
+    "hip": 1,
+    "thigh": 2,
+    "calf": 3
+  },
+  "q0_rad": [
+    -0.018335107193686445,
+    -0.13244422550420512,
+    -0.0011704234354192743,
+    0.02072457668668584,
+    0.1330973745532801,
+    -4.4055163179920176e-05,
+    0.01833510666804733,
+    -0.13214757138346628,
+    -0.001166977560049921,
+    -0.020724575436395665,
+    0.13280004814541338,
+    -4.433912579885794e-05
+  ],
+  "q0_deg": [
+    -1.0505242591181883,
+    -7.588495142269891,
+    -0.06706032309272708,
+    1.1874307763423182,
+    7.625917826174871,
+    -0.002524174915969569,
+    1.0505242290012853,
+    -7.571498113176391,
+    -0.06686288897733506,
+    -1.1874307047059678,
+    7.608882277866322,
+    -0.0025404447755741845
+  ],
+  "policy_period_s": 0.02,
+  "motor_period_s": 0.004,
+  "obs_hist_shape": [
+    1,
+    10,
+    48
+  ],
+  "goal_shape": [
+    1,
+    390
+  ],
+  "action_shape": [
+    1,
+    12
+  ],
+  "action_scale": 0.35,
+  "target_joint_clip_rad": [
+    -1.55,
+    1.55
+  ],
+  "joint_limits_rad": [
+    -1.57,
+    1.57
+  ],
+  "kp_joint": [
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0,
+    60.0
+  ],
+  "kd_joint": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0
+  ],
+  "effort_joint_Nm": [
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66
+  ],
+  "velocity_joint_rad_s": [
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05
+  ],
+  "extra_ratio": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2
+  ],
+  "obs_fields": [
+    {
+      "slice": [
+        0,
+        12
+      ],
+      "value": "q_joint-q0; rad"
+    },
+    {
+      "slice": [
+        12,
+        24
+      ],
+      "value": "dq_joint; rad/s, no manual scale"
+    },
+    {
+      "slice": [
+        24,
+        27
+      ],
+      "value": "gyro in URDF body frame C; rad/s"
+    },
+    {
+      "slice": [
+        27,
+        30
+      ],
+      "value": "gravity_C=-R_WC[2,:]"
+    },
+    {
+      "slice": [
+        30,
+        42
+      ],
+      "value": "previous raw action a_(t-1)"
+    },
+    {
+      "slice": [
+        42,
+        48
+      ],
+      "value": "R_WC.T @ R_ref(t), first two columns, row-major flatten"
+    }
+  ],
+  "reference_body_axes": {
+    "front": "-Y_C",
+    "left": "+X_C",
+    "up": "+Z_C"
+  },
+  "initial_R_WC": [
+    [
+      0,
+      -1,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "quat_order": "wxyz",
+  "manual_obs_scaling": false,
+  "normalization": "trained RunningNorm buffers are part of actor; do not normalize again",
+  "future_frames": "f+1 through f+10, clip-local end clamped",
+  "goal_frame_fields": [
+    {
+      "slice": [
+        0,
+        3
+      ],
+      "value": "reference position delta in current reference yaw frame"
+    },
+    {
+      "slice": [
+        3,
+        9
+      ],
+      "value": "reference orientation in current reference yaw frame; first two columns row-major"
+    },
+    {
+      "slice": [
+        9,
+        12
+      ],
+      "value": "future reference local root linear velocity"
+    },
+    {
+      "slice": [
+        12,
+        15
+      ],
+      "value": "future reference local root angular velocity"
+    },
+    {
+      "slice": [
+        15,
+        27
+      ],
+      "value": "future reference joint position"
+    },
+    {
+      "slice": [
+        27,
+        39
+      ],
+      "value": "future reference joint velocity times 0.1"
+    }
+  ],
+  "history_order": "oldest first, newest last",
+  "hardware_ready": false
+}

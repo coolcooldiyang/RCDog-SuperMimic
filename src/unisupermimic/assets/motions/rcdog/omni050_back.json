@@ -1,0 +1,46 @@
+{
+  "name": "omni050_back",
+  "stage": "omni050",
+  "target_twist_world": [
+    -0.5,
+    0.0,
+    0.0
+  ],
+  "period_seconds": 0.4,
+  "duty_factor": 0.6,
+  "clearance_m": 0.04,
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "steady_interval_seconds": [
+    2.5,
+    6.8
+  ],
+  "acceleration_seconds": 1.2,
+  "reference_displacement": [
+    -2.8999999999999875,
+    0.0,
+    0.0
+  ],
+  "max_ik_error_m": 3.845615344221041e-09,
+  "max_joint_speed_rad_s": [
+    0.044061672917696575,
+    6.711365482357238,
+    4.987475688736606,
+    0.049768688953801855,
+    6.707915298836381,
+    4.987250655357185,
+    0.044061671703134964,
+    6.7106440537579735,
+    4.987485543624665,
+    0.049768685969016256,
+    6.70720401666332,
+    4.9872598409829125
+  ],
+  "max_nominal_speed_fraction": 0.3313943882807086,
+  "self_penetration_frames": 0,
+  "worst_self_penetration_m": 0.0,
+  "source": "user URDF; procedural diagonal trot; bounded IK",
+  "hardware_ready": false,
+  "sha256": "65fcaeb8c8876c357b58f60f14d73b1d0248c4c2ca1de7bfb9cc8eee071e4c44"
+}

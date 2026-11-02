@@ -1,4 +1,5 @@
 .venv/
+.venv_local/
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -12,23 +13,18 @@ dist/
 *.egg-info/
 .tmp/
 .upstream/
-logs/
 runs/
+logs/
+evaluations/
+local_sim2sim/
 outputs/
-*.pt
-src/unisupermimic/assets/robots/g1/assets/
-src/unisupermimic/assets/motions/
-
-# Research inputs and local outputs are not part of the public release.
-data/source/
-initializers/
-results/**/*.pt
-results/**/*.npz
+torchinductor_cache/
+triton_cache/
+*.tar.gz
 *.so
 .env
 .env.*
 *.pem
 *.key
-*.tar.gz
-torchinductor_cache/
-triton_cache/
+hardware.local.yaml
+src/unisupermimic/assets/robots/g1/assets/

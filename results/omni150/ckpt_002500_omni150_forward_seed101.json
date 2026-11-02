@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "completed": true,
+  "hard_termination": false,
+  "seed": 101,
+  "noise_rad": 0.0,
+  "frames": 451,
+  "target_twist": [
+    1.5,
+    0.0,
+    0.0
+  ],
+  "measured_twist": [
+    1.5251780019829775,
+    0.025056622242514204,
+    0.002254049838752115
+  ],
+  "displacement_xy_yaw": [
+    8.836820832942525,
+    0.1433822756737569,
+    -0.01007761361283932
+  ],
+  "reference_displacement_xy_yaw": [
+    8.699999999999962,
+    0.0,
+    0.0
+  ],
+  "speed_ok": true,
+  "displacement_ok": true,
+  "drift_ok": true,
+  "acceptance_fraction": 0.1,
+  "norm_return": 0.9209553458624415,
+  "diagonal_contact_agreement": 0.9282407407407407,
+  "stance_phase_accuracy": 0.9641203703703703,
+  "air_fraction": [
+    0.5,
+    0.5,
+    0.42592592592592593,
+    0.4305555555555556
+  ],
+  "p95_clearance_m": [
+    0.023739733885276466,
+    0.022659131272207974,
+    0.024487205286926512,
+    0.023694546442050598
+  ],
+  "lift_events": [
+    16,
+    15,
+    15,
+    16
+  ],
+  "nonfoot_ground_frames": 0,
+  "max_joint_speed_rad_s": [
+    1.3744756069512545,
+    16.14526639195553,
+    8.433628349041339,
+    1.5959526174371195,
+    16.76220282025076,
+    8.36439502867911,
+    1.7949653625439104,
+    17.36475517676725,
+    8.157116386952499,
+    1.8393177666490517,
+    16.93124133571616,
+    8.556130727646881
+  ],
+  "max_joint_torque_Nm": [
+    5.692599135829306,
+    23.7,
+    22.182545661551192,
+    6.384847512136323,
+    23.7,
+    22.660810452881844,
+    7.289422651543068,
+    23.7,
+    21.504867077029534,
+    7.498200261372592,
+    23.7,
+    21.116744699702593
+  ],
+  "clip": "omni150_forward",
+  "checkpoint": "results/omni150/ckpt_002500.pt",
+  "iteration": 2500,
+  "checkpoint_sha256": "6bcbcb23c3ce2717c7b48588f5c0959b7b7ed45ee091fe4cdad01d4e63d44fe6",
+  "reference_file": "src/unisupermimic/assets/motions/rcdog/omni150_forward.csv",
+  "rollout_file": "local_sim2sim/omni150/ckpt_002500_omni150_forward_seed101.npz",
+  "mujoco_version": "3.11.0",
+  "torch_version": "2.14.1+cu130",
+  "hardware_ready": false
+}

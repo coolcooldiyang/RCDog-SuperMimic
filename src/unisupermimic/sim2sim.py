@@ -1,4 +1,4 @@
-# Modified 2026-10-26 for RPO motion tracking; see CHANGES_RPO.md.
+# Modified 2026-10-27 for RCDog 12-DoF quadruped; see THIRD_PARTY.md.
 """SuperMimic policy-I/O contract snapshots and strict evaluation checks."""
 
 from __future__ import annotations

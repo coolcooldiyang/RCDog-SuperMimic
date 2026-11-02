@@ -1,0 +1,163 @@
+robot: RCDog27
+physical_front_confirmed: false
+controller_platform: null
+actuator:
+  sdk_motor_type: null
+  sdk_feedback_domain: null
+  sdk_internal_gear_ratio: null
+  bus_type: null
+  baud: null
+buses:
+  rr:
+    device: null
+    leg_identity_verified: false
+    motors:
+      hip:
+        id: 1
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      thigh:
+        id: 2
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      calf:
+        id: 3
+        extra_ratio: 2
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+    transmission_model: null
+    A_joint_from_output: null
+    transmission_verified: false
+  rl:
+    device: null
+    leg_identity_verified: false
+    motors:
+      hip:
+        id: 1
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      thigh:
+        id: 2
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      calf:
+        id: 3
+        extra_ratio: 2
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+    transmission_model: null
+    A_joint_from_output: null
+    transmission_verified: false
+  fr:
+    device: null
+    leg_identity_verified: false
+    motors:
+      hip:
+        id: 1
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      thigh:
+        id: 2
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      calf:
+        id: 3
+        extra_ratio: 2
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+    transmission_model: null
+    A_joint_from_output: null
+    transmission_verified: false
+  fl:
+    device: null
+    leg_identity_verified: false
+    motors:
+      hip:
+        id: 1
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      thigh:
+        id: 2
+        extra_ratio: 1
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+      calf:
+        id: 3
+        extra_ratio: 2
+        sign: null
+        theta_output_cal_rad: null
+        q_cal_rad: null
+        physical_joint_limits_rad:
+        - null
+        - null
+    transmission_model: null
+    A_joint_from_output: null
+    transmission_verified: false
+imu:
+  model: HI12M0-MI1-000
+  device: null
+  baud: 115200
+  quaternion_order: wxyz
+  gyro_raw_unit: deg/s
+  R_CI: null
+  quat_direction_verified: false
+timing:
+  motor_period_s: 0.004
+  policy_period_s: 0.02
+  joint_age_max_s: 0.02
+  imu_age_max_s: 0.03
+  policy_age_max_s: 0.06
+calibration_verified: false
+notes: Template only; all null/false calibration fields require measurement. No controller
+  is started by this file.

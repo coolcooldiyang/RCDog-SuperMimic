@@ -13,7 +13,7 @@ source-exclude = [
 [project]
 name = "unisupermimic"
 version = "0.1.0"
-description = "SuperMimic reproduction on UniLab with mjwarp, MuJoCo, and Motrix backends"
+description = "RCDog 12-DoF quadruped omnidirectional locomotion, adapted from Uni-SuperMimic"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "LICENSES/*"]

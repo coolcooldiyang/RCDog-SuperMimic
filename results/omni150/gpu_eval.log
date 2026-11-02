@@ -1,0 +1,56 @@
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 4090" (24 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     ${HOME}/.cache/warp/1.16.0
+Module mujoco_warp._src.smooth c4020f1 load on device 'cuda:0' took 9.42 ms  (cached)
+Module _nxn_broadphase__locals__kernel_70761e73 70761e7 load on device 'cuda:0' took 819.50 ms  (compiled)
+Module _primitive_narrowphase__locals__primitive_narrowphase_143acaa7 143acaa load on device 'cuda:0' took 1.72 ms  (cached)
+Module mujoco_warp._src.constraint 36c8060 load on device 'cuda:0' took 0.52 ms  (cached)
+Module _friction_dof__locals__kernel_a6ed3529 a6ed352 load on device 'cuda:0' took 0.72 ms  (cached)
+Module _limit_slide_hinge__locals__kernel_56cb53b3 56cb53b load on device 'cuda:0' took 0.68 ms  (cached)
+Module _efc_contact_init__locals__kernel_0bd15084 0bd1508 load on device 'cuda:0' took 2.35 ms  (cached)
+Module _efc_contact_jac_dense__locals__kernel_f15eda8d 1ff2125 load on device 'cuda:0' took 0.91 ms  (cached)
+Module _efc_contact_update__locals__kernel_8c34abe6 8c34abe load on device 'cuda:0' took 0.69 ms  (cached)
+Module mujoco_warp._src.sensor de892d8 load on device 'cuda:0' took 3.85 ms  (cached)
+Module mujoco_warp._src.forward bfd9fb5 load on device 'cuda:0' took 1.64 ms  (cached)
+Module mujoco_warp._src.passive d8c18c6 load on device 'cuda:0' took 1.96 ms  (cached)
+Module mujoco_warp._src.forward b068ad6 load on device 'cuda:0' took 1.74 ms  (cached)
+Module _qfrc_smooth__locals__kernel_b98573a2 b98573a load on device 'cuda:0' took 0.53 ms  (cached)
+Module mujoco_warp._src.support ca784c5 load on device 'cuda:0' took 0.59 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_ed258411 8277d35 load on device 'cuda:0' took 45.52 ms  (cached)
+Module _solve_init_dof__locals__kernel_befe379c befe379 load on device 'cuda:0' took 0.53 ms  (cached)
+Module mujoco_warp._src.solver 3a105a0 load on device 'cuda:0' took 2.48 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_49c0432a 49c0432 load on device 'cuda:0' took 0.55 ms  (cached)
+Module mul_m_kernel__locals___mul_m_dc7994af dc7994a load on device 'cuda:0' took 0.61 ms  (cached)
+Module _update_constraint_efc__locals__kernel_64b75440 64b7544 load on device 'cuda:0' took 0.58 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_88a8869f 88a8869 load on device 'cuda:0' took 0.54 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_817148e6 817148e load on device 'cuda:0' took 0.77 ms  (cached)
+Module _update_gradient_grad__locals__kernel_00c9ca8d 00c9ca8 load on device 'cuda:0' took 0.52 ms  (cached)
+Module _update_gradient_JTDAJ_dense_tiled__locals__kernel_eb35c98e 9a228ba load on device 'cuda:0' took 1.74 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_db7becc8 4da674c load on device 'cuda:0' took 47.34 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_2e1c0e7d 2e65bde load on device 'cuda:0' took 0.98 ms  (cached)
+Module _update_constraint_efc__locals__kernel_dc2dbb33 dc2dbb3 load on device 'cuda:0' took 0.80 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_175b3165 175b316 load on device 'cuda:0' took 0.57 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_932c92ad 932c92a load on device 'cuda:0' took 0.53 ms  (cached)
+Module _update_gradient_grad__locals__kernel_4c37eb70 4c37eb7 load on device 'cuda:0' took 0.51 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_939651e0 ad6a9f6 load on device 'cuda:0' took 47.38 ms  (cached)
+Module mujoco_warp._src.derivative 833f5d0 load on device 'cuda:0' took 1.37 ms  (cached)
+Module _next_time_builder__locals___next_time_a67f49d6 a67f49d load on device 'cuda:0' took 0.60 ms  (cached)
+Module reset_data__locals__reset_xfrc_applied_fe5fcb03 fe5fcb0 load on device 'cuda:0' took 0.54 ms  (cached)
+Module reset_data__locals__reset_M_e5e6cdd0 e5e6cdd load on device 'cuda:0' took 0.44 ms  (cached)
+Module reset_data__locals__reset_mocap_9faa71ef 9faa71e load on device 'cuda:0' took 0.43 ms  (cached)
+Module reset_data__locals__reset_contact_7aad0792 7aad079 load on device 'cuda:0' took 0.44 ms  (cached)
+Module reset_data__locals__reset_sleep_4dc3e6fb 4dc3e6f load on device 'cuda:0' took 0.43 ms  (cached)
+Module reset_data__locals__reset_nworld_bb6e9693 bb6e969 load on device 'cuda:0' took 0.57 ms  (cached)
+Module mujoco_warp._src.io b4940be load on device 'cuda:0' took 5.04 ms  (cached)
+Module _tile_cholesky_factorize_block__locals__kernel_dccc1fac 2d1dc66 load on device 'cuda:0' took 39.21 ms  (cached)
+Module _tile_cholesky_solve_block__locals__kernel_cc0baf95 1fbe0d2 load on device 'cuda:0' took 33.47 ms  (cached)
+{
+ "norm_return": 0.9451349377632141,
+ "norm_return_framew": 0.9451349377632141,
+ "n_failed": 0,
+ "failed": []
+}

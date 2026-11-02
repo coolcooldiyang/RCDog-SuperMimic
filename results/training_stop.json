@@ -1,8 +1,0 @@
-{
-  "stopped_at_utc": "2026-10-26T10:33:24.228944+00:00",
-  "reason": "Selected v2 iteration 2500 policies passed all 8 seeded perturbation and semantic action tests; stopped extra training after acceptance.",
-  "selected_iteration": 2500,
-  "hardware_ready": false,
-  "run_last_log_row": "3225,0.48122,8321024,0.0359758,0.0490043,-7.83183,0.00182717,0.847384,1.65093,0.999117,0.803886,239.691,0.783075,0.0171233,1.96116,0.00019992",
-  "backflip_last_log_row": "3250,0.482392,8385536,0.0315933,0.0443857,-6.77839,0.00221258,0.651103,3.18517,0.99562,0.594915,119.833,0.260389,0.0608424,1.94998,0.000199919"
-}

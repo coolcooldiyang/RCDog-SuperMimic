@@ -1,0 +1,63 @@
+{
+  "kind": "procedural diagonal trot",
+  "diagonal_pairs": [
+    [
+      "fl",
+      "rr"
+    ],
+    [
+      "fr",
+      "rl"
+    ]
+  ],
+  "leg_order": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "source": "user robot URDF + task-space foot trajectory + bounded IK",
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "period_seconds": 0.5,
+  "duty_factor": 0.6,
+  "swing_clearance_m": 0.04,
+  "target_speed_m_s": 0.5,
+  "root_distance_m": 3.0999999999999805,
+  "steady_interval_seconds": [
+    2.0,
+    7.2
+  ],
+  "max_ik_error_m": 4.367031349743105e-09,
+  "max_joint_speed_rad_s": [
+    0.035942655915231075,
+    6.773124954171612,
+    4.5264231045372085,
+    0.041369434949677354,
+    6.613890197453034,
+    4.5319377398599245,
+    0.036625509631971975,
+    6.616727664724031,
+    4.53205116328931,
+    0.04059681706242825,
+    6.768385885477368,
+    4.526114599878847
+  ],
+  "joint_names": [
+    "rr_hip_joint",
+    "rr_thigh_joint",
+    "rr_calf_joint",
+    "rl_hip_joint",
+    "rl_thigh_joint",
+    "rl_calf_joint",
+    "fr_hip_joint",
+    "fr_thigh_joint",
+    "fr_calf_joint",
+    "fl_hip_joint",
+    "fl_thigh_joint",
+    "fl_calf_joint"
+  ],
+  "sha256": "711dd939040baabcd6346884721087f2c3ea279fb78702a53390825c5d1a6c20",
+  "hardware_ready": false
+}

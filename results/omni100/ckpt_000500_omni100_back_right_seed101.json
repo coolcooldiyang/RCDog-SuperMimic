@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "completed": true,
+  "hard_termination": false,
+  "seed": 101,
+  "noise_rad": 0.0,
+  "frames": 451,
+  "target_twist": [
+    -0.7071067811865477,
+    -0.7071067811865475,
+    0.0
+  ],
+  "measured_twist": [
+    -0.7086046832649212,
+    -0.7095225654137243,
+    -0.0021617796722499727
+  ],
+  "displacement_xy_yaw": [
+    -4.098002266276109,
+    -4.12119390945492,
+    0.005486501167859759
+  ],
+  "reference_displacement_xy_yaw": [
+    -4.101219330881959,
+    -4.101219330881958,
+    0.0
+  ],
+  "speed_ok": true,
+  "displacement_ok": true,
+  "drift_ok": true,
+  "acceptance_fraction": 0.1,
+  "norm_return": 0.970344977080822,
+  "diagonal_contact_agreement": 0.9699074074074074,
+  "stance_phase_accuracy": 0.9849537037037037,
+  "air_fraction": [
+    0.38425925925925924,
+    0.42592592592592593,
+    0.36574074074074076,
+    0.38425925925925924
+  ],
+  "p95_clearance_m": [
+    0.03130016882730214,
+    0.037812317831242476,
+    0.03292409717132385,
+    0.033408715809069824
+  ],
+  "lift_events": [
+    13,
+    14,
+    14,
+    13
+  ],
+  "nonfoot_ground_frames": 0,
+  "max_joint_speed_rad_s": [
+    7.9364809760397055,
+    7.169158761841968,
+    9.903491038226822,
+    8.256633440208862,
+    12.05446363562229,
+    10.668767920460068,
+    8.552126074529408,
+    7.637597116908395,
+    9.629903460355195,
+    7.8920120017684265,
+    11.3342162261662,
+    10.829296967527572
+  ],
+  "max_joint_torque_Nm": [
+    13.082364104017376,
+    15.625659109838825,
+    20.51809865665127,
+    13.19626183990444,
+    18.592921510845148,
+    20.916198341643064,
+    15.939500561965142,
+    14.880244624765206,
+    15.948858580594823,
+    11.772386986229051,
+    21.25092008938716,
+    24.43549679868131
+  ],
+  "clip": "omni100_back_right",
+  "checkpoint": "results/omni100/ckpt_000500.pt",
+  "iteration": 500,
+  "checkpoint_sha256": "2340c90bd4199dab946bf7cb130b22a7cd60dc6f33fd496316cf1a286129ca46",
+  "reference_file": "src/unisupermimic/assets/motions/rcdog/omni100_back_right.csv",
+  "rollout_file": "local_sim2sim/omni100/ckpt_000500_omni100_back_right_seed101.npz",
+  "mujoco_version": "3.11.0",
+  "torch_version": "2.14.1+cu130",
+  "hardware_ready": false
+}

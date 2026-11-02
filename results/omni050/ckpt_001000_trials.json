@@ -1,0 +1,2738 @@
+{
+  "stage": "omni050",
+  "passed": 30,
+  "total": 30,
+  "all_passed": true,
+  "reports": [
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        0.519808875963028,
+        0.013205231589666758,
+        0.011252319032088516
+      ],
+      "displacement_xy_yaw": [
+        3.0275159090535513,
+        0.07038916248602839,
+        0.04981705526133262
+      ],
+      "reference_displacement_xy_yaw": [
+        2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9751513285769356,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03445864508534732,
+        0.03635818023367048,
+        0.03690632532758051,
+        0.0348199683372228
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.7230115184468736,
+        7.828473200322533,
+        5.548356836620676,
+        0.6967879506344696,
+        7.4410464842264865,
+        5.753690882542423,
+        0.9562816404377477,
+        8.062917112330489,
+        5.775012033010187,
+        0.5599335277009888,
+        7.789678439433894,
+        5.250374382861848
+      ],
+      "max_joint_torque_Nm": [
+        6.11551695801479,
+        9.779860426437292,
+        18.795136714626267,
+        5.856927042938365,
+        9.445960418334025,
+        17.5668354141616,
+        5.767338834488646,
+        10.258465966650508,
+        11.431711297448535,
+        7.542357975605303,
+        10.038434383671659,
+        12.298015265608754
+      ],
+      "clip": "omni050_forward",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        0.5197759401093237,
+        0.013350088485606733,
+        0.010781175847171118
+      ],
+      "displacement_xy_yaw": [
+        3.026159140102557,
+        0.0702535920628524,
+        0.05044357220769391
+      ],
+      "reference_displacement_xy_yaw": [
+        2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9744070577952597,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03448330019878685,
+        0.036364874010124344,
+        0.03690998639362053,
+        0.034716567240525624
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.7266884969803833,
+        7.82805847746943,
+        5.548116180882376,
+        0.6945218687384817,
+        7.437001641432218,
+        5.754774991171754,
+        0.9458643600237897,
+        8.063895730654846,
+        5.776884430511397,
+        0.5600286944683017,
+        7.785171793135722,
+        5.2519942159029505
+      ],
+      "max_joint_torque_Nm": [
+        6.116857116930436,
+        9.787701933693807,
+        18.790800956689715,
+        5.647531714463613,
+        9.438998265519253,
+        16.4572049443554,
+        5.777771309456434,
+        10.259921284287246,
+        11.433505782610595,
+        7.542931944055863,
+        10.024970391799101,
+        12.298307779413852
+      ],
+      "clip": "omni050_forward",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        0.5197836614856691,
+        0.01329693012055232,
+        0.010955295290022678
+      ],
+      "displacement_xy_yaw": [
+        3.02719440371032,
+        0.07132372125455604,
+        0.0502144117971246
+      ],
+      "reference_displacement_xy_yaw": [
+        2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9744631189439031,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.034461777579978335,
+        0.03636569404513897,
+        0.036908672566350095,
+        0.034813367178305056
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.7253383181798243,
+        7.828190557185429,
+        5.548205341727447,
+        0.6967236549420401,
+        7.438297791168469,
+        5.754378547408052,
+        0.9229961799554874,
+        8.063539379340996,
+        5.776195788451881,
+        0.5713343233594294,
+        7.787624516600679,
+        5.251395181076935
+      ],
+      "max_joint_torque_Nm": [
+        6.116366530258095,
+        9.776866516248576,
+        18.778104059162654,
+        5.980165685585151,
+        9.441115959216607,
+        16.860684608292477,
+        5.72526636870488,
+        10.25938981121145,
+        11.432843266596475,
+        7.5420333438946505,
+        10.032457205676812,
+        12.298201716482401
+      ],
+      "clip": "omni050_forward",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932738,
+        0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        0.37347065439011895,
+        0.3619638078790914,
+        0.012865766176705172
+      ],
+      "displacement_xy_yaw": [
+        2.174445595272426,
+        2.0940812241763727,
+        0.0758187549370799
+      ],
+      "reference_displacement_xy_yaw": [
+        2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9756654100285636,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03474927337031162,
+        0.03467900365069428,
+        0.03860201079463732,
+        0.0350948218969617
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.288823132417338,
+        5.041262444547834,
+        6.869220193952772,
+        4.030847759834847,
+        7.460704447840496,
+        6.796646378041566,
+        3.893742848945733,
+        5.627643473800793,
+        6.73891324953827,
+        4.855153472855249,
+        7.197330021212734,
+        6.5062776528691915
+      ],
+      "max_joint_torque_Nm": [
+        7.510500911061095,
+        6.601041019212213,
+        20.49706204155354,
+        7.808102563708432,
+        9.32518082041807,
+        17.5668354141616,
+        5.914624653144653,
+        7.177961216468202,
+        12.273826613037286,
+        8.720494088690703,
+        8.827629496948836,
+        11.95764624898694
+      ],
+      "clip": "omni050_forward_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_left_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932738,
+        0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        0.37341150302001475,
+        0.36203835775549825,
+        0.012362800351520296
+      ],
+      "displacement_xy_yaw": [
+        2.172572590009414,
+        2.0937827246715885,
+        0.07627895594120915
+      ],
+      "reference_displacement_xy_yaw": [
+        2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9750908998979463,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03474422771689346,
+        0.03468019286437377,
+        0.0385995780557334,
+        0.03508124327919757
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.281570283583239,
+        5.042249335533077,
+        6.8659078653518035,
+        4.024759121450739,
+        7.461542724575648,
+        6.790787617064208,
+        3.880106007171986,
+        5.629922781148048,
+        6.730392404488162,
+        4.841580477990723,
+        7.198021780336878,
+        6.501480353510811
+      ],
+      "max_joint_torque_Nm": [
+        7.505134119295339,
+        6.592248459127009,
+        20.501562597616424,
+        7.802189475542955,
+        9.32790704361122,
+        16.4572049443554,
+        5.914135691655757,
+        7.180741227090651,
+        12.270637065795222,
+        8.718944744013278,
+        8.823896856732404,
+        11.958108519348885
+      ],
+      "clip": "omni050_forward_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_left_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932738,
+        0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        0.3734331901978958,
+        0.3620114300492809,
+        0.012543629483625734
+      ],
+      "displacement_xy_yaw": [
+        2.173947944002669,
+        2.094902739780467,
+        0.07611174955607636
+      ],
+      "reference_displacement_xy_yaw": [
+        2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.975193955666489,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03474580578117562,
+        0.03467973946272478,
+        0.03860027558755503,
+        0.03508607838379734
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.284149172284653,
+        5.041895561997333,
+        6.86709582401588,
+        4.026745789487591,
+        7.461238468461766,
+        6.7925737653697995,
+        3.884612878686416,
+        5.629094521594613,
+        6.732836775008904,
+        4.846438215146068,
+        7.197774146135874,
+        6.50318736383912
+      ],
+      "max_joint_torque_Nm": [
+        7.5076836601155,
+        6.582115071610413,
+        20.477685446955896,
+        7.805107699494586,
+        9.326303356342489,
+        16.860684608292477,
+        5.919396605163258,
+        7.179731738840352,
+        12.271254600123855,
+        8.717965101150162,
+        8.825289891804141,
+        11.95794213862098
+      ],
+      "clip": "omni050_forward_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_left_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.02000556762217592,
+        0.5044076184258035,
+        0.01749772268403643
+      ],
+      "displacement_xy_yaw": [
+        0.12427569880799745,
+        2.9213988202484105,
+        0.08287151565321804
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9756088208821084,
+      "diagonal_contact_agreement": 0.9745370370370371,
+      "stance_phase_accuracy": 0.9733796296296297,
+      "air_fraction": [
+        0.3472222222222222,
+        0.3055555555555556,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03432990194035996,
+        0.03556176994714337,
+        0.03997443717117656,
+        0.035637771796513736
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        6.523767121350135,
+        3.9928594666646036,
+        7.505768465186897,
+        5.7406287666670766,
+        5.19242068082823,
+        8.052509387151925,
+        5.860386619940585,
+        4.813460701658901,
+        7.841052135531401,
+        7.060894233103338,
+        4.220783954982489,
+        7.212960734343882
+      ],
+      "max_joint_torque_Nm": [
+        8.560713422884016,
+        5.876201829938897,
+        16.85346366473778,
+        9.845509011241147,
+        7.44106391430728,
+        17.5668354141616,
+        7.9874994910291734,
+        7.488341805704228,
+        13.4616821185665,
+        10.1308897616097,
+        5.776139770374664,
+        11.929362877883745
+      ],
+      "clip": "omni050_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_left_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.01991465383393483,
+        0.50435336923837,
+        0.016981219742471465
+      ],
+      "displacement_xy_yaw": [
+        0.12188387057853467,
+        2.9201852835212065,
+        0.08327266215711515
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9752589798635907,
+      "diagonal_contact_agreement": 0.9745370370370371,
+      "stance_phase_accuracy": 0.9733796296296297,
+      "air_fraction": [
+        0.3472222222222222,
+        0.3055555555555556,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03432658821895781,
+        0.03555418974562846,
+        0.03996681648602954,
+        0.035642890001001994
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        6.523752153684786,
+        3.983221476195775,
+        7.502655537855398,
+        5.740598854023117,
+        5.193323125703919,
+        8.050836707644471,
+        5.851738721055971,
+        4.803847379348949,
+        7.837973536655004,
+        7.056162306840008,
+        4.22192275434182,
+        7.210114400001879
+      ],
+      "max_joint_torque_Nm": [
+        8.561331174325257,
+        5.8625092582159315,
+        16.876800258276166,
+        9.842551018089049,
+        7.439970250482803,
+        16.4572049443554,
+        7.971395461650633,
+        7.479067213076593,
+        13.457110031984653,
+        10.116601245763345,
+        5.775302863404173,
+        11.923652608426814
+      ],
+      "clip": "omni050_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_left_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.019945638519234157,
+        0.5043719944377404,
+        0.01715635799948471
+      ],
+      "displacement_xy_yaw": [
+        0.12329858630284728,
+        2.921657614456209,
+        0.08313500055905343
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9755104747083452,
+      "diagonal_contact_agreement": 0.9745370370370371,
+      "stance_phase_accuracy": 0.9733796296296297,
+      "air_fraction": [
+        0.3472222222222222,
+        0.3055555555555556,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03432734377537832,
+        0.03555681300581313,
+        0.03996955371535423,
+        0.035641192917141136
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        6.523760028985649,
+        3.9861545225302923,
+        7.503709458034678,
+        5.740629689564565,
+        5.193012999639491,
+        8.051455767137462,
+        5.854069531215946,
+        4.80656389409821,
+        7.8381268376596385,
+        7.057793507991538,
+        4.221530394312433,
+        7.211090682307248
+      ],
+      "max_joint_torque_Nm": [
+        8.561112475351376,
+        5.866803268172452,
+        16.851412628443306,
+        9.843570386322833,
+        7.440411016656455,
+        16.860684608292477,
+        7.976275275997292,
+        7.482154879759344,
+        13.458691686251328,
+        10.121399818252435,
+        5.775585353063274,
+        11.925170943401131
+      ],
+      "clip": "omni050_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_left_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327373,
+        0.3535533905932738,
+        0.0
+      ],
+      "measured_twist": [
+        -0.3510570796008245,
+        0.3491192119011686,
+        0.011859330630168894
+      ],
+      "displacement_xy_yaw": [
+        -1.9975157947824664,
+        2.0228287282084274,
+        0.055816417812297514
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9864611132277383,
+      "diagonal_contact_agreement": 0.9976851851851852,
+      "stance_phase_accuracy": 0.9849537037037037,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35185185185185186,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.035420435539135604,
+        0.03417659907634489,
+        0.036069602149028365,
+        0.03668926485607177
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.903918910552489,
+        6.480202935658751,
+        7.035181554039938,
+        4.284515129677159,
+        5.217736800782841,
+        7.416686654499465,
+        4.4014237284659234,
+        7.235778299822699,
+        7.1514557392918245,
+        5.227092272178208,
+        5.025615399939884,
+        6.7507732907777385
+      ],
+      "max_joint_torque_Nm": [
+        7.964413669068529,
+        9.838519249445792,
+        15.101753989297116,
+        9.471803761672726,
+        9.309037403789276,
+        17.5668354141616,
+        6.754651498172166,
+        11.56112154189342,
+        12.540523529605982,
+        9.073036356256482,
+        8.17809854887154,
+        12.387659733635699
+      ],
+      "clip": "omni050_back_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_left_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327373,
+        0.3535533905932738,
+        0.0
+      ],
+      "measured_twist": [
+        -0.35098591211250296,
+        0.3489263581713725,
+        0.011442086355960304
+      ],
+      "displacement_xy_yaw": [
+        -1.9989370678774674,
+        2.020742551501477,
+        0.05625093457180763
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9863740114702119,
+      "diagonal_contact_agreement": 0.9976851851851852,
+      "stance_phase_accuracy": 0.9849537037037037,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35185185185185186,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.035422042905645434,
+        0.0341720826803466,
+        0.036070036334719155,
+        0.03668399348046753
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.906911076902403,
+        6.477441742475982,
+        7.035859063949549,
+        4.286955798558784,
+        5.2076592781233035,
+        7.418278373553955,
+        4.401229980724332,
+        7.231754590621213,
+        7.151998181312323,
+        5.228354479382443,
+        5.017455465877376,
+        6.750270795693634
+      ],
+      "max_joint_torque_Nm": [
+        7.964721143585239,
+        9.839447009887401,
+        15.09570741391973,
+        9.473482560631743,
+        9.30070957107723,
+        16.4572049443554,
+        6.754672628405194,
+        11.558738493972069,
+        12.541564519912482,
+        9.075888083488113,
+        8.173215934319666,
+        12.38114732339123
+      ],
+      "clip": "omni050_back_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_left_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327373,
+        0.3535533905932738,
+        0.0
+      ],
+      "measured_twist": [
+        -0.35098209769928634,
+        0.34897518693296564,
+        0.01158311458722358
+      ],
+      "displacement_xy_yaw": [
+        -1.9976545224241855,
+        2.0223800957808016,
+        0.05613218549186083
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.050609665440979,
+        2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9870387953188684,
+      "diagonal_contact_agreement": 0.9976851851851852,
+      "stance_phase_accuracy": 0.9849537037037037,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35185185185185186,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.035421615684679386,
+        0.0341748752568962,
+        0.03606917258011307,
+        0.03667947113175494
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        4.906092501798722,
+        6.478375573232366,
+        7.0356722953992685,
+        4.286284133429381,
+        5.210946909025689,
+        7.417860600944681,
+        4.401196833999674,
+        7.232404844272193,
+        7.151911829386081,
+        5.228001562966979,
+        5.020178267628271,
+        6.750200733242274
+      ],
+      "max_joint_torque_Nm": [
+        7.964617292718744,
+        9.838364852584272,
+        15.097595423473136,
+        9.473032617122152,
+        9.303377417305425,
+        16.860684608292477,
+        6.754667842336,
+        11.559536944050997,
+        12.541327420024478,
+        9.075097180431781,
+        8.17478630452749,
+        12.383272774118272
+      ],
+      "clip": "omni050_back_left",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_left_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        -0.5046835789419671,
+        -0.006156669288424613,
+        0.0060259087409107355
+      ],
+      "displacement_xy_yaw": [
+        -2.896276392409497,
+        -0.024905434304979726,
+        0.02776076951486317
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.989954397910171,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03645198831205676,
+        0.034500188795107765,
+        0.035412612393617544,
+        0.03617081830815849
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.802511510734192,
+        7.271063946709894,
+        5.913891537792576,
+        0.5854780876965802,
+        7.391469402352381,
+        5.567860792239822,
+        0.6262546742835164,
+        7.5540321126024255,
+        5.645923088992563,
+        0.9347409605641956,
+        7.217275602957776,
+        5.548000780875862
+      ],
+      "max_joint_torque_Nm": [
+        5.458920022731991,
+        11.474554530201816,
+        15.556785630878075,
+        7.02464083200126,
+        11.17595050813465,
+        17.5668354141616,
+        6.000280358387777,
+        11.832695404178397,
+        11.828360430669907,
+        5.860668034916,
+        11.446955891080696,
+        11.72482423312796
+      ],
+      "clip": "omni050_back",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        -0.5046615614161236,
+        -0.006267075459227155,
+        0.005601047969158667
+      ],
+      "displacement_xy_yaw": [
+        -2.897669078188718,
+        -0.026678680866727283,
+        0.028103405657694314
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9900612672170003,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.036452237094189086,
+        0.03449602472951794,
+        0.03541215237879731,
+        0.036173119973202245
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.7893216204186801,
+        7.27224489454709,
+        5.91178964541115,
+        0.5860896549400935,
+        7.386576278391269,
+        5.563584719602482,
+        0.6255691327859102,
+        7.556149212405985,
+        5.6439561332006125,
+        0.9226253960755272,
+        7.2158067851775956,
+        5.548206317002554
+      ],
+      "max_joint_torque_Nm": [
+        5.45971938120386,
+        11.476783010906841,
+        15.555043367746213,
+        7.0398386832618876,
+        11.172625314659754,
+        16.4572049443554,
+        5.992811843489014,
+        11.835500494763336,
+        11.824882305722548,
+        5.863295102156647,
+        11.448744326333408,
+        11.724757221552933
+      ],
+      "clip": "omni050_back",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "measured_twist": [
+        -0.5046707850965017,
+        -0.006221384902198225,
+        0.005776103003118573
+      ],
+      "displacement_xy_yaw": [
+        -2.896538347497885,
+        -0.024831527195472436,
+        0.02796120010729153
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.8999999999999875,
+        0.0,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9905975381533305,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03645217031085127,
+        0.03449766107092589,
+        0.03541234605579592,
+        0.036171935472559404
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        0.7944923646900317,
+        7.271753499612203,
+        5.912626237797511,
+        0.5854305605088808,
+        7.388548422219313,
+        5.565289444077024,
+        0.6255137233144622,
+        7.555327521944507,
+        5.644624305206497,
+        0.9263114315498826,
+        7.216447274297163,
+        5.54812177209027
+      ],
+      "max_joint_torque_Nm": [
+        5.477140667107065,
+        11.475859603239897,
+        15.555763823857454,
+        7.032006331584427,
+        11.173523044110581,
+        16.860684608292477,
+        5.9276833157416355,
+        11.834608464737519,
+        11.826471183240505,
+        5.86220785549447,
+        11.4475228793645,
+        11.72478696655953
+      ],
+      "clip": "omni050_back",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327384,
+        -0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        -0.3585373072210387,
+        -0.35658737144534725,
+        0.00698534128373234
+      ],
+      "displacement_xy_yaw": [
+        -2.0581483384770287,
+        -2.0609501748281995,
+        0.03319851798236684
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.0506096654409793,
+        -2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9899062131841977,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.037507877265969,
+        0.0358136124908547,
+        0.03547342369288344,
+        0.03614316659562252
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.294342845504886,
+        5.072833635118257,
+        7.347254679959753,
+        4.11058548284456,
+        7.017520011421957,
+        7.301015746411432,
+        4.184779069233733,
+        5.1321040581778385,
+        6.970651215217307,
+        5.236470917551689,
+        6.832171092097302,
+        7.158111260320308
+      ],
+      "max_joint_torque_Nm": [
+        8.823870152482566,
+        9.253061788312829,
+        15.73208849436837,
+        6.909517998269764,
+        10.939901503421082,
+        17.5668354141616,
+        9.230286335148094,
+        9.427658421874195,
+        12.601840610325352,
+        7.409736319165222,
+        11.465329735854828,
+        13.072499606259235
+      ],
+      "clip": "omni050_back_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_right_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327384,
+        -0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        -0.3584720570638149,
+        -0.3566476002486936,
+        0.0065424199835942085
+      ],
+      "displacement_xy_yaw": [
+        -2.0590812762400854,
+        -2.0625265834208824,
+        0.03361322282739776
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.0506096654409793,
+        -2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9900059842401081,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.037505229259824,
+        0.03581858392323561,
+        0.03547344761582475,
+        0.036145787463455745
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.28103815208461,
+        5.075090978412326,
+        7.345346038905417,
+        4.098491343640723,
+        7.0176156048135,
+        7.300563426812603,
+        4.178970886420395,
+        5.134588867643968,
+        6.970434693245125,
+        5.227083508933344,
+        6.8323685932761915,
+        7.155592307056556
+      ],
+      "max_joint_torque_Nm": [
+        8.802827383276956,
+        9.268224452622976,
+        15.732148587121161,
+        6.918445329726043,
+        10.943335432288729,
+        16.4572049443554,
+        9.22505055925341,
+        9.429915883280755,
+        12.617507682943774,
+        7.395095059064811,
+        11.471465115714292,
+        13.095682155143193
+      ],
+      "clip": "omni050_back_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_right_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        -0.35355339059327384,
+        -0.35355339059327373,
+        0.0
+      ],
+      "measured_twist": [
+        -0.3584968798822309,
+        -0.35662459007119685,
+        0.006711333973769003
+      ],
+      "displacement_xy_yaw": [
+        -2.0579767281369685,
+        -2.060680622797033,
+        0.03345491403363243
+      ],
+      "reference_displacement_xy_yaw": [
+        -2.0506096654409793,
+        -2.050609665440979,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9903360328740544,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.037506467491329555,
+        0.0358164512471286,
+        0.03547344958929505,
+        0.03614461669284848
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.286116640378643,
+        5.074230567770366,
+        7.346330027925442,
+        4.102689425782435,
+        7.017580316195429,
+        7.300910071213166,
+        4.18131362804494,
+        5.133641100412695,
+        6.970518356885176,
+        5.230975391193831,
+        6.832294639795703,
+        7.157174085547889
+      ],
+      "max_joint_torque_Nm": [
+        8.810631009474722,
+        9.265812067025106,
+        15.732126724591659,
+        6.920233958060089,
+        10.942685194909094,
+        16.860684608292477,
+        9.227358167890618,
+        9.4290551420426,
+        12.618231958246534,
+        7.400856065244047,
+        11.47242380997311,
+        13.096176267064383
+      ],
+      "clip": "omni050_back_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_back_right_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.010881724038634974,
+        -0.5011104623751371,
+        0.007682393039567083
+      ],
+      "displacement_xy_yaw": [
+        0.07207371126172758,
+        -2.9062763128645344,
+        0.037861761440447284
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        -2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9844910095135371,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03559462459866501,
+        0.03708115171180225,
+        0.03576046858249881,
+        0.03662228394485108
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        7.102129777074472,
+        5.0576770783708564,
+        7.961345335795927,
+        5.453188792059018,
+        4.693326092057392,
+        8.048419376336025,
+        5.822132002137709,
+        4.348121754930701,
+        7.484498832517977,
+        6.78477640570252,
+        4.355665779714749,
+        7.556376688463935
+      ],
+      "max_joint_torque_Nm": [
+        10.705732641055198,
+        7.250038654265125,
+        14.488168374094114,
+        8.534328934786135,
+        7.089421067384373,
+        19.742130333099134,
+        9.904810101134611,
+        7.339199801234378,
+        12.756869853465117,
+        9.767790309233934,
+        8.248668326867719,
+        15.048480372928616
+      ],
+      "clip": "omni050_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_right_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.011004261323680344,
+        -0.5010739277612554,
+        0.007267281425942153
+      ],
+      "displacement_xy_yaw": [
+        0.0715415116803377,
+        -2.9070102175404475,
+        0.03828805271196489
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        -2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9842448969682057,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03559579599271397,
+        0.03708856973637179,
+        0.03576412360396968,
+        0.036621654053533126
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        7.100053114587899,
+        5.052438695488351,
+        7.961373209942431,
+        5.450403640864217,
+        4.695033079454726,
+        8.048654789676949,
+        5.822507559363087,
+        4.343463427164432,
+        7.484831014482195,
+        6.785526818965542,
+        4.356984034063498,
+        7.554587011804285
+      ],
+      "max_joint_torque_Nm": [
+        10.706359031783576,
+        7.2456643069203714,
+        14.48688001379324,
+        8.535787007738627,
+        7.090626144759468,
+        19.713332358965012,
+        9.915658058712207,
+        7.343445812570797,
+        12.760824790411116,
+        9.767754975578924,
+        8.240856388831032,
+        15.07440506368107
+      ],
+      "clip": "omni050_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_right_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "measured_twist": [
+        0.010939582732139548,
+        -0.5010933911571581,
+        0.007487117099801016
+      ],
+      "displacement_xy_yaw": [
+        0.07230770402854435,
+        -2.905145571065413,
+        0.03806190348264815
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        -2.8999999999999875,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9849068942997191,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03559506859561803,
+        0.037084381371946064,
+        0.03576218780237453,
+        0.03662198772859099
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        7.101343429710245,
+        5.0552461663960395,
+        7.961358295803027,
+        5.452423071457319,
+        4.694132665140627,
+        8.048532043204872,
+        5.822309468179784,
+        4.3458880970548615,
+        7.484655666877372,
+        6.785455506668527,
+        4.356287643686499,
+        7.555626030283774
+      ],
+      "max_joint_torque_Nm": [
+        10.706344778965093,
+        7.2477011263570885,
+        14.985479698967497,
+        8.535583748071163,
+        7.0899890072762,
+        19.73903910330203,
+        9.909747353438396,
+        7.338190865807896,
+        12.759425175830334,
+        9.767779331424123,
+        8.245992960567214,
+        15.026077107853535
+      ],
+      "clip": "omni050_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_right_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932737,
+        -0.35355339059327384,
+        0.0
+      ],
+      "measured_twist": [
+        0.37542432583723834,
+        -0.34377004809057937,
+        0.011372574685500587
+      ],
+      "displacement_xy_yaw": [
+        2.1914553207802627,
+        -1.9971759072456814,
+        0.04204450637131196
+      ],
+      "reference_displacement_xy_yaw": [
+        2.0506096654409784,
+        -2.0506096654409793,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.974457176691956,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03512877504308743,
+        0.03802479395100205,
+        0.036698588608867724,
+        0.036140161054987664
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.421316511124673,
+        7.6858024334462005,
+        7.032076116500311,
+        3.6745472272144295,
+        4.89967149106221,
+        7.435379869598291,
+        4.391466768832335,
+        7.338273464514052,
+        7.249005366883347,
+        5.072841080922574,
+        5.2348606297653415,
+        6.8076122611565575
+      ],
+      "max_joint_torque_Nm": [
+        8.195972755872196,
+        9.82332353405904,
+        14.26856456267897,
+        7.420519195482102,
+        6.423135647785464,
+        17.76045902339479,
+        8.66481396941817,
+        9.376395839014151,
+        12.35833895817976,
+        7.343841152411276,
+        7.19158727223394,
+        12.512964171992875
+      ],
+      "clip": "omni050_forward_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_right_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932737,
+        -0.35355339059327384,
+        0.0
+      ],
+      "measured_twist": [
+        0.37549692355271724,
+        -0.3436527725798942,
+        0.010918704477285471
+      ],
+      "displacement_xy_yaw": [
+        2.190604054895104,
+        -1.9977008342433216,
+        0.04266483715765168
+      ],
+      "reference_displacement_xy_yaw": [
+        2.0506096654409784,
+        -2.0506096654409793,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9738109134965472,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.03513755431764371,
+        0.03803683919477525,
+        0.03671134122238992,
+        0.03613429497826196
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.423182247752503,
+        7.680816579442805,
+        7.033077074833623,
+        3.6764892609902553,
+        4.891726129899418,
+        7.437161562776591,
+        4.395386034864346,
+        7.3360427249728435,
+        7.251098318070995,
+        5.076578004712487,
+        5.225637335416601,
+        6.808561311435294
+      ],
+      "max_joint_torque_Nm": [
+        8.206856105420352,
+        9.822618146962757,
+        14.264324999744908,
+        7.421934225922278,
+        6.411128970387892,
+        17.743685586910757,
+        8.679468792434239,
+        9.377767808639407,
+        12.359018504254053,
+        7.3488322838033495,
+        7.175017821483417,
+        12.513382497366921
+      ],
+      "clip": "omni050_forward_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_right_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.3535533905932737,
+        -0.35355339059327384,
+        0.0
+      ],
+      "measured_twist": [
+        0.37547276673401053,
+        -0.3436923142904852,
+        0.01107031391352642
+      ],
+      "displacement_xy_yaw": [
+        2.1916787766765515,
+        -1.996365034554971,
+        0.04245756541482559
+      ],
+      "reference_displacement_xy_yaw": [
+        2.0506096654409784,
+        -2.0506096654409793,
+        0.0
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9740593221452502,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9861111111111112,
+      "air_fraction": [
+        0.3472222222222222,
+        0.35648148148148145,
+        0.35648148148148145,
+        0.3472222222222222
+      ],
+      "p95_clearance_m": [
+        0.035134794667267134,
+        0.03803276014784732,
+        0.03670711893046046,
+        0.036135671250760476
+      ],
+      "lift_events": [
+        10,
+        11,
+        11,
+        10
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        5.42256065348419,
+        7.682432589620039,
+        7.032744296324832,
+        3.6758409890101404,
+        4.895044902412276,
+        7.436566861289714,
+        4.394076791812971,
+        7.336796162323933,
+        7.250399983475534,
+        5.075331067972185,
+        5.228931899099363,
+        6.80824221170011
+      ],
+      "max_joint_torque_Nm": [
+        8.196746117510157,
+        9.82285271261075,
+        14.985479698967497,
+        7.421459944521006,
+        6.416610870125144,
+        17.76998392078991,
+        8.66987197452959,
+        9.378338906900328,
+        12.358793400494939,
+        7.347163644455236,
+        7.185957854959494,
+        12.513242188272866
+      ],
+      "clip": "omni050_forward_right",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_forward_right_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        0.75
+      ],
+      "measured_twist": [
+        -0.0034670973552200146,
+        0.0035208500697196674,
+        0.7559441934658635
+      ],
+      "displacement_xy_yaw": [
+        0.003714527266577138,
+        0.0011614941724753113,
+        4.374171606909203
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9921535597907172,
+      "diagonal_contact_agreement": 0.9745370370370371,
+      "stance_phase_accuracy": 0.9317129629629629,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.38425925925925924
+      ],
+      "p95_clearance_m": [
+        0.03236899762113573,
+        0.033445919334668416,
+        0.03348538340283763,
+        0.033363780207318686
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.826241206942969,
+        3.4620202999867513,
+        4.404366951838211,
+        1.675024925733348,
+        3.748608460537999,
+        5.906600842974076,
+        1.8405554381554734,
+        2.9436268191334305,
+        5.388968108952124,
+        1.748318625954763,
+        3.195792089995576,
+        4.606994535024477
+      ],
+      "max_joint_torque_Nm": [
+        7.252954570786338,
+        4.817682954674943,
+        14.951063621758276,
+        5.856927042938365,
+        8.251977422035162,
+        17.5668354141616,
+        5.65172900942573,
+        6.3417130008412155,
+        12.739758100457122,
+        6.7544040060596,
+        6.20403676146127,
+        11.785358880415115
+      ],
+      "clip": "omni050_ccw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_ccw_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        0.75
+      ],
+      "measured_twist": [
+        -0.003472084687117228,
+        0.003495467992961818,
+        0.7554600735308564
+      ],
+      "displacement_xy_yaw": [
+        0.0021343235629669834,
+        -0.0001181041845475006,
+        4.374535544966134
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9920104005270534,
+      "diagonal_contact_agreement": 0.9722222222222222,
+      "stance_phase_accuracy": 0.9305555555555556,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3888888888888889
+      ],
+      "p95_clearance_m": [
+        0.032368062880073475,
+        0.03344141892695205,
+        0.03352376644797501,
+        0.033365177233706786
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.8229380721763864,
+        3.4604371968176113,
+        4.404308075607282,
+        1.6719479694812631,
+        3.7484580141525075,
+        5.906297729372312,
+        1.8367939222017169,
+        2.9428504697202778,
+        5.390744500089262,
+        1.7460342940653035,
+        3.1971088382658057,
+        4.603103932197253
+      ],
+      "max_joint_torque_Nm": [
+        7.255130462003388,
+        4.817355265185879,
+        14.925631890405311,
+        5.647531714463613,
+        8.25243173360358,
+        16.4572049443554,
+        5.649570691557144,
+        6.341872329200789,
+        12.751003489403088,
+        6.759480978188317,
+        6.210454202815652,
+        11.781315925081628
+      ],
+      "clip": "omni050_ccw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_ccw_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        0.75
+      ],
+      "measured_twist": [
+        -0.0034730348913061407,
+        0.0034982323990226894,
+        0.7555998028995189
+      ],
+      "displacement_xy_yaw": [
+        0.0031448498310675927,
+        0.0012834034824907234,
+        4.374435624437948
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.992201478779316,
+      "diagonal_contact_agreement": 0.9722222222222222,
+      "stance_phase_accuracy": 0.9305555555555556,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3888888888888889
+      ],
+      "p95_clearance_m": [
+        0.03236691672264347,
+        0.033440134423716954,
+        0.033520296241319796,
+        0.03336478052853037
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.8233543254269517,
+        3.4608638774723217,
+        4.402867015203141,
+        1.6758894395779564,
+        3.7487582206240897,
+        5.907558498781521,
+        1.83935479385783,
+        2.945300496048011,
+        5.3899414631796345,
+        1.7471568152364407,
+        3.195590685534742,
+        4.605436163896434
+      ],
+      "max_joint_torque_Nm": [
+        7.250694321436114,
+        4.817444489772329,
+        14.985479698967497,
+        5.980165685585151,
+        8.253043909906996,
+        16.860684608292477,
+        5.649626993413917,
+        6.341910404240334,
+        12.76605930488177,
+        6.755710871915598,
+        6.205582657201432,
+        11.772727107355237
+      ],
+      "clip": "omni050_ccw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_ccw_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 101,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        -0.75
+      ],
+      "measured_twist": [
+        -0.010818924243734646,
+        -0.006753231652867713,
+        -0.7399106430514116
+      ],
+      "displacement_xy_yaw": [
+        -0.01991603303412493,
+        -0.012089340004604023,
+        -4.307177980481224
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        -4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9896742479668723,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9444444444444444,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "p95_clearance_m": [
+        0.031213199874981393,
+        0.0320288205460345,
+        0.03323644441622183,
+        0.03292924899559884
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.7199981950953507,
+        3.640090806343951,
+        5.433609229756881,
+        1.5387826895274173,
+        3.9872507773219037,
+        4.835578819121494,
+        1.8414479303061084,
+        3.1476872212893707,
+        4.680362594794121,
+        1.5983139362173715,
+        2.9045757838219193,
+        5.268337816735297
+      ],
+      "max_joint_torque_Nm": [
+        5.858265351969391,
+        8.05900948090535,
+        14.69442927300226,
+        7.610994378543435,
+        5.5125006957580265,
+        17.5668354141616,
+        7.369515667437344,
+        6.628716536954007,
+        11.418326402561277,
+        6.907702377842885,
+        5.2639773783887716,
+        12.378566534791155
+      ],
+      "clip": "omni050_cw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_cw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_cw_seed101.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 102,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        -0.75
+      ],
+      "measured_twist": [
+        -0.010831360196670716,
+        -0.0067056537320454674,
+        -0.7403944745675484
+      ],
+      "displacement_xy_yaw": [
+        -0.02163550908653378,
+        -0.013060657931818188,
+        -4.306635098970229
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        -4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.9899598709411092,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9444444444444444,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "p95_clearance_m": [
+        0.03123071030753014,
+        0.03204918566490807,
+        0.033258549704034295,
+        0.03293917709562808
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.721052405898798,
+        3.6393467767686327,
+        5.434072987743565,
+        1.5407386636548854,
+        3.9877067303226164,
+        4.836003406413419,
+        1.8424559106071836,
+        3.1483897768895246,
+        4.681861885939554,
+        1.5985129399013995,
+        2.904653583004673,
+        5.269023951459341
+      ],
+      "max_joint_torque_Nm": [
+        5.856733878035235,
+        8.05686473571197,
+        14.692837978519785,
+        7.6049588364130365,
+        5.513100757027099,
+        16.4572049443554,
+        7.370789745259871,
+        6.596660793309179,
+        11.418214538149739,
+        6.907010512208222,
+        5.265046403561577,
+        12.38917279626279
+      ],
+      "clip": "omni050_cw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_cw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_cw_seed102.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    },
+    {
+      "pass": true,
+      "completed": true,
+      "hard_termination": false,
+      "seed": 103,
+      "noise_rad": 0.01,
+      "frames": 451,
+      "target_twist": [
+        0.0,
+        0.0,
+        -0.75
+      ],
+      "measured_twist": [
+        -0.010826926257500938,
+        -0.0067227909379778805,
+        -0.7402226171487911
+      ],
+      "displacement_xy_yaw": [
+        -0.02009460856172738,
+        -0.012015129992281614,
+        -4.306828334649706
+      ],
+      "reference_displacement_xy_yaw": [
+        0.0,
+        0.0,
+        -4.349999999999981
+      ],
+      "speed_ok": true,
+      "displacement_ok": true,
+      "drift_ok": true,
+      "acceptance_fraction": 0.1,
+      "norm_return": 0.990449429055055,
+      "diagonal_contact_agreement": 1.0,
+      "stance_phase_accuracy": 0.9444444444444444,
+      "air_fraction": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "p95_clearance_m": [
+        0.031224286259216253,
+        0.032041303293268014,
+        0.033251099854020756,
+        0.03293571949994109
+      ],
+      "lift_events": [
+        12,
+        11,
+        11,
+        12
+      ],
+      "nonfoot_ground_frames": 0,
+      "max_joint_speed_rad_s": [
+        1.7206778757678654,
+        3.6393959141117245,
+        5.433909777076692,
+        1.5394861519520193,
+        3.987545100392392,
+        4.835853084622907,
+        1.8420716086282336,
+        3.148135115863458,
+        4.681328401830334,
+        1.5984426317257583,
+        2.9046254337741213,
+        5.268782420654065
+      ],
+      "max_joint_torque_Nm": [
+        5.857162439570816,
+        8.057067228834457,
+        14.985479698967497,
+        7.606891684763312,
+        5.512889295811547,
+        16.860684608292477,
+        7.370338601460836,
+        6.714133040335271,
+        11.418255458806827,
+        6.907255386417158,
+        5.264673970066507,
+        12.381655483600024
+      ],
+      "clip": "omni050_cw",
+      "checkpoint": "results/omni050/ckpt_001000.pt",
+      "iteration": 1000,
+      "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+      "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_cw.csv",
+      "rollout_file": "local_sim2sim/omni050/ckpt_001000_trials_omni050_cw_seed103.npz",
+      "mujoco_version": "3.11.0",
+      "torch_version": "2.14.1+cu130",
+      "hardware_ready": false
+    }
+  ]
+}

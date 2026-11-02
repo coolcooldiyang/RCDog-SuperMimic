@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "completed": true,
+  "hard_termination": false,
+  "seed": 101,
+  "noise_rad": 0.0,
+  "frames": 451,
+  "target_twist": [
+    0.0,
+    0.0,
+    0.75
+  ],
+  "measured_twist": [
+    -0.0034720216486836784,
+    0.003496659193148156,
+    0.7554978467852438
+  ],
+  "displacement_xy_yaw": [
+    0.0022872181234169374,
+    0.0008414928205131367,
+    4.3745081307850935
+  ],
+  "reference_displacement_xy_yaw": [
+    0.0,
+    0.0,
+    4.349999999999981
+  ],
+  "speed_ok": true,
+  "displacement_ok": true,
+  "drift_ok": true,
+  "acceptance_fraction": 0.1,
+  "norm_return": 0.9922890366779433,
+  "diagonal_contact_agreement": 0.9722222222222222,
+  "stance_phase_accuracy": 0.9305555555555556,
+  "air_fraction": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3888888888888889
+  ],
+  "p95_clearance_m": [
+    0.03236772444117275,
+    0.03343942904144041,
+    0.03352054612500176,
+    0.033365103491248584
+  ],
+  "lift_events": [
+    12,
+    11,
+    11,
+    12
+  ],
+  "nonfoot_ground_frames": 0,
+  "max_joint_speed_rad_s": [
+    1.8225847034815204,
+    3.46138295747562,
+    4.402868659592848,
+    1.6754926095498075,
+    3.7491950146866766,
+    5.907678260984125,
+    1.8386611330119533,
+    2.9451698940022593,
+    5.3902833248742645,
+    1.746719646658045,
+    3.196240295894508,
+    4.604600469623464
+  ],
+  "max_joint_torque_Nm": [
+    7.251429103820707,
+    4.817379972254693,
+    14.914398094973029,
+    5.732313394546509,
+    8.254602702823277,
+    16.50576889514923,
+    5.6494376678928395,
+    6.341891831681964,
+    12.769056382404218,
+    6.754572599325962,
+    6.208576036380161,
+    11.77182599020023
+  ],
+  "clip": "omni050_ccw",
+  "checkpoint": "results/omni050/ckpt_001000.pt",
+  "iteration": 1000,
+  "checkpoint_sha256": "a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9",
+  "reference_file": "src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv",
+  "rollout_file": "local_sim2sim/omni050/ckpt_001000_omni050_ccw_seed101.npz",
+  "mujoco_version": "3.11.0",
+  "torch_version": "2.14.1+cu130",
+  "hardware_ready": false
+}

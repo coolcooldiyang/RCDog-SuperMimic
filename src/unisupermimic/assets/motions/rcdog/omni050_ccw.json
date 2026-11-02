@@ -1,0 +1,46 @@
+{
+  "name": "omni050_ccw",
+  "stage": "omni050",
+  "target_twist_world": [
+    0.0,
+    0.0,
+    0.75
+  ],
+  "period_seconds": 0.36,
+  "duty_factor": 0.6,
+  "clearance_m": 0.035,
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "steady_interval_seconds": [
+    2.5,
+    6.8
+  ],
+  "acceleration_seconds": 1.2,
+  "reference_displacement": [
+    0.0,
+    0.0,
+    4.349999999999981
+  ],
+  "max_ik_error_m": 3.6605457061477904e-09,
+  "max_joint_speed_rad_s": [
+    1.7067259699387802,
+    3.032611684486223,
+    4.535914270415256,
+    1.6620581433018276,
+    3.092856227988826,
+    4.4241026130105086,
+    1.665267524302908,
+    2.5347994079490226,
+    4.424387101388972,
+    1.7074821254008148,
+    2.5058303215513282,
+    4.535715174715675
+  ],
+  "max_nominal_speed_fraction": 0.3013896525192861,
+  "self_penetration_frames": 0,
+  "worst_self_penetration_m": 0.0,
+  "source": "user URDF; procedural diagonal trot; bounded IK",
+  "hardware_ready": false,
+  "sha256": "6c4221ba0bebce90e5faf410139195ecf207717773197a6748a709f7f868a3fd"
+}

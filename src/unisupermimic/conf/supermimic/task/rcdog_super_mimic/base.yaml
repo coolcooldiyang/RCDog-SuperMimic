@@ -1,0 +1,155 @@
+# @package _global_
+env:
+  seed: null
+  scene:
+    model_file: src/unisupermimic/assets/robots/rcdog/scene_supermimic_motor.xml
+    default_keyframe_name: stand
+    entities:
+      robot:
+        root_body_name: base_link
+        joint_names: &id001
+        - rr_hip_joint
+        - rr_thigh_joint
+        - rr_calf_joint
+        - rl_hip_joint
+        - rl_thigh_joint
+        - rl_calf_joint
+        - fr_hip_joint
+        - fr_thigh_joint
+        - fr_calf_joint
+        - fl_hip_joint
+        - fl_thigh_joint
+        - fl_calf_joint
+        actuator_names: *id001
+        body_names:
+        - base_link
+        - rr_thigh
+        - rr_calf
+        - rr_foot
+        - rl_thigh
+        - rl_calf
+        - rl_foot
+        - fr_thigh
+        - fr_calf
+        - fr_foot
+        - fl_thigh
+        - fl_calf
+        - fl_foot
+      ground:
+        geom_names:
+        - floor
+  sim_dt: 0.004
+  ctrl_dt: 0.02
+  max_episode_seconds: 10.0
+  auto_reset: true
+  scale_rewards_by_dt: false
+  observations:
+    policy:
+      enable_corruption: false
+      terms:
+        obs:
+          func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_obs
+          params:
+            command_name: motion
+    future:
+      enable_corruption: false
+      terms:
+        goal:
+          func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_goal
+          params:
+            command_name: motion
+            num_frames: 10
+  actions:
+    joint_pos:
+      _target_: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.SuperMimicActionCfg
+      entity_name: robot
+      command_name: motion
+  commands:
+    motion:
+      _target_: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.SuperMimicCommandCfg
+      entity_name: robot
+      mjcf_path: src/unisupermimic/assets/robots/rcdog/supermimic_motor.xml
+      eval_mode: false
+      gamma: 0.99
+      src_fps: 50
+      reset_noise: true
+      max_episode_steps: 500
+      goal_frames: 10
+      context_dim: 16
+      resampling_time_range:
+      - 1.0e9
+      - 1.0e9
+      motion_files:
+      - src/unisupermimic/assets/motions/rcdog/omni050_forward.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_left.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_back.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_right.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv
+      - src/unisupermimic/assets/motions/rcdog/omni050_cw.csv
+      reset_noise_scale: 0.3
+  events:
+    startup_context:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.SuperMimicContextEvent
+      mode: startup
+      params:
+        command_name: motion
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+        ground_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: ground
+          geom_names:
+          - floor
+    reset_context:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.SuperMimicContextEvent
+      mode: reset
+      params:
+        command_name: motion
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+        ground_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: ground
+          geom_names:
+          - floor
+    joint_offsets:
+      _target_: unilab.managers.EventTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.SuperMimicJointOffsetEvent
+      mode: reset
+      params:
+        command_name: motion
+  terminations:
+    hard:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_termination
+      params:
+        command_name: motion
+    timeout:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_timeout
+      time_out: true
+      params:
+        command_name: motion
+    clip_end:
+      _target_: unilab.managers.TerminationTermCfg
+      func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_clip_end
+      time_out: true
+      params:
+        command_name: motion
+  policy_observation_group: policy
+  critic_observation_group: future
+reward:
+  tracking:
+    _target_: unilab.managers.RewardTermCfg
+    func: unisupermimic.tasks.motion_tracking.rcdog.supermimic.manager_terms.supermimic_reward
+    weight: 1.0
+    params:
+      command_name: motion

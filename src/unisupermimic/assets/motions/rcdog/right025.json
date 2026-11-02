@@ -1,0 +1,58 @@
+{
+  "name": "right025",
+  "stage": "strafe025",
+  "target_twist_world": [
+    0.0,
+    -0.25,
+    0.0
+  ],
+  "period_seconds": 0.5,
+  "duty_factor": 0.6,
+  "clearance_m": 0.035,
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "steady_interval_seconds": [
+    2.0,
+    7.2
+  ],
+  "reference_displacement": [
+    0.0,
+    -1.5499999999999903,
+    0.0
+  ],
+  "max_ik_error_m": 3.435752829011845e-09,
+  "max_joint_speed_rad_s": [
+    2.946486895550507,
+    2.2342740724179238,
+    4.128181211657922,
+    2.883169200845304,
+    2.161335594474716,
+    4.004585075919668,
+    2.883751045758484,
+    2.1620814490779754,
+    4.004510949238421,
+    2.9442756553222122,
+    2.2346642268615753,
+    4.128093205544539
+  ],
+  "leg_order": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "diagonal_pairs": [
+    [
+      "fl",
+      "rr"
+    ],
+    [
+      "fr",
+      "rl"
+    ]
+  ],
+  "source": "user URDF; procedural foot trajectories; bounded IK",
+  "sha256": "f54918f0ae76b68c3ec936b6add2074004b3227f2fb840f5df1605157d64b2e9",
+  "hardware_ready": false
+}

@@ -1,0 +1,61 @@
+{
+  "stages": {
+    "omni050": {
+      "clips": [
+        "src/unisupermimic/assets/motions/rcdog/omni050_forward.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_back.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni050_cw.csv"
+      ],
+      "iterations": 8000,
+      "perturbation_trials": 3,
+      "speed_m_s": 0.5,
+      "yaw_rate_rad_s": 0.75,
+      "acceptance_fraction": 0.1
+    },
+    "omni100": {
+      "clips": [
+        "src/unisupermimic/assets/motions/rcdog/omni100_forward.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_forward_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_back_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_back.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_back_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_forward_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_ccw.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni100_cw.csv"
+      ],
+      "iterations": 8000,
+      "perturbation_trials": 3,
+      "speed_m_s": 1.0,
+      "yaw_rate_rad_s": 1.0,
+      "acceptance_fraction": 0.1
+    },
+    "omni150": {
+      "clips": [
+        "src/unisupermimic/assets/motions/rcdog/omni150_forward.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_forward_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_back_left.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_back.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_back_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_forward_right.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_ccw.csv",
+        "src/unisupermimic/assets/motions/rcdog/omni150_cw.csv"
+      ],
+      "iterations": 8000,
+      "perturbation_trials": 8,
+      "speed_m_s": 1.5,
+      "yaw_rate_rad_s": 1.5,
+      "acceptance_fraction": 0.1
+    }
+  }
+}

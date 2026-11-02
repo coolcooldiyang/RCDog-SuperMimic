@@ -1,0 +1,58 @@
+{
+  "name": "cw050",
+  "stage": "turn050",
+  "target_twist_world": [
+    0.0,
+    0.0,
+    -0.5
+  ],
+  "period_seconds": 0.5,
+  "duty_factor": 0.6,
+  "clearance_m": 0.035,
+  "fps": 50,
+  "frames": 451,
+  "seconds": 9.0,
+  "steady_interval_seconds": [
+    2.0,
+    7.2
+  ],
+  "reference_displacement": [
+    0.0,
+    0.0,
+    -3.0999999999999805
+  ],
+  "max_ik_error_m": 4.573882272577543e-09,
+  "max_joint_speed_rad_s": [
+    1.2179158858478558,
+    2.2745911794000406,
+    3.356055503925611,
+    1.1938047537803622,
+    2.22179617565425,
+    3.422842370460176,
+    1.193280048418918,
+    1.8803169029981959,
+    3.422949902007021,
+    1.2169991705406633,
+    1.8870331909023055,
+    3.355840448194334
+  ],
+  "leg_order": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "diagonal_pairs": [
+    [
+      "fl",
+      "rr"
+    ],
+    [
+      "fr",
+      "rl"
+    ]
+  ],
+  "source": "user URDF; procedural foot trajectories; bounded IK",
+  "sha256": "01babbe06946c6a8d6b75efbf1ce4526e3603ca0052830242f624bffa9f5a733",
+  "hardware_ready": false
+}
