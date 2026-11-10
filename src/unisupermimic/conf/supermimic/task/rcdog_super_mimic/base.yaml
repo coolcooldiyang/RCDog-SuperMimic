@@ -38,7 +38,7 @@ env:
       ground:
         geom_names:
         - floor
-  sim_dt: 0.004
+  sim_dt: 0.005
   ctrl_dt: 0.02
   max_episode_seconds: 10.0
   auto_reset: true
@@ -80,16 +80,39 @@ env:
       - 1.0e9
       - 1.0e9
       motion_files:
-      - src/unisupermimic/assets/motions/rcdog/omni050_forward.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_forward_left.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_left.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_back_left.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_back.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_back_right.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_right.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_forward_right.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_ccw.csv
-      - src/unisupermimic/assets/motions/rcdog/omni050_cw.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_forward.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_forward_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_back_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_back.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_back_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_forward_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_forward.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_forward_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_back_left.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_back.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_back_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_forward_right.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_ccw.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd025_cw.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_ccw.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd050_cw.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_stand.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_00.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_01.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_02.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_03.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_04.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_05.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_06.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_07.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_08.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_09.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_10.csv
+      - src/unisupermimic/assets/motions/rcdog/cmd_transition_11.csv
       reset_noise_scale: 0.3
   events:
     startup_context:

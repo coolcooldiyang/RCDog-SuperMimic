@@ -28,3 +28,12 @@ triton_cache/
 *.key
 hardware.local.yaml
 src/unisupermimic/assets/robots/g1/assets/
+.venv-sim/
+real_deploy/controller/.venv/
+real_deploy/controller/config/
+real_deploy/controller/reports/
+real_deploy/controller/third_party/
+experiments/command150/posture_check.json
+experiments/command150/sim2sim_status.json
+experiments/command150/ik_audit.json
+*.log

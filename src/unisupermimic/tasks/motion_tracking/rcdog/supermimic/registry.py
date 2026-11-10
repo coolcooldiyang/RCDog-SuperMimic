@@ -1,6 +1,6 @@
-# RCDog adaptation, 2026-10-27; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
-"""Register the RCDog SuperMimic task with UniLab."""
+"""Register the RPO SuperMimic task with UniLab."""
 
 from unilab.base import registry
 from unilab.envs import ManagerBasedRlEnvCfg

@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-10",
+  "controller_unit_tests": {
+    "passed": 68,
+    "total": 68
+  },
+  "sdk_dependency": {
+    "commit": "5b79a42d81cd69adac1367db79efdb972a898fd1",
+    "built": true,
+    "send_recv_releases_gil": true,
+    "hardware_opened": false
+  },
+  "onnx": {
+    "samples": 720,
+    "max_abs_error": 7.152557373046875e-07
+  },
+  "cpu_mujoco": {
+    "passed": 4,
+    "total": 4,
+    "version": "3.11.0"
+  },
+  "posture_state_machine_headless_passed": true,
+  "reward_gradient_and_penalty_check_passed": true,
+  "torchscript_reexport_passed": true,
+  "neutral_native_recheck": {
+    "passed": 10,
+    "total": 12,
+    "failed_cases": [
+      {
+        "case": "lateral15",
+        "delay_ms": 0,
+        "reason": "调试关节速度越限，停止策略"
+      },
+      {
+        "case": "lateral15",
+        "delay_ms": 8,
+        "reason": "调试关节速度越限，停止策略"
+      }
+    ]
+  },
+  "gpu_training_rerun": false,
+  "real_motors_driven": false
+}

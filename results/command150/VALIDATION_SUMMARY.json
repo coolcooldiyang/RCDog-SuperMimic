@@ -1,0 +1,408 @@
+{
+  "status": "training_and_sim2sim_complete",
+  "framework": "Uni-SuperMimic",
+  "framework_source": "https://github.com/Motphys/Uni-SuperMimic",
+  "parent_experiment": "previous_lateral150_training",
+  "parent_checkpoint_sha256": "128ced2afae919e87dc75ad6fd59f2aa7fdd50694e300c26222dbc334f927bd8",
+  "previous_forward_backward_command_limit_mps": 0.5,
+  "selected_checkpoint": "results/command150/ckpt_000500.pt",
+  "checkpoint_sha256": "f9a9736547d8325949b03b0e3c635e69bf1fcbdb14431f4d60abd525c8772205",
+  "onnx": "real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx",
+  "onnx_sha256": "f5ac62876e067585864849170ea8a45ada97fe1ea9adc1aaeb8e5cfebda10be4",
+  "selection_reason": "final500 passed all 60 MuJoCo cases,14 native transmission cases and98.6s mixed test; final750 exceeded backward lateral-drift tolerance in mixed test.",
+  "kp_joint": 20,
+  "kd_joint": 0.5,
+  "motor_internal_reduction": 6.33,
+  "calf_external_reduction": 2,
+  "command_limits": {
+    "forward_mps": 1.5,
+    "backward_mps": 1.5,
+    "lateral_mps": 1.5,
+    "planar_norm_mps": 1.5,
+    "yaw_rad_s": 1.5
+  },
+  "training_stages": [
+    [
+      "mid",
+      750
+    ],
+    [
+      "high",
+      2000
+    ],
+    [
+      "final",
+      750
+    ]
+  ],
+  "selected_final_iteration": 500,
+  "training_changes": {
+    "forward_backward_reference_max": 1.5,
+    "additional_explicit_diagonal_clips": 8,
+    "reference_interpolation_fix": "Keep grid-node planar velocities unscaled; norm-limit requested and slewed planar commands only.",
+    "reference_interpolation_audit": "reference_interpolation_audit.json",
+    "upright_sin_squared_weight": -1.0,
+    "excess_tilt_from_deg": 15,
+    "excess_tilt_weight": -3.0,
+    "roll_pitch_rate_weight": -0.08,
+    "stop_joint_velocity_weight": -0.8,
+    "stop_action_rate_weight": -1.0,
+    "stop_body_speed_weight": -2.0,
+    "tilt_termination_deg": 25,
+    "joint_speed_limits_rad_s": [
+      8,
+      10,
+      10,
+      8,
+      10,
+      10,
+      8,
+      10,
+      10,
+      8,
+      10,
+      10
+    ],
+    "velocity_tracking_weight": 4.0,
+    "velocity_squared_error_weight": -0.5,
+    "reference_clearance_m": 0.025,
+    "reference_duty_factor": 0.5,
+    "reference_period_s": 0.32
+  },
+  "validation": {
+    "cpu_mujoco": {
+      "passed": 60,
+      "total": 60,
+      "file": "sim2sim_final500.json"
+    },
+    "native_motor_transmission": {
+      "passed": 14,
+      "total": 14,
+      "file": "native_final500.json"
+    },
+    "continuous_start_stop": {
+      "passed": true,
+      "duration_s": 98.60000000000001,
+      "file": "mixed_final500.json"
+    },
+    "onnx_max_abs_error": 7.152557373046875e-07,
+    "command_limit_validation": "command_limit_validation.json"
+  },
+  "nominal_top_speed_cases": [
+    {
+      "case": "forward_1.5",
+      "target": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        1.4903527666004177,
+        -0.019238987758711846,
+        0.0015053821118731904
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.457697562353835,
+      "stop_joint_ptp_deg": 0.2142297966764381,
+      "stop_target_ptp_deg": 0.2377810831229464,
+      "stop_joint_speed_rms": 0.0008228733917761577,
+      "stop_action_ptp": 0.01660025119781494,
+      "stop_speed_mps": 8.898185733008157e-05,
+      "stop_yaw_rad_s": 0.00010567969064019474,
+      "passed": true
+    },
+    {
+      "case": "backward_1.5",
+      "target": [
+        -1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.4693781702208946,
+        0.027929298082600813,
+        0.002540662811873674
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.8111209567042703,
+      "stop_joint_ptp_deg": 0.16664086883307838,
+      "stop_target_ptp_deg": 0.22254122353735545,
+      "stop_joint_speed_rms": 0.0008260310762044695,
+      "stop_action_ptp": 0.015536308288574219,
+      "stop_speed_mps": 9.427038975985799e-05,
+      "stop_yaw_rad_s": 0.0001666285929123979,
+      "passed": true
+    },
+    {
+      "case": "left_1.5",
+      "target": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "measured": [
+        0.06434668520641147,
+        1.4683277436357747,
+        0.0005321987703456322
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 3.6779610048574716,
+      "stop_joint_ptp_deg": 0.20865526943100607,
+      "stop_target_ptp_deg": 0.2464605460107401,
+      "stop_joint_speed_rms": 0.0009343058853896822,
+      "stop_action_ptp": 0.017206192016601562,
+      "stop_speed_mps": 0.00010469515803291968,
+      "stop_yaw_rad_s": 7.260545469711577e-05,
+      "passed": true
+    },
+    {
+      "case": "right_1.5",
+      "target": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "measured": [
+        -0.05303999324772276,
+        -1.4649940017311252,
+        0.003372876606081826
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 3.8473647438965646,
+      "stop_joint_ptp_deg": 0.11975848291200855,
+      "stop_target_ptp_deg": 0.18198099892488098,
+      "stop_joint_speed_rms": 0.0005373198910497018,
+      "stop_action_ptp": 0.012704670429229736,
+      "stop_speed_mps": 7.699001019064277e-05,
+      "stop_yaw_rad_s": 0.00010049562366938955,
+      "passed": true
+    },
+    {
+      "case": "ccw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "measured": [
+        -0.015770040915339675,
+        0.02341353803204129,
+        1.5000452491085863
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.286392791639308,
+      "stop_joint_ptp_deg": 0.11314401122873631,
+      "stop_target_ptp_deg": 0.1448230622927191,
+      "stop_joint_speed_rms": 0.0005052521723992853,
+      "stop_action_ptp": 0.010110557079315186,
+      "stop_speed_mps": 4.582544569677588e-05,
+      "stop_yaw_rad_s": 7.060208473751528e-05,
+      "passed": true
+    },
+    {
+      "case": "cw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        -1.5
+      ],
+      "measured": [
+        0.018230272757593178,
+        0.010431059840858105,
+        -1.4992398214395624
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 1.8805627547843096,
+      "stop_joint_ptp_deg": 0.10518214195383259,
+      "stop_target_ptp_deg": 0.19731221229062085,
+      "stop_joint_speed_rms": 0.000513746179003292,
+      "stop_action_ptp": 0.013774991035461426,
+      "stop_speed_mps": 5.056306833198093e-05,
+      "stop_yaw_rad_s": 9.477929274834639e-05,
+      "passed": true
+    }
+  ],
+  "noisy_delayed_top_speed_cases": [
+    {
+      "case": "forward_1.5",
+      "target": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        1.4814516626629142,
+        -0.02085529773756371,
+        0.002737959584391156
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 3.1474080163567355,
+      "stop_joint_ptp_deg": 0.6493922193728783,
+      "stop_target_ptp_deg": 3.4565504181737663,
+      "stop_joint_speed_rms": 0.01992283637454969,
+      "stop_action_ptp": 0.24131274223327637,
+      "stop_speed_mps": 0.006070976031043579,
+      "stop_yaw_rad_s": 0.009183094126970878,
+      "passed": true
+    },
+    {
+      "case": "backward_1.5",
+      "target": [
+        -1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.4906548475970498,
+        0.037553897824741014,
+        -0.0013748909856535856
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 3.00292356745192,
+      "stop_joint_ptp_deg": 0.6770902221230277,
+      "stop_target_ptp_deg": 3.615428302231079,
+      "stop_joint_speed_rms": 0.020138551545925597,
+      "stop_action_ptp": 0.25240451097488403,
+      "stop_speed_mps": 0.0061067047492686325,
+      "stop_yaw_rad_s": 0.009085836398133467,
+      "passed": true
+    },
+    {
+      "case": "left_1.5",
+      "target": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "measured": [
+        0.1057320252724739,
+        1.4742072086703348,
+        0.005930627234669333
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.04686693861798,
+      "stop_joint_ptp_deg": 0.6651911017687387,
+      "stop_target_ptp_deg": 3.422505340255838,
+      "stop_joint_speed_rms": 0.019918979710677815,
+      "stop_action_ptp": 0.2389359474182129,
+      "stop_speed_mps": 0.006077503254018849,
+      "stop_yaw_rad_s": 0.00925022673379323,
+      "passed": true
+    },
+    {
+      "case": "right_1.5",
+      "target": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "measured": [
+        -0.012415371566820996,
+        -1.4668406008091306,
+        -0.005720378806464617
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.929781799043572,
+      "stop_joint_ptp_deg": 0.6139051926479588,
+      "stop_target_ptp_deg": 3.6766507028564885,
+      "stop_joint_speed_rms": 0.020197214871532213,
+      "stop_action_ptp": 0.25667864084243774,
+      "stop_speed_mps": 0.00611102481426029,
+      "stop_yaw_rad_s": 0.009037980781222383,
+      "passed": true
+    },
+    {
+      "case": "ccw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "measured": [
+        -0.026915832859341318,
+        0.015714428845658462,
+        1.5009700124531071
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 2.6374220490010294,
+      "stop_joint_ptp_deg": 0.5643674309332251,
+      "stop_target_ptp_deg": 3.564627062731817,
+      "stop_joint_speed_rms": 0.02004496898192516,
+      "stop_action_ptp": 0.24885791540145874,
+      "stop_speed_mps": 0.0060743838737564206,
+      "stop_yaw_rad_s": 0.009087035438455697,
+      "passed": true
+    },
+    {
+      "case": "cw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        -1.5
+      ],
+      "measured": [
+        0.025080532143579165,
+        0.005424244668305792,
+        -1.4993795732082538
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 2.284707145973577,
+      "stop_joint_ptp_deg": 0.558506816010837,
+      "stop_target_ptp_deg": 3.685998670509297,
+      "stop_joint_speed_rms": 0.020191785867095805,
+      "stop_action_ptp": 0.2573312520980835,
+      "stop_speed_mps": 0.0060935468511574276,
+      "stop_yaw_rad_s": 0.009056125593631422,
+      "passed": true
+    }
+  ],
+  "max_tilt_deg": 5.929781799043572,
+  "max_stop_joint_ptp_deg": {
+    "0": 0.23822412278857327,
+    "8": 0.6770902221230277
+  },
+  "stop_transition_metrics": "sim2sim_final500_stop_transition.json",
+  "neutral_behavior": "Immediate zero request; reference deceleration0.5m/s2 linear and1rad/s2 yaw, policy remains active without switching to fixed stand.",
+  "real_hardware_accessed": false,
+  "current_hardware_policy_unchanged": true,
+  "hardware_ready": false,
+  "limitations": [
+    "These are finite simulation tests, not real hardware verification.",
+    "1.5m/s is the command limit; steady measured forward/backward speeds are approximately1.49/1.47m/s.",
+    "Model friction, inertia, motor lag, backlash and sensor noise are approximations."
+  ],
+  "video": "sim2sim_omni150.mp4",
+  "viewer_command": "./run_sim2sim.sh --keyboard-only",
+  "stage_reported_wall_hours": {
+    "mid": 0.0968452,
+    "high": 0.242808,
+    "final": 0.100264
+  },
+  "video_sha256": "f09deebe7cde0dc6560786d1d762d7e03a2a993d767be3415aa32a821fbc62ac",
+  "current_deployment_neutral_test": "results/command150/neutral_continuity_20261110.json",
+  "current_deployment_note": "Immediate-zero neutral handling has a separate 10/12 result; two maximum-speed lateral stop cases trigger the existing joint-speed guard."
+}

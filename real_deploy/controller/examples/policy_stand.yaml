@@ -1,0 +1,75 @@
+version: 1
+checkpoint_sha256: a3edd6fa4038acd40fe8f1cddbc2ec5ce47e95287406fd66c7170b70f4a760f9
+joint_names:
+- rr_hip_joint
+- rr_thigh_joint
+- rr_calf_joint
+- rl_hip_joint
+- rl_thigh_joint
+- rl_calf_joint
+- fr_hip_joint
+- fr_thigh_joint
+- fr_calf_joint
+- fl_hip_joint
+- fl_thigh_joint
+- fl_calf_joint
+policy_leg_order:
+- RR
+- RL
+- FR
+- FL
+motion_leg_order:
+- FL
+- FR
+- RR
+- RL
+q0_urdf_rad:
+  RR:
+  - -0.01833510771393776
+  - -0.13244423270225525
+  - -0.0011704234639182687
+  RL:
+  - 0.020724575966596603
+  - 0.13309738039970398
+  - -4.405516301630996e-05
+  FR:
+  - 0.01833510585129261
+  - -0.13214756548404694
+  - -0.0011669775703921914
+  FL:
+  - -0.020724575966596603
+  - 0.13280004262924194
+  - -4.4339125452097505e-05
+q0_urdf_deg:
+  RR:
+  - -1.0505242347717285
+  - -7.588495254516602
+  - -0.06706032156944275
+  RL:
+  - 1.1874306201934814
+  - 7.625917911529541
+  - -0.002524174749851227
+  FR:
+  - 1.050524115562439
+  - -7.571497440338135
+  - -0.06686288863420486
+  FL:
+  - -1.1874306201934814
+  - 7.60888147354126
+  - -0.0025404447223991156
+base_origin_height_m: 0.35
+target_semantics: URDF q0; must bind a measured model-aligned motor pose before movement
+reference_file: policy_encoder_reference.yaml
+motor_coordinate_semantics: The legacy bus controls signed motor output angles, not
+  reduced calf joint angles.
+nominal_supported_stance_geometry_mm:
+  reference: Outer carbon-plate midplane intersections with P/K joint axes; level
+    model at q0. Kinematic setup under support, not loaded settling height.
+  P_height_approx: 354
+  K_height_approx: 200
+  K_rearward_of_P_approx: 157
+  foot_pad_fore_aft_spacing_approx: 413
+  foot_pad_left_right_spacing_approx: 280
+  foot_pad_center_fore_aft_offset_from_P_approx: 0
+  audit_file: reports/CAD_CALIBRATION_AUDIT_20261103.json
+active_bundle: policies/omni050

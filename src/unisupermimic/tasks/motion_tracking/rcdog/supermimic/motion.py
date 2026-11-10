@@ -1,6 +1,6 @@
-# RCDog adaptation, 2026-10-27; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
-"""Reference motions resampled to 50 Hz with tracked-body forward kinematics."""
+"""Reference RPO motions resampled to 50 Hz with tracked-body forward kinematics."""
 
 from __future__ import annotations
 

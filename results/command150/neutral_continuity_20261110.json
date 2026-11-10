@@ -1,0 +1,1057 @@
+{
+  "results": [
+    {
+      "case": "forward05",
+      "delay_ms": 0,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 1.5188602787131995,
+      "max_xy_speed_mps": 0.5192294422648576,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.01,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "forward15",
+      "delay_ms": 0,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 2.9449937652166587,
+      "max_xy_speed_mps": 1.5590627542281519,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            1.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.01,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.8000000000000005,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "lateral05",
+      "delay_ms": 0,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 1.964906702078663,
+      "max_xy_speed_mps": 0.5219332696131627,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.01,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "yaw05",
+      "delay_ms": 0,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 0.9916447163954014,
+      "max_xy_speed_mps": 0.08639038794034735,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.02
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "lateral15",
+      "delay_ms": 0,
+      "failure": "\u8c03\u8bd5\u5173\u8282\u901f\u5ea6\u8d8a\u9650\uff0c\u505c\u6b62\u7b56\u7565",
+      "final_mode": "PLAY",
+      "simulated_seconds": 5.321,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 25.470818629674397,
+      "max_xy_speed_mps": 1.5363183895903383,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            1.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "yaw15",
+      "delay_ms": 0,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 2.229635776871589,
+      "max_xy_speed_mps": 0.08639038794034735,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            1.5
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.02
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            1.5
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "forward05",
+      "delay_ms": 8,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 1.5113160539173034,
+      "max_xy_speed_mps": 0.5321981858662804,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.01,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "forward15",
+      "delay_ms": 8,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 3.474455428465539,
+      "max_xy_speed_mps": 1.5535597306143303,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            1.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.01,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            1.5,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.8000000000000005,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "lateral05",
+      "delay_ms": 8,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 2.45484619766481,
+      "max_xy_speed_mps": 0.5196100944145658,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.01,
+            0.0
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "yaw05",
+      "delay_ms": 8,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 0.9633629786550303,
+      "max_xy_speed_mps": 0.08915604380709102,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.02
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "lateral15",
+      "delay_ms": 8,
+      "failure": "\u8c03\u8bd5\u5173\u8282\u901f\u5ea6\u8d8a\u9650\uff0c\u505c\u6b62\u7b56\u7565",
+      "final_mode": "PLAY",
+      "simulated_seconds": 5.322,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 25.55652652894849,
+      "max_xy_speed_mps": 1.5235554364333876,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            1.5,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    },
+    {
+      "case": "yaw15",
+      "delay_ms": 8,
+      "failure": null,
+      "final_mode": "PLAY",
+      "simulated_seconds": 10.0,
+      "neutral_reference_exact_zero": true,
+      "max_tilt_deg": 2.2469857872789194,
+      "max_xy_speed_mps": 0.08915604380709102,
+      "events": [
+        {
+          "time_s": 4.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            1.5
+          ]
+        },
+        {
+          "time_s": 5.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.38,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "time_s": 5.4,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.02
+          ]
+        },
+        {
+          "time_s": 6.98,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            1.5
+          ]
+        },
+        {
+          "time_s": 7.0,
+          "mode": "PLAY",
+          "requested": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reference": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "hardware_accessed": false
+    }
+  ],
+  "hardware_accessed": false
+}

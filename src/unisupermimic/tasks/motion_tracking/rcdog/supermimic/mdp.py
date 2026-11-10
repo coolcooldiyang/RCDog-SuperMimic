@@ -1,4 +1,4 @@
-# RCDog adaptation, 2026-10-27; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
 """Differentiable SuperMimic observations, goals, rewards, and terminations."""
 
@@ -60,11 +60,17 @@ class RewardCfg:
     body_angvel_std: float = 3.14
     root_pos_std: float = 0.15
     root_ori_std: float = 0.4
-    w_action_rate: float = -0.02
+    w_action_rate: float = -0.05
     w_joint_limit: float = -2.0
     soft_limit_factor: float = 0.9
-    term_height: float = 0.12
-    term_tilt: float = 0.4
+    term_height: float = 0.10
+    w_upright: float = -1.0
+    w_excess_tilt: float = -3.0
+    w_roll_pitch_rate: float = -0.08
+    w_stop_joint_speed: float = -0.8
+    w_stop_action_rate: float = -1.0
+    w_stop_body_speed: float = -2.0
+    term_tilt: float = 0.09369221296335006  # 1-cos(25 deg), below hardware 30 deg
 
 
 class MDP:
@@ -217,16 +223,37 @@ class MDP:
         foot_xy = ((foot_p[..., :2]-ref_foot[..., :2])**2).sum(-1).mean(-1)
         stance = torch.exp(-((ref_foot[..., 2]-.02)/.012)**2)
         slip = (body_v[..., feet, :2].square().sum(-1)*stance).mean(-1)
-        speeds = torch.tensor([30.1,30.1,15.05]*4,device=joint_vel.device)
+        speeds = torch.tensor([8.,10.,10.]*4,device=joint_vel.device)
         overspeed = torch.relu(joint_vel.abs()/(.8*speeds)-1).square().mean(-1)
         reward = reward + (2*torch.exp(-foot_z/.025**2)
-                            +torch.exp(-foot_xy/.05**2)-1.0*slip-.2*overspeed)*CONTROL_DT
+                            +torch.exp(-foot_xy/.05**2)-1.0*slip-1.0*overspeed)*CONTROL_DT
         # Explicit translation and yaw-rate tracking make standing a poor
         # solution for small lateral and turning references.
         root_velocity_error = (linear_velocity-motion.root_v[frames]).square().sum(-1)
         yaw_rate_error = (angular_velocity[..., 2]-motion.root_w[frames, 2]).square()
-        reward = reward + (torch.exp(-root_velocity_error/.2**2)
+        reward = reward + (4.0*torch.exp(-root_velocity_error/.35**2)-0.5*root_velocity_error
                            +torch.exp(-yaw_rate_error/.3**2))*CONTROL_DT
+        # Absolute uprightness, independent of yaw; small lean is allowed.
+        tilt_sin_sq = rotation[..., 2, :2].square().sum(-1)
+        excess_tilt = torch.relu(0.9659258263-rotation[..., 2, 2]) / 0.0596180393
+        body_omega = (rotation.transpose(-1,-2) @ angular_velocity.unsqueeze(-1)).squeeze(-1)
+        roll_pitch_rate = body_omega[..., :2].square().sum(-1)
+        # Only penalize stillness where the reference is genuinely stationary;
+        # slow swing phases must not accidentally be treated as standstill.
+        ref_speed_sq = motion.root_v[frames].square().sum(-1)
+        ref_yaw_sq = motion.root_w[frames,2].square()
+        ref_joint_speed_sq = motion.qd[frames].square().mean(-1)
+        stop_weight = torch.exp(-ref_speed_sq/.06**2-ref_yaw_sq/.12**2-ref_joint_speed_sq/.25**2)
+        stop_joint_speed = stop_weight*joint_vel.square().mean(-1)
+        stop_action_rate = stop_weight*action_rate
+        stop_body_speed = stop_weight*(linear_velocity.square().sum(-1)+.1*angular_velocity.square().sum(-1))
+        stability = (cfg.w_upright*tilt_sin_sq/.2588190451**2
+                     +cfg.w_excess_tilt*excess_tilt.square()
+                     +cfg.w_roll_pitch_rate*roll_pitch_rate
+                     +cfg.w_stop_joint_speed*stop_joint_speed
+                     +cfg.w_stop_action_rate*stop_action_rate
+                     +cfg.w_stop_body_speed*stop_body_speed)
+        reward = reward + stability*CONTROL_DT
         if terms:
             return reward, {
                 "track": tracking * CONTROL_DT,
@@ -235,6 +262,10 @@ class MDP:
                 "e_root_pos": error_root_pos,
                 "action_rate": action_rate,
                 "joint_limit": joint_limit,
+                "tilt_sin_sq": tilt_sin_sq,
+                "stop_weight": stop_weight,
+                "stop_joint_speed": stop_joint_speed,
+                "stability": stability*CONTROL_DT,
             }
         return reward
 
@@ -244,7 +275,9 @@ class MDP:
         ref_p, ref_R = self.motion.root_p[frames], self.motion.root_R[frames]
         error_height = (ref_p[..., 2] - position[..., 2]).abs()
         error_tilt = (ref_R[..., 2, 2] - rotation[..., 2, 2]).abs()
-        done=(error_height > self.cfg.term_height) | (error_tilt > self.cfg.term_tilt)
+        speed_limits=torch.tensor([8.,10.,10.]*4,device=state[5].device)
+        overspeed=(state[5].abs()>speed_limits).any(-1)
+        done=(error_height > self.cfg.term_height) | (error_tilt > self.cfg.term_tilt) | overspeed
         return done
 
     def soft_termination(
@@ -252,7 +285,7 @@ class MDP:
         state: State,
         frames: torch.Tensor,
         height_temperature: float = 0.02,
-        tilt_temperature: float = 0.04,
+        tilt_temperature: float = 0.01,
     ) -> torch.Tensor:
         """Return the differentiable imagined-rollout termination probability."""
         position, rotation = state[0], state[1]
@@ -262,6 +295,8 @@ class MDP:
         alive = (1 - torch.sigmoid((error_height - self.cfg.term_height) / height_temperature)) * (
             1 - torch.sigmoid((error_tilt - self.cfg.term_tilt) / tilt_temperature)
         )
+        speed_limits=torch.tensor([8.,10.,10.]*4,device=state[5].device)
+        alive=alive*(1-torch.sigmoid((state[5].abs()-speed_limits)/.25)).prod(-1)
         return 1 - alive
 
     def critic_features(

@@ -1,6 +1,6 @@
-# RCDog adaptation, 2026-10-27; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
-"""Torch forward kinematics built from a RCDog MJCF on the cold path."""
+"""Torch forward kinematics built from a RPO MJCF on the cold path."""
 
 from __future__ import annotations
 

@@ -1,0 +1,106 @@
+{
+  "checkpoint": "real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx",
+  "cap": 1.5,
+  "all_passed": true,
+  "passed": 4,
+  "total": 4,
+  "real_hardware_accessed": false,
+  "results": [
+    {
+      "case": "forward_1.5",
+      "target": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        1.4903527666004177,
+        -0.019238987758711846,
+        0.0015053821118731904
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.457697562353835,
+      "stop_joint_ptp_deg": 0.2142297966764381,
+      "stop_target_ptp_deg": 0.2377810831229464,
+      "stop_joint_speed_rms": 0.0008228733917761577,
+      "stop_action_ptp": 0.01660025119781494,
+      "stop_speed_mps": 8.898185733008157e-05,
+      "stop_yaw_rad_s": 0.00010567969064019474,
+      "passed": true
+    },
+    {
+      "case": "left_1.5",
+      "target": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "measured": [
+        0.06434668520641147,
+        1.4683277436357747,
+        0.0005321987703456322
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 3.6779610048574716,
+      "stop_joint_ptp_deg": 0.20865526943100607,
+      "stop_target_ptp_deg": 0.2464605460107401,
+      "stop_joint_speed_rms": 0.0009343058853896822,
+      "stop_action_ptp": 0.017206192016601562,
+      "stop_speed_mps": 0.00010469515803291968,
+      "stop_yaw_rad_s": 7.260545469711577e-05,
+      "passed": true
+    },
+    {
+      "case": "ccw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "measured": [
+        -0.015770040915339675,
+        0.02341353803204129,
+        1.5000452491085863
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.286392791639308,
+      "stop_joint_ptp_deg": 0.11314401122873631,
+      "stop_target_ptp_deg": 0.1448230622927191,
+      "stop_joint_speed_rms": 0.0005052521723992853,
+      "stop_action_ptp": 0.010110557079315186,
+      "stop_speed_mps": 4.582544569677588e-05,
+      "stop_yaw_rad_s": 7.060208473751528e-05,
+      "passed": true
+    },
+    {
+      "case": "stand",
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.8726281773299456e-05,
+        7.601391726259431e-07,
+        7.172662661123153e-05
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 0.8719753247973673,
+      "stop_joint_ptp_deg": 0.006328271831220091,
+      "stop_target_ptp_deg": 0.008987675174090529,
+      "stop_joint_speed_rms": 3.250939588964746e-05,
+      "stop_action_ptp": 0.0006274580955505371,
+      "stop_speed_mps": 8.331825037658184e-07,
+      "stop_yaw_rad_s": 2.0857908445178014e-05,
+      "passed": true
+    }
+  ]
+}

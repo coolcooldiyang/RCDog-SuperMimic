@@ -1,192 +1,192 @@
 # RCDog-SuperMimic
 
-自研 12 自由度四足机器人 **RCDog** 的全向运动策略，基于 [Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic) 的 SuperMimic 可微世界模型与目标条件策略。一份策略跟踪十段参考动作：八个平移方向合速度 **1.5 m/s**，原地左右旋转 **1.5 rad/s**。
+基于 [Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic) 的自研12自由度四足机器人运动控制。使用 SuperMimic 可微世界模型训练参考动作条件策略，通过连续参考生成器接收手柄速度指令，实现前进、后退、横移和旋转，并接入实机起立、趴下状态机。
 
-训练使用 MJWarp（MuJoCo Warp）GPU 后端；评估、视频导出和实机部署包使用独立 CPU MuJoCo / ONNX Runtime。
+当前版本为 **command150 / final500**：新URDF总质量 **11.1134 kg**，策略 **50 Hz**，电机指令 **200 Hz**，关节侧 **Kp=20、Kd=0.5**，5帧观测历史。平移指令合速度上限 **1.5 m/s**，旋转上限 **1.5 rad/s**。
 
-[![RCDog 1.5 m/s 全向运动](docs/assets/rcdog/contact_sheet.jpg)](docs/assets/rcdog/omni150_mujoco.mp4)
+## 效果演示
 
-实体机器人由策略控制，蓝色半透明机器人为参考动作，两者保留各自全局位置。点击封面查看完整 MP4。
+| 实机：地面手柄测试 | 仿真：前进、后退、横移、旋转与停步 |
+| --- | --- |
+| [![实机演示](docs/assets/rcdog/rcdog_real_preview.gif)](docs/assets/rcdog/rcdog_real_20261110.mp4) | [![MuJoCo仿真](docs/assets/rcdog/command150_cover.jpg)](docs/assets/rcdog/command150_mujoco.mp4) |
 
-## 结果
+点击预览查看完整MP4。实机视频约23秒，现场有人持扶手跟随；没有同步速度测量。下文的速度与通过率来自仿真评估。
 
-`omni150` 权重 `results/omni150/ckpt_002500.pt` 在同一台 CPU 上完成的 10 次基准与 80 次初态扰动全部通过（`results/SIM2SIM_SUMMARY.json`，90/90）。
-
-| 平移方向 | 目标合速度 | 实测合速度 |
-| --- | --- | --- |
-| 前进 | 1.5 m/s | 1.525 m/s |
-| 左前 | 1.5 m/s | 1.537 m/s |
-| 左移 | 1.5 m/s | 1.523 m/s |
-| 左后 | 1.5 m/s | 1.506 m/s |
-| 后退 | 1.5 m/s | 1.507 m/s |
-| 右后 | 1.5 m/s | 1.502 m/s |
-| 右移 | 1.5 m/s | 1.499 m/s |
-| 右前 | 1.5 m/s | 1.513 m/s |
-| 左转 | 1.5 rad/s | 1.491 rad/s |
-| 右转 | 1.5 rad/s | −1.502 rad/s |
-
-| 关节类别 | 90 次测试峰值速度 | 峰值扭矩 |
-| --- | --- | --- |
-| 髋 | 17.685 rad/s | 23.70 N·m |
-| 大腿 | 17.365 rad/s | 23.70 N·m |
-| 小腿 | 14.548 rad/s | 28.19 N·m |
-
-小腿峰值速度达到设定上限 15.05 rad/s 的 96.7%，髋和大腿出现扭矩限幅。以上均为仿真结果，尚未在实机验证。
-
-三档训练链的选中迭代与训练耗时：
-
-| 阶段 | 平移 / 旋转 | 选中权重 | 迭代 | 训练耗时 |
-| --- | --- | --- | --- | --- |
-| omni050 | 0.5 m/s / 0.75 rad/s | `results/omni050/ckpt_001000.pt` | 1000 | 421.20 s |
-| omni100 | 1.0 m/s / 1.00 rad/s | `results/omni100/ckpt_000500.pt` | 500 | 163.32 s |
-| omni150 | 1.5 m/s / 1.50 rad/s | `results/omni150/ckpt_002500.pt` | 2500 | 940.62 s |
-
-训练在单张 RTX 4090 24 GB 上完成，1024 个并行环境，世界模型 `[512,512,512]`，策略 `[512,256,128]`。耗时包含已有编译缓存；各档通过验收后即停止训练。
-
-## 仓库结构
+## 目录
 
 ```text
-RCDog-SuperMimic/
-├── src/unisupermimic/
-│   ├── rl/algos/supermimic/                 # 世界模型、策略、critic、replay 与 learner
-│   ├── tasks/motion_tracking/rcdog/supermimic/
-│   │   ├── robot.py, kinematics.py          # 12 关节顺序、默认姿态、PD 增益、前向运动学
-│   │   ├── motion.py, mdp.py                # 参考动作加载、观测、奖励与终止
-│   │   ├── motor_backend.py                 # 4 ms 电机 PD 与力矩限幅
-│   │   ├── env.py, manager_terms.py         # 训练环境与 Manager terms
-│   │   ├── evaluate.py, render.py           # 框架后端的评估与视频导出
-│   │   └── registry.py                      # 任务注册
-│   ├── conf/supermimic/task/rcdog_super_mimic/  # rcdog 任务配置（mjwarp / mujoco / motrix）
-│   └── assets/
-│       ├── robots/rcdog/                    # MJCF、网格、模型清单
-│       └── motions/rcdog/                   # 生成的参考动作 CSV 与元数据
-├── tools/rcdog/
-│   ├── prepare_rcdog_assets.py              # URDF + 网格 → 带碰撞体的 MJCF
-│   ├── generate_omni.py                     # 生成八方向与双向旋转参考
-│   ├── train_pipeline.py                    # 分档训练、验收、框架复核
-│   ├── evaluate_locomotion.py               # 独立 CPU MuJoCo 评估
-│   ├── render_rollout.py                    # 已记录轨迹的视频导出
-│   ├── validate_runtime.py                  # 张量契约、前向运动学与奖励梯度冒烟检查
-│   ├── plan.json, plan_150.json             # 三档 / 单档训练配置
-│   └── model_audit.json, standing_check.json
-├── source/                                  # 源 URDF、STL 与 CAD 导出元数据
-├── results/                                 # 三档权重、配置、逐动作评估与汇总
-├── initial_policy/strafe025.pt              # 训练链起点权重
-├── real_deploy/                             # 1.5 m/s 档 ONNX/TorchScript 与标定说明
-├── docs/assets/rcdog/                       # 演示视频与封面
-├── README.upstream.md, README.upstream_zh.md
-└── LICENSE, NOTICE, THIRD_PARTY.md
+src/unisupermimic/
+  rl/algos/supermimic/                     世界模型、策略、critic和训练循环
+  tasks/motion_tracking/rcdog/supermimic/   RCDog观测、奖励、传动与动力学配置
+  assets/robots/rcdog/                     当前URDF转换的MJCF与网格
+  assets/motions/rcdog/                    速度、旋转、对角与启停参考动作
+source/                                   当前CAD导出的URDF与STL
+experiments/command150/                    参考生成、训练、导出、CPU MuJoCo与手柄仿真
+results/command150/                        final500权重、父策略、训练配置和评估记录
+real_deploy/policies/newurdf_command150_final500/
+                                          ONNX、TorchScript、参考表与接口契约
+real_deploy/controller/                    实机通信、起立趴下、手柄、IMU与日志
+real_deploy/README.md                      实机安装、标定与运行步骤
+real_deploy/COMMANDS.md                    常用命令与故障排查
 ```
+
+早期 `omni050 / omni100 / omni150` 的权重和报告保留在原目录。它们使用10帧历史，不能与当前5帧部署程序混用；对应代码见 [早期版本说明](docs/LEGACY_OMNI150.md)。
 
 ## 安装
 
-要求 Linux、Python 3.10–3.13 与 [uv](https://docs.astral.sh/uv/)。训练需要 CUDA GPU；评估和部署包验证只需要 CPU。以下命令均在仓库根目录执行。
+克隆后，以下仿真和训练命令均在仓库根目录执行：
 
 ```bash
 git clone https://github.com/coolcooldiyang/RCDog-SuperMimic.git
 cd RCDog-SuperMimic
+```
+
+只运行ONNX策略与CPU MuJoCo，不需要GPU或ROS：
+
+```bash
+python3 -m venv .venv-sim
+source .venv-sim/bin/activate
+python -m pip install -r experiments/command150/requirements-sim.txt
+python real_deploy/verify_bundle.py \
+  --bundle real_deploy/policies/newurdf_command150_final500
+```
+
+训练使用Linux、CUDA GPU、Python 3.10–3.13和 [uv](https://docs.astral.sh/uv/)。按框架环境安装：
+
+```bash
 uv sync
+uv pip install scipy onnx onnxruntime
 ```
 
-`uv sync` 按 `uv.lock` 安装 `unilab`、三个仿真后端、PyTorch 与开发依赖。依赖快照见 `requirements-tested-cloud.txt`（训练机）和 `tools/rcdog/requirements-local-sim2sim.txt`（本机 CPU 评估）。生成参考动作另需 SciPy：
+训练机的完整依赖记录见 [requirements-training.txt](experiments/command150/requirements-training.txt)；它是环境快照，CPU仿真使用上面的独立依赖文件。
+
+## 手柄与键盘仿真
+
+直接使用发布的ONNX，无需先训练：
 
 ```bash
-uv pip install scipy
+python experiments/command150/sim2sim_gamepad.py
 ```
 
-## 资产准备
+仿真手柄：`LB+A` 起立，`RB+Y` 接入策略，左摇杆平移、右摇杆旋转，`B` 趴下。键盘：`1` 起立、`2` 接策略、`W/S/A/D` 平移、`Q/E` 旋转、空格停止、`B` 趴下。键盘速度指令会保持至空格清零。
 
-仓库已包含转换后的 RCDog MJCF、网格和参考动作。要从源 URDF 重建：
+没有手柄时：
 
 ```bash
-uv run python tools/rcdog/prepare_rcdog_assets.py
-uv run python tools/rcdog/generate_omni.py
+python experiments/command150/sim2sim_gamepad.py --keyboard-only
 ```
 
-`prepare_rcdog_assets.py` 读取 `source/robot.urdf` 与 `source/meshes/`，输出 `src/unisupermimic/assets/robots/rcdog/`；`generate_omni.py` 读取 `tools/rcdog/model_audit.json`，输出 0.5 / 1.0 / 1.5 m/s 三档、每档八方向加双向旋转的 CSV 与 `.json` 元数据。生成参数在 `generate_omni.py` 内按档定义，参考周期、占空比与抬脚高度见 `docs/OMNI150.md`。
+仿真只打开MuJoCo与输入设备，不打开电机串口。不要让实机后台和仿真同时读取同一个手柄。
 
-`tools/rcdog/validate_runtime.py` 可检查前向运动学、观测维度和奖励梯度：
+## 参考动作与训练
+
+仓库已包含当前模型和72段训练参考。参考由足端轨迹经RCDog逆运动学生成，速度网格覆盖前后、左右与旋转，另有静止、方向切换和对角动作；没有使用第三方动作捕捉数据。
+
+重建参考表和CSV：
 
 ```bash
-uv run python tools/rcdog/validate_runtime.py --backend mjwarp --num-envs 32
+python experiments/command150/build_references.py
 ```
 
-## 训练
+输出为 `experiments/command150/command_gait_table.npz`、`plan.json` 和 `src/unisupermimic/assets/motions/rcdog/*.csv`。当前参考周期0.32秒、占空比0.5、最大抬脚高度0.025米，面向平地运动。
 
-完整三档训练链从 `initial_policy/strafe025.pt` 开始，依次训练 omni050、omni100、omni150。每档要全部动作通过评估和扰动测试才会停止当前训练并进入下一档：
+当前训练链从仓库内的横移父策略开始，先扩展前后速度，再做全向速度跟踪与停步微调：
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run python tools/rcdog/train_pipeline.py
+# 前后速度扩展到1.0 m/s；继承父策略的横移、旋转能力
+uv run python experiments/command150/train.py --stage mid \
+  --parent results/command150/parent_lateral150.pt
+
+# 前后速度扩展到1.5 m/s
+uv run python experiments/command150/train.py --stage high \
+  --parent runs/command150_mid/ckpt_000750.pt
+
+# 全向速度跟踪和停步微调
+uv run python experiments/command150/train.py --stage final \
+  --parent runs/command150_high/ckpt_002000.pt
 ```
 
-训练日志写入 `logs/`，checkpoint 写入 `runs/<stage>_v1/`，验收通过的权重和配置复制到 `results/<stage>/`，进度写入 `tools/rcdog/pipeline_status.json`。已有同名 run 时程序会拒绝覆盖。
+每阶段输出在 `runs/command150_<stage>/`。训练使用1024个并行环境、世界模型 `[512,512,512]`、策略网络 `[512,256,128]`、5帧历史、动作比例0.25。`--parent` 加载网络权重，优化器与经验缓冲重新建立。已有同名目录时拒绝覆盖，可用 `--name` 指定新目录。
 
-只训练 1.5 m/s 一档时，以 `results/omni100/ckpt_000500.pt` 初始化：
+正式训练前可加 `--smoke` 跑2次小规模迭代，或加 `--print-command` 只检查命令。奖励中包含机身倾斜、横滚/俯仰角速度，以及零速时的关节速度、动作变化和机身速度惩罚。
+
+发布权重选取最后微调的第500次迭代：`results/command150/ckpt_000500.pt`。第750次候选在连续混合指令测试中后退横向漂移超限，因此未采用。训练配置与选择记录见 [训练与结果说明](docs/COMMAND150.md)。
+
+## sim2sim评估
+
+独立CPU MuJoCo使用1 ms物理步长、50 Hz策略；测试不固定机身，不施加辅助支撑力。全方向、多速度与8 ms延迟/观测噪声测试：
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run unisupermimic-train \
-  task=rcdog_super_mimic/mjwarp \
-  algo.num_envs=1024 algo.iterations=8000 \
-  'algo.wm_hidden=[512,512,512]' \
-  'algo.policy_hidden=[512,256,128]' \
-  algo.wm_batch=1024 algo.pi_batch=1024 algo.wm_batches=10 \
-  algo.wm_only_iters=250 algo.ckpt_every=500 algo.log_every=25 \
-  +training.init_checkpoint=results/omni100/ckpt_000500.pt \
-  'env.commands.motion.motion_files=[src/unisupermimic/assets/motions/rcdog/omni150_forward.csv,src/unisupermimic/assets/motions/rcdog/omni150_forward_left.csv,src/unisupermimic/assets/motions/rcdog/omni150_left.csv,src/unisupermimic/assets/motions/rcdog/omni150_back_left.csv,src/unisupermimic/assets/motions/rcdog/omni150_back.csv,src/unisupermimic/assets/motions/rcdog/omni150_back_right.csv,src/unisupermimic/assets/motions/rcdog/omni150_right.csv,src/unisupermimic/assets/motions/rcdog/omni150_forward_right.csv,src/unisupermimic/assets/motions/rcdog/omni150_ccw.csv,src/unisupermimic/assets/motions/rcdog/omni150_cw.csv]' \
-  training.log_dir=runs/omni150_v1
+python experiments/command150/evaluate_stability.py \
+  --checkpoint real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx \
+  --output outputs/command150/recheck.json --cap 1.5 --stress
 ```
 
-`+training.init_checkpoint` 只加载网络权重，世界模型的经验与优化器状态重新建立。继续同一个 run 时改用 `algo.resume=true`、`algo.load_run` 和 `algo.checkpoint`，并让 `algo.iterations` 表示该阶段的总迭代数；续训不要再传 `init_checkpoint`。
-
-## 评估
-
-独立 CPU MuJoCo 评估从每段参考的第一帧开始，不设置根部轨迹、不施加辅助力。十条参考各跑一次：
+连续启停、换向和旋转测试：
 
 ```bash
-uv run python tools/rcdog/evaluate_locomotion.py \
-  --stage omni150 \
-  --ckpt results/omni150/ckpt_002500.pt \
-  --output results/omni150/recheck.json
+python experiments/command150/evaluate_mixed.py \
+  --checkpoint real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx \
+  --output outputs/command150/mixed.json --delay 8 --noise
 ```
 
-加 8 次初态扰动（关节角 ±0.01 rad、根部 XY ±0.005 m、线速度 ±0.03 m/s、角速度 ±0.05 rad/s）：
+报告保存速度误差、倾角、停步关节抖动和保护原因；同目录生成逐帧NPZ。发布时的结果为 **60/60** 个CPU MuJoCo案例、**14/14** 个电机传动仿真案例通过，以及 **98.6秒** 连续混合指令测试通过，详见 [VALIDATION_SUMMARY.json](results/command150/VALIDATION_SUMMARY.json)。
+
+| 指令 | 无延迟仿真实测 | 8 ms延迟与噪声仿真实测 |
+| --- | --- | --- |
+| 前进1.5 m/s | 1.490 m/s | 1.481 m/s |
+| 后退−1.5 m/s | −1.469 m/s | −1.491 m/s |
+| 左移1.5 m/s | 1.468 m/s | 1.474 m/s |
+| 右移−1.5 m/s | −1.465 m/s | −1.467 m/s |
+| 左转1.5 rad/s | 1.500 rad/s | 见原始报告 |
+| 右转−1.5 rad/s | −1.499 rad/s | 见原始报告 |
+
+导出四格仿真视频：
 
 ```bash
-uv run python tools/rcdog/evaluate_locomotion.py \
-  --stage omni150 \
-  --ckpt results/omni150/ckpt_002500.pt \
-  --output results/omni150/recheck_trials.json \
-  --trials 8 --noise 0.01
+MUJOCO_GL=egl python experiments/command150/render_comparison.py \
+  --rollout-dir outputs/command150/recheck \
+  --output ../../outputs/command150/recheck.mp4
 ```
 
-输出 JSON 汇总速度、位移、对角触地相位、抬脚、漂移、非足部触地和子步关节速度；逐动作明细与轨迹 NPZ 写在输出文件同目录。`results/omni150/` 中保存了发布时的验收结果，轨迹 NPZ 未纳入仓库，可用上面的命令重新生成。
+当前实机版另加了“摇杆回中立即清零参考”的处理。其专项电机传动仿真为 **10/12通过**，1.5 m/s横移急停在0/8 ms延迟下均触发调试关节速度保护；它与上面的平滑参考评估是两组测试，见 [停步专项记录](results/command150/neutral_continuity_20261110.json)。
 
-## 视频导出
+## 导出与实机部署
 
-`render_rollout.py` 渲染已记录的轨迹，实体为策略实际状态，蓝色半透明为参考：
+需要重新导出自己训练的checkpoint时，在训练环境执行：
 
 ```bash
-uv run python tools/rcdog/render_rollout.py \
-  --rollout results/omni150/recheck_omni150_forward_seed101.npz \
-  --reference src/unisupermimic/assets/motions/rcdog/omni150_forward.csv \
-  --output docs/assets/rcdog/omni150_forward.mp4 \
-  --label omni150_forward
+uv run python experiments/command150/export_bundle.py \
+  --checkpoint results/command150/ckpt_000500.pt \
+  --output outputs/command150_export
 ```
 
-## 实机部署包
+输出ONNX/TorchScript、固定输入、参考表、参考生成器与接口契约；新权重应配套保留这些文件。
 
-`real_deploy/bundle_omni150/` 提供 1.5 m/s 档的 `actor_fp32.onnx`、`actor_fp32.ts`、十段参考的 `references/*.npz`、固定输入 `golden_inputs.npz` 和导出误差记录。策略输入为 `(1,10,48)` 观测历史与 `(1,390)` 未来参考，输出 `(1,12)` 关节偏移；网络内已包含训练得到的归一化参数。
+实机使用 **GO-M8010-6** 电机、宇树USB转四路RS-485、HI12M0-MI1-000 IMU与ShanWan手柄。UART1/2/3/4分别连接左前/右前/左后/右后，每腿ID1/2/3分别为髋/大腿/小腿。电机内部减速比6.33:1，小腿另有2:1皮带减速。
 
-离线核对：
+完整步骤见 [实机部署](real_deploy/README.md)，日常操作见 [常用命令](real_deploy/COMMANDS.md)。完成SDK安装和本机标定后，控制器内执行：
 
 ```bash
-python real_deploy/verify_bundle.py --bundle real_deploy/bundle_omni150
+cd real_deploy/controller
+./dognew serve --gamepad
 ```
 
-接口字段、标定顺序和限制见 [real_deploy/README.md](real_deploy/README.md) 与 [real_deploy/CALIBRATION_AND_INTERFACE.md](real_deploy/CALIBRATION_AND_INTERFACE.md)。**实机电机通信控制程序未包含在本仓库中；这批文件没有在实机上使能或验证过。**
+另开终端进入同一目录，原标定趴姿、手柄松键回中后：
+
+```bash
+./dognew init-lie &&
+./dognew stand &&
+sleep 8 &&
+./dognew servo-check &&
+./dognew arm-walk
+```
+
+实机左摇杆平移、右摇杆旋转，回中立即给零速度参考并保持策略；`B` 或 `./dognew lie` 停止策略后趴下。回中指令清零不等于机器人实际速度瞬间归零。
 
 ## 来源与许可
 
-- 框架与算法：[Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic)（Apache-2.0），原始方法为 [SuperMimic](https://supermimic.github.io/)（[论文](https://arxiv.org/abs/2610.28480)）。
-- RCDog 机器人模型由项目作者提供；参考动作由本仓库脚本生成；训练权重由本项目训练得到。
-- 本发布版的组合软件按 GPL-3.0-only 分发，上游 Apache-2.0 与 MIT 通知保留。详见 [THIRD_PARTY.md](THIRD_PARTY.md) 与 [NOTICE](NOTICE)。
+- 框架：[Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic)，保留上游历史、Apache-2.0许可与NOTICE。原始方法：[SuperMimic](https://supermimic.github.io/)。
+- 电机通信：[Unitree Actuator SDK](https://github.com/unitreerobotics/unitree_actuator_sdk)，BSD-3-Clause；安装脚本获取固定版本，并对Python绑定应用释放GIL补丁，核心SDK动态库不随本次更新重新打包。
+- 训练控制参数参考：[unitree_cpp_deploy](https://github.com/wty-yy/unitree_cpp_deploy/tree/go2)，采用GYM配套的20/0.5与5帧历史；本项目策略由Uni-SuperMimic训练。
+- RCDog模型、生成参考、训练权重和实机视频由本项目提供。软件组合按GPL-3.0-only分发，详见 [THIRD_PARTY.md](THIRD_PARTY.md) 与 [NOTICE](NOTICE)。

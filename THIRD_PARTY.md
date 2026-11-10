@@ -25,3 +25,12 @@
 ## 软件许可范围
 
 本发布版的 RCDog 扩展与上游框架组合后按根目录 `LICENSE`（GPL-3.0-only）提供；原有 Apache-2.0 与 MIT 文件的版权、许可与 NOTICE 保留。机器人模型、参考动作、训练权重与依赖不被一概声明为 GPL。上游 README 中的 Apache-2.0 声明描述上游版本，不能替代本文件对 RCDog 发布版的范围说明。
+
+## 2026-11-10当前实机版本
+
+- 当前机器人源文件为11.1134 kg的新URDF及其STL。`src/unisupermimic/assets/robots/rcdog/`、RCDog任务与 `experiments/command150/` 更新到command150训练版本；早期版本的代码固定在提交b2251f5，权重和原报告仍保留。
+- `results/command150/` 的父策略、final500权重和参考动作均由本项目生成/训练。实机速度未经录像同步测量；平滑启停与即时回中专项结果分别发布。
+- `real_deploy/controller/` 包含本项目整理的电机状态机、传动换算、输入采集和诊断代码；HI12解析器为项目内按公开协议实现的Python解析程序，协议来源为 [HiPNUC](https://www.hipnuc.com/) HI12/CHAOHE 0x91数据格式。
+- 宇树电机依赖使用 [Unitree Actuator SDK](https://github.com/unitreerobotics/unitree_actuator_sdk/tree/5b79a42d81cd69adac1367db79efdb972a898fd1)，BSD-3-Clause许可保留在 `LICENSES/BSD-3-Clause-Unitree-SDK.txt`。仅发布绑定补丁和获取/构建脚本，SDK源码与核心预编译库由安装脚本从上游获取，不纳入本次Git提交。
+- 控制配置参考 [wty-yy/unitree_cpp_deploy](https://github.com/wty-yy/unitree_cpp_deploy/tree/go2) 的GYM配套Kp20/Kd0.5、5帧历史；本项目未用该仓库策略权重替代SuperMimic策略。
+- `docs/assets/rcdog/rcdog_real_20261110.mp4` 为用户提供并授权发布的本项目实机录像，首页GIF与封面由该录像截取；`command150_mujoco.mp4` 为本项目CPU MuJoCo渲染结果。

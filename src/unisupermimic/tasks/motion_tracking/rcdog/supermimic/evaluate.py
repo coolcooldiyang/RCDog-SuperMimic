@@ -1,6 +1,6 @@
-# RCDog adaptation, 2026-10-27; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
-"""Deterministic full-clip evaluation and checkpoint watching for RCDog SuperMimic."""
+"""Deterministic full-clip evaluation and checkpoint watching for RPO SuperMimic."""
 
 from __future__ import annotations
 
@@ -272,7 +272,7 @@ def make_eval_env(run_dir: Path, backend: str = "mjwarp") -> SuperMimicManagerBa
     with initialize_config_dir(version_base="1.3", config_dir=str(config_dir)):
         cfg = compose(config_name="config", overrides=overrides)
     # Evaluate the recorded architecture and motion library, including nondefault
-    # RCDog runs. Keep the explicitly selected simulator backend from compose.
+    # RPO runs. Keep the explicitly selected simulator backend from compose.
     from omegaconf import OmegaConf
     from unisupermimic.sim2sim import read_contract_snapshot
     snapshot = read_contract_snapshot(run_dir)

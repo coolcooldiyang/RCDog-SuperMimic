@@ -27,3 +27,11 @@ redistributed. Trained weights under results/ and initial_policy/ were produced
 by this project and are included so the reported results can be reproduced.
 
 See THIRD_PARTY.md for sources, modifications and scope.
+
+2026-11-10 update: command150 / final500, new 11.1134 kg RCDog model,
+continuous-command reference generation, 5-frame observation history,
+real-robot controller and author-provided ground-test video.
+The Unitree SDK binding patch is based on unitreerobotics/unitree_actuator_sdk
+at 5b79a42d81cd69adac1367db79efdb972a898fd1; the BSD-3-Clause notice is
+preserved in LICENSES/BSD-3-Clause-Unitree-SDK.txt. The core SDK is fetched
+as a build dependency and is not vendored in this update.

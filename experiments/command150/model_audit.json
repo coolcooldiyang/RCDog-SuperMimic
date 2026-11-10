@@ -1,0 +1,172 @@
+{
+  "source_urdf_sha256": "a8265c6998848e1a66784e450e4fa7f374c95a4f67d88e0f92142798723423c7",
+  "mass_kg": 11.1134,
+  "joint_names": [
+    "rr_hip_joint",
+    "rr_thigh_joint",
+    "rr_calf_joint",
+    "rl_hip_joint",
+    "rl_thigh_joint",
+    "rl_calf_joint",
+    "fr_hip_joint",
+    "fr_thigh_joint",
+    "fr_calf_joint",
+    "fl_hip_joint",
+    "fl_thigh_joint",
+    "fl_calf_joint"
+  ],
+  "tracked_bodies": [
+    "base_link",
+    "rr_thigh",
+    "rr_calf",
+    "rr_foot",
+    "rl_thigh",
+    "rl_calf",
+    "rl_foot",
+    "fr_thigh",
+    "fr_calf",
+    "fr_foot",
+    "fl_thigh",
+    "fl_calf",
+    "fl_foot"
+  ],
+  "standing_qpos": [
+    0.0,
+    0.0,
+    0.35,
+    0.7071067811865476,
+    0.0,
+    0.0,
+    0.7071067811865476,
+    -0.018336079976392874,
+    -0.1324431034068085,
+    -0.0011705762584732558,
+    0.020723547214253048,
+    0.13309753174154132,
+    -4.601739209796582e-05,
+    0.018336072697256435,
+    -0.132148652334857,
+    -0.0011639516394655687,
+    -0.020723538608260556,
+    0.13279860403662302,
+    -4.303755189977567e-05
+  ],
+  "standing_foot_positions": [
+    [
+      -0.20650000397167714,
+      -0.1399999982963152,
+      0.02000000443211869
+    ],
+    [
+      -0.2065000039890291,
+      0.13999999819931708,
+      0.02000000452869713
+    ],
+    [
+      0.20649999603849076,
+      -0.1399999982985069,
+      0.020000004423680273
+    ],
+    [
+      0.20649999602129146,
+      0.13999999820171188,
+      0.020000004519475784
+    ]
+  ],
+  "foot_points_local": {
+    "rr": [
+      -0.19883040551510195,
+      0.1318217035807321,
+      0.012501737964295014
+    ],
+    "rl": [
+      -0.19883028916972495,
+      -0.13182181857002592,
+      0.013298246984494996
+    ],
+    "fr": [
+      -0.19882985832683708,
+      0.13182136965854907,
+      0.01250173553454936
+    ],
+    "fl": [
+      -0.19883013693993745,
+      -0.1318212555323765,
+      0.013298244110330811
+    ]
+  },
+  "foot_source_mesh": {
+    "rr": "part_50",
+    "rl": "part_76",
+    "fr": "part_110",
+    "fl": "part_140"
+  },
+  "model_forward_source": "-Y, inferred from front/rear leg names and transforms",
+  "world_heading_quaternion_wxyz": [
+    0.7071067811865476,
+    0.0,
+    0.0,
+    0.7071067811865476
+  ],
+  "actuation": {
+    "motor": "Unitree GO-M8010-6 output shaft; limits follow supplied URDF",
+    "gear_ratio": [
+      1,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      1,
+      2
+    ],
+    "assumed_extra_gear_efficiency": 0.9,
+    "motor_peak_torque_Nm": 23.7,
+    "motor_speed_metadata_rad_s": 30.1,
+    "source": "https://github.com/unitreerobotics/unitree_ros/blob/master/robots/go1_description/urdf/go1.urdf",
+    "pd_kp": 20.0,
+    "pd_kd": 0.5,
+    "armature_assumption_kg_m2": {
+      "hip_thigh": 0.005,
+      "calf": 0.02
+    },
+    "internal_reduction_ratio": 6.33
+  },
+  "collision_model": "visual STL retained; per-part chassis boxes, leg capsules and four massless sole spheres; self collisions enabled",
+  "collision_geom_names": [
+    "base_collision_00",
+    "base_collision_01",
+    "base_collision_02",
+    "base_collision_03",
+    "base_collision_04",
+    "base_collision_05",
+    "base_collision_06",
+    "base_collision_07",
+    "base_collision_08",
+    "base_collision_09",
+    "base_collision_10",
+    "base_collision_11",
+    "base_collision_12",
+    "rr_hip_collision",
+    "rr_thigh_collision",
+    "rr_calf_collision",
+    "rr_foot_collision",
+    "rl_hip_collision",
+    "rl_thigh_collision",
+    "rl_calf_collision",
+    "rl_foot_collision",
+    "fr_hip_collision",
+    "fr_thigh_collision",
+    "fr_calf_collision",
+    "fr_foot_collision",
+    "fl_hip_collision",
+    "fl_thigh_collision",
+    "fl_calf_collision",
+    "fl_foot_collision"
+  ],
+  "hardware_ready": false
+}

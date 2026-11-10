@@ -1,0 +1,2 @@
+# Vendor patches preserve the exact whitespace of upstream context lines.
+real_deploy/controller/patches/*.patch -whitespace

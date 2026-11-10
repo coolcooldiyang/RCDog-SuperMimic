@@ -1,0 +1,364 @@
+{
+  "checkpoint": "results/command150/ckpt_000500.pt",
+  "checkpoint_sha256": "f9a9736547d8325949b03b0e3c635e69bf1fcbdb14431f4d60abd525c8772205",
+  "joint_names": [
+    "rr_hip_joint",
+    "rr_thigh_joint",
+    "rr_calf_joint",
+    "rl_hip_joint",
+    "rl_thigh_joint",
+    "rl_calf_joint",
+    "fr_hip_joint",
+    "fr_thigh_joint",
+    "fr_calf_joint",
+    "fl_hip_joint",
+    "fl_thigh_joint",
+    "fl_calf_joint"
+  ],
+  "joint_order_legs": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "motor_id_per_leg": {
+    "hip": 1,
+    "thigh": 2,
+    "calf": 3
+  },
+  "q0_rad": [
+    -0.018336080014705658,
+    -0.13244310021400452,
+    -0.0011705762008205056,
+    0.020723547786474228,
+    0.13309752941131592,
+    -4.601739055942744e-05,
+    0.01833607256412506,
+    -0.1321486532688141,
+    -0.001163951586931944,
+    -0.020723538473248482,
+    0.13279859721660614,
+    -4.3037551222369075e-05
+  ],
+  "q0_deg": [
+    -1.0505799055099487,
+    -7.588430404663086,
+    -0.06706906855106354,
+    1.1873717308044434,
+    7.625926494598389,
+    -0.002636602148413658,
+    1.05057954788208,
+    -7.571559906005859,
+    -0.06668950617313385,
+    -1.1873712539672852,
+    7.608798503875732,
+    -0.0024658699985593557
+  ],
+  "policy_period_s": 0.02,
+  "motor_period_s": 0.005,
+  "obs_hist_shape": [
+    1,
+    5,
+    48
+  ],
+  "goal_shape": [
+    1,
+    390
+  ],
+  "action_shape": [
+    1,
+    12
+  ],
+  "action_scale": 0.25,
+  "target_joint_clip_rad": [
+    -1.55,
+    1.55
+  ],
+  "joint_limits_rad": [
+    -1.57,
+    1.57
+  ],
+  "kp_joint": [
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0
+  ],
+  "kd_joint": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "effort_joint_Nm": [
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66
+  ],
+  "velocity_joint_rad_s": [
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05
+  ],
+  "extra_ratio": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2
+  ],
+  "obs_fields": [
+    {
+      "slice": [
+        0,
+        12
+      ],
+      "value": "q_joint-q0; rad"
+    },
+    {
+      "slice": [
+        12,
+        24
+      ],
+      "value": "dq_joint; rad/s, no manual scale"
+    },
+    {
+      "slice": [
+        24,
+        27
+      ],
+      "value": "gyro in URDF body frame C; rad/s"
+    },
+    {
+      "slice": [
+        27,
+        30
+      ],
+      "value": "gravity_C=-R_WC[2,:]"
+    },
+    {
+      "slice": [
+        30,
+        42
+      ],
+      "value": "previous raw action a_(t-1)"
+    },
+    {
+      "slice": [
+        42,
+        48
+      ],
+      "value": "R_WC.T @ R_ref(t), first two columns, row-major flatten"
+    }
+  ],
+  "reference_body_axes": {
+    "front": "-Y_C",
+    "left": "+X_C",
+    "up": "+Z_C"
+  },
+  "initial_R_WC": [
+    [
+      0,
+      -1,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "quat_order": "wxyz",
+  "manual_obs_scaling": false,
+  "normalization": "trained RunningNorm buffers are part of actor; do not normalize again",
+  "future_frames": "continuous command planner: next 10 frames at 50 Hz",
+  "goal_frame_fields": [
+    {
+      "slice": [
+        0,
+        3
+      ],
+      "value": "reference position delta in current reference yaw frame"
+    },
+    {
+      "slice": [
+        3,
+        9
+      ],
+      "value": "reference orientation in current reference yaw frame; first two columns row-major"
+    },
+    {
+      "slice": [
+        9,
+        12
+      ],
+      "value": "future reference local root linear velocity"
+    },
+    {
+      "slice": [
+        12,
+        15
+      ],
+      "value": "future reference local root angular velocity"
+    },
+    {
+      "slice": [
+        15,
+        27
+      ],
+      "value": "future reference joint position"
+    },
+    {
+      "slice": [
+        27,
+        39
+      ],
+      "value": "future reference joint velocity times 0.1"
+    }
+  ],
+  "history_order": "oldest first, newest last",
+  "hardware_ready": false,
+  "model_source_urdf_sha256": "a8265c6998848e1a66784e450e4fa7f374c95a4f67d88e0f92142798723423c7",
+  "mass_kg": 11.1134,
+  "continuous_body_commands": {
+    "forward_max": 1.5,
+    "backward_max": 1.5,
+    "lateral_max": 1.5,
+    "planar_norm_max": 1.5,
+    "yaw_rate_max": 1.5
+  },
+  "simulation_period_s": 0.005,
+  "control_decimation": 4,
+  "validation_simulation_period_s": 0.001,
+  "framework": "Uni-SuperMimic",
+  "mass_includes_battery_controller_wiring": true,
+  "command_limits": {
+    "forward_mps": 1.5,
+    "lateral_mps": 1.5,
+    "yaw_rad_s": 1.5,
+    "backward_mps": 1.5
+  },
+  "neutral_behavior": "zero_velocity_keep_policy",
+  "reference_period_s": 0.32,
+  "training_tilt_termination_deg": 25,
+  "clips": [
+    "lat025_left",
+    "lat025_right",
+    "lat025_ccw",
+    "lat025_cw",
+    "lat050_left",
+    "lat050_right",
+    "lat050_ccw",
+    "lat050_cw",
+    "lat075_left",
+    "lat075_right",
+    "lat075_ccw",
+    "lat075_cw",
+    "lat100_left",
+    "lat100_right",
+    "lat100_ccw",
+    "lat100_cw",
+    "lat125_left",
+    "lat125_right",
+    "lat125_ccw",
+    "lat125_cw",
+    "lat150_left",
+    "lat150_right",
+    "lat150_ccw",
+    "lat150_cw",
+    "lat025_forward",
+    "lat025_back",
+    "lat050_forward",
+    "lat050_back",
+    "lat075_forward",
+    "lat075_back",
+    "lat100_forward",
+    "lat100_back",
+    "lat125_forward",
+    "lat125_back",
+    "lat150_forward",
+    "lat150_back",
+    "diag075_fl",
+    "diag075_fr",
+    "diag075_bl",
+    "diag075_br",
+    "diag150_fl",
+    "diag150_fr",
+    "diag150_bl",
+    "diag150_br",
+    "cmd025_forward",
+    "lat_stand_0",
+    "lat_stand_1",
+    "lat_stand_2",
+    "lat_low_transition_00",
+    "lat_low_transition_01",
+    "lat_low_transition_02",
+    "lat_low_transition_03",
+    "lat_low_transition_04",
+    "lat_low_transition_05",
+    "lat_low_transition_06",
+    "lat_low_transition_07",
+    "lat_mid_transition_00",
+    "lat_mid_transition_01",
+    "lat_mid_transition_02",
+    "lat_mid_transition_03",
+    "lat_mid_transition_04",
+    "lat_mid_transition_05",
+    "lat_mid_transition_06",
+    "lat_mid_transition_07",
+    "lat_high_transition_00",
+    "lat_high_transition_01",
+    "lat_high_transition_02",
+    "lat_high_transition_03",
+    "lat_high_transition_04",
+    "lat_high_transition_05",
+    "lat_high_transition_06",
+    "lat_high_transition_07"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-10",
+  "kind": "real_robot_video",
+  "duration_s": 22.64,
+  "fps": 30,
+  "resolution": [
+    720,
+    1280
+  ],
+  "source_sha256": "c1b49bd88e9a74711ba496f9344bed9e026d0723134ee07766f92aaf44042081",
+  "published_sha256": "5019b62d30d0f79bf7f00c8b8fcb23c7fdf48ce83c367fd072d97d909bece81c",
+  "format": "H.264/AAC, metadata removed, faststart",
+  "checkpoint_sha256": "f9a9736547d8325949b03b0e3c635e69bf1fcbdb14431f4d60abd525c8772205",
+  "checkpoint_association": "User identified footage as the current deployed policy; no synchronized telemetry supplied.",
+  "real_speed_measurement": null,
+  "scene": "Indoor ground test with an operator following while holding the support handle."
+}

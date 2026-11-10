@@ -1,4 +1,4 @@
-# Modified 2026-10-27 for RCDog 12-DoF quadruped; see THIRD_PARTY.md.
+# Modified for RCDog motion tracking; see THIRD_PARTY.md.
 """SuperMimic training and deterministic full-library evaluation entrypoint."""
 
 from __future__ import annotations
@@ -152,6 +152,8 @@ def main(cfg: DictConfig) -> None:
                 ),
                 "seed": seed_info.to_dict(),
                 "init_checkpoint": OmegaConf.select(cfg, 'training.init_checkpoint'),
+                "init_policy_checkpoint": OmegaConf.select(cfg, 'training.init_policy_checkpoint'),
+                "control_profile": json.loads((Path.cwd()/'experiments/command150/control_profile.json').read_text()) if (Path.cwd()/'experiments/command150/control_profile.json').exists() else None,
             },
             full_cfg=cfg,
             contract_snapshot=extract_contract_snapshot(cfg),
@@ -199,6 +201,15 @@ def main(cfg: DictConfig) -> None:
             if 'critic' in weights:
                 learner.critic.load_state_dict(weights['critic'])
             print(f"Warm start from iteration {weights['iteration']}; new physics replay and optimizer state.")
+        initial_policy = OmegaConf.select(cfg, 'training.init_policy_checkpoint')
+        if initial_policy is not None:
+            if initial is not None or checkpoint is not None:
+                raise ValueError('policy-only initialization cannot be combined with another resume')
+            policy_weights = torch.load(Path(str(initial_policy)), map_location=device, weights_only=True)
+            if int(policy_weights['args']['hist']) != int(cfg.algo.hist):
+                raise ValueError('Policy-only initialization history mismatch')
+            learner.pi.load_state_dict(policy_weights['pi'], strict=True)
+            print('Policy-only initialization; world model, critic, replay and optimizers fresh.', flush=True)
         summary = learner.train(resume=checkpoint)
         print(json.dumps(summary, indent=2))
     finally:

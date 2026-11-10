@@ -1,0 +1,21 @@
+--- a/thirdparty/python_wrapper/wrapper.cpp
++++ b/thirdparty/python_wrapper/wrapper.cpp
+@@ -5,7 +5,8 @@
+ namespace py = pybind11; 
+ 
+ PYBIND11_MODULE(unitree_actuator_sdk, m){ 
+-m.doc() = "unitree_actuator_sdk python wrapper"; 
++m.doc() = "unitree_actuator_sdk python wrapper";
++m.attr("send_recv_releases_gil") = py::bool_(true); 
+  
+ py::enum_<MotorType>(m, "MotorType")
+   .value("A1", MotorType::A1, "A1 Motor")
+@@ -45,7 +46,7 @@
+ py::class_<SerialPort>(m, "SerialPort")
+   .def(py::init<const std::string &>())
+   .def("test", &SerialPort::test)
+-  .def("sendRecv", py::overload_cast<MotorCmd*, MotorData*>(&SerialPort::sendRecv));
++  .def("sendRecv", py::overload_cast<MotorCmd*, MotorData*>(&SerialPort::sendRecv), py::call_guard<py::gil_scoped_release>());
+ 
+ m.def("queryMotorMode", &queryMotorMode, "Query Motor Mode");
+ m.def("queryGearRatio", &queryGearRatio, "Query Motor Gear Ratio");

@@ -1,0 +1,41 @@
+# 四腿关节方向映射
+#
+# 约定
+#   - 关节顺序固定为 [髋, 大腿, 小腿]，与电机 ID [1, 2, 3] 一一对应
+#   - direction = +1：指令为正时，关节朝机器人标准正方向运动
+#   - direction = -1：该关节需要取反（指令和反馈都取反）
+#   - 每条腿独占一个 485 通道，电机 ID 在不同通道上可以重复
+#   - 本表由 testgui 逐腿测试得出（滑杆给正、看实际转向后确定符号）
+version: 1
+
+joint_order: [髋, 大腿, 小腿]
+motor_ids: [1, 2, 3]
+
+legs:
+  - id: 1
+    name: 左前
+    code: FL
+    # UART1 / FTDI interface 00（当前 ttyUSB0）
+    port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_YOUR_FTDI_SERIAL-if00-port0
+    directions: [-1, -1, 1]
+
+  - id: 2
+    name: 右前
+    code: FR
+    # UART2 / FTDI interface 01（当前 ttyUSB1）
+    port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_YOUR_FTDI_SERIAL-if01-port0
+    directions: [1, 1, -1]
+
+  - id: 3
+    name: 右后
+    code: RR
+    # UART4 / FTDI interface 03（当前 ttyUSB3）
+    port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_YOUR_FTDI_SERIAL-if03-port0
+    directions: [-1, 1, -1]
+
+  - id: 4
+    name: 左后
+    code: RL
+    # UART3 / FTDI interface 02（当前 ttyUSB2）
+    port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_YOUR_FTDI_SERIAL-if02-port0
+    directions: [1, -1, 1]
