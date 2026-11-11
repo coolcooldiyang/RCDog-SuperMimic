@@ -1,3 +1,5 @@
+当前默认示例是V3高抬脚实验版（0.5m/s、0.5rad/s）。用 `python tools/configure_ports.py --policy command150` 可生成V2示例；已有config不会自动覆盖。版本结果见 [版本索引](../docs/VERSIONS.md)。
+
 # 常用命令与日志
 
 以下命令在仓库的 `real_deploy/controller/` 下执行。安装与本机配置见 [部署说明](README.md)。

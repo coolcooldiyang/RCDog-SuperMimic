@@ -1,6 +1,6 @@
 # RCDog实机部署
 
-当前版本是5帧历史的 `command150 / final500`，对应首页实机视频。早期10帧的 `bundle_omni150/` 仍保留作归档，不用于下面的控制器。
+当前默认示例为V3的 `flat_legged_a3 / 1000` 高抬脚实验版，默认平移0.5m/s、旋转0.5rad/s，对应首页新实机视频。V2 `command150 / final500`和早期10帧版本均保留；通过配置选择，不混用参考表。完整区别见 [版本索引](../docs/VERSIONS.md)。
 
 ## 硬件与连接
 
@@ -44,7 +44,8 @@ bash tools/install_unitree_sdk.sh
 接入USB后，确认当前用户有串口和手柄访问权限。自动识别唯一的四路FTDI与CP2102N设备，并生成本机配置：
 
 ```bash
-python tools/configure_ports.py
+python tools/configure_ports.py --policy legged-a3
+# 旧V2：python tools/configure_ports.py --policy command150
 ```
 
 多个适配器时手工指定稳定设备路径，`--motor-prefix` 不包含末尾的接口编号：
@@ -116,14 +117,14 @@ sleep 8 &&
 | 策略周期 / 电机指令周期 | 20 ms / 5 ms |
 | 策略关节侧PD | Kp20 / Kd0.5 |
 | 观测历史 / 动作比例 | 5帧 / 0.25 |
-| 平移合速度 / 旋转指令上限 | 1.5 m/s / 1.5 rad/s |
+| 公开示例平移合速度 / 旋转指令上限 | 0.5 m/s / 0.5 rad/s；训练覆盖1.5/1.5实验范围 |
 | 新目标要求的关节反馈年龄 | 12 ms以内；20 ms硬时限 |
-| IMU有效数据年龄 | 20 ms以内；站姿检查最多等8 ms新帧，读取器30 ms过期仍拒绝 |
+| IMU有效数据年龄 | 20 ms以内；短暂延迟最多等8 ms有效新帧，读取器30 ms过期仍拒绝 |
 | 起立保持倾角 / 策略倾角 | 15° / 30° |
-| 调试关节速度阈值 | 髋8、大腿10、小腿10 rad/s |
+| 位置目标变化率 / 真实关节速度门槛 | 髋30.1、大腿30.1、小腿15.05 rad/s；反馈速度不截断 |
 | 温度阈值 | 70°C |
 
-策略训练的物理步长为5 ms，独立CPU评估为1 ms。物理能力上限30.1/30.1/15.05 rad/s与上述实机调试阈值是不同字段。当前发布的平地策略没有后续地形实验的位置目标限速后处理。
+V3训练与CPU评估均使用1 ms物理步长、20子步/策略帧。位置目标变化率限制不保证真实速度永不超限，真实反馈仍单独检查。a3全速稳定性58/60、实际步态57/60；0.5档部署链22/22。V2物理步长和调试阈值见旧tag，不能套用V3报告。
 
 故障会锁存并撤去出力。`clear-fault` 只有在12轴反馈有效、错误码为0时才成功；之后恢复原趴姿、重新读零与起立。详细操作见 [COMMANDS.md](COMMANDS.md)。
 
@@ -135,7 +136,7 @@ sleep 8 &&
 
 ```bash
 python real_deploy/verify_bundle.py \
-  --bundle real_deploy/policies/newurdf_command150_final500
+  --bundle real_deploy/policies/newurdf_legged_a3_1000
 ```
 
 控制器的离线测试不打开电机端口，在 `real_deploy/controller/` 下执行：
@@ -155,6 +156,10 @@ python tools/feedback_monitor.py
 
 ## 文件对应关系
 
-`policies/newurdf_command150_final500/` 包含当前actor与配套的参考生成器、表格、固定输入和导出记录。`controller/` 是从实机程序整理的可独立部署副本，目录和端口配置做了通用化；本次仓库整理只做离线测试，没有操作实机电机。
+`policies/newurdf_legged_a3_1000/` 包含当前actor与配套的参考生成器、表格、固定输入和导出记录。`controller/` 是从实机程序整理的可独立部署副本，包含新步态的批量动态参考和有效新帧等待逻辑，目录与端口配置做了通用化。`examples/deploy_command150.yaml`保留V2配置，`examples/deploy_legged_a3.yaml`是V3；本次仓库更新只做离线验证，没有操作实机电机。
 
 包内导出记录中的 `hardware_ready: false` 保留了导出时的状态，不代表没有后续实机视频，也不会作为自动完成新机器标定的凭据。实机视频、仿真报告和配置示例分别保存，视频没有同步速度遥测。
+
+## V3实机问题记录
+
+新视频属于0.5m/s指令演示，有扶手跟随和未测量的承重影响。后续实机日志还记录了USB公共链路异常、右后UART4超时、回中后倾角增长；这些问题尚未全部解决。配置没有因为演示视频而取消反馈、温度或倾角保护。扩展坞断联、手柄初始化未回中和姿态保护需要分别排查，不能把所有变软都归为PD问题。

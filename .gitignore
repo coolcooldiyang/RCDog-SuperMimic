@@ -37,3 +37,7 @@ experiments/command150/posture_check.json
 experiments/command150/sim2sim_status.json
 experiments/command150/ik_audit.json
 *.log
+
+experiments/flat_legged_a3/*_check.json
+experiments/flat_legged_a3/*_status.json
+experiments/flat_legged_a3/ik_audit.json

@@ -1,4 +1,4 @@
-# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-10; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
 """SuperMimic Manager-Based environment and backend factory."""
 
@@ -59,6 +59,9 @@ class SuperMimicManagerBasedRlEnv(ManagerBasedRlEnv):
         return self._supermimic_command.mdp
 
     def apply_action(self, actions: torch.Tensor, state: TorchEnvState) -> torch.Tensor:
+        for name in ('substep_speed_peak','substep_overspeed'):
+            value=getattr(self.backend,name,None)
+            if value is not None:value.zero_()
         command = self._supermimic_command
         self._pre_action = {
             "state": tuple(value.detach().clone() for value in command.state()),
@@ -178,7 +181,7 @@ def make_supermimic_env(
     )
     if '_motor' in str(cfg.scene.model_file):
         from .motor_backend import install_motor_pd
-        install_motor_pd(backend)
+        install_motor_pd(backend, cfg.sim_dt)
     try:
         return SuperMimicManagerBasedRlEnv(cfg, backend, num_envs)
     except Exception:

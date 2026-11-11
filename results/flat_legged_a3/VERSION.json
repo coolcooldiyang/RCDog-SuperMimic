@@ -1,0 +1,62 @@
+{
+  "version": "v3-flat-legged-a3",
+  "status": "experimental",
+  "selected": "a3/ckpt_001000.pt",
+  "checkpoint_sha256": "758b3ebed59cdbd8a2c7d830d0a64c9cc22cf496fa964888d084054d462045ff",
+  "reference_family": "legged_control_trot",
+  "reference_lift_m": 0.08,
+  "actual_cpu_swing_peak_cm": "0.5m/s translation7.4-7.8;0.5rad/s yaw4.7-4.9; per-case metrics in publication_gait050.json",
+  "reference_period_s": [
+    0.4,
+    0.6
+  ],
+  "kp": 20,
+  "kd": 0.5,
+  "physics_dt_s": 0.001,
+  "policy_hz": 50,
+  "motor_hz": 200,
+  "history": 5,
+  "calf_extra_ratio": 2,
+  "internal_ratio": 6.33,
+  "position_target_rate_caps_rad_s": [
+    30.1,
+    30.1,
+    15.05
+  ],
+  "feedback_velocity_clipped": false,
+  "trained_command_caps": {
+    "planar_mps": 1.5,
+    "yaw_rad_s": 1.5
+  },
+  "default_hardware_trial_caps": {
+    "planar_mps": 0.5,
+    "yaw_rad_s": 0.5
+  },
+  "cpu_stability": {
+    "passed": 58,
+    "total": 60
+  },
+  "cpu_gait": {
+    "passed": 57,
+    "total": 60
+  },
+  "native_deployment_050": {
+    "passed": 22,
+    "total": 22
+  },
+  "full_acceptance": false,
+  "lineage": [
+    "results/command150/ckpt_000500.pt",
+    "a0/ckpt_005000.pt",
+    "a2/ckpt_001500.pt",
+    "a3/ckpt_001000.pt"
+  ],
+  "training_feedback_age_ms": 0,
+  "optional_feedback_age_training_flag": "RCDOG_FEEDBACK_DELAY_MS; a4 experiment, not selected a3",
+  "remaining_failures": [
+    "diag_bl0ms contact slip p95.3265>.3m/s",
+    "right1.5m/s8ms+noise joint speed",
+    "ccw1.5rad/s8ms+noise target stop excursion7.118>6deg"
+  ],
+  "physical_observation": "Author-supplied0.5m/s command video, held support, no synchronized speed/clearance telemetry; later stop-tilt and USB/UART failures remain unresolved"
+}

@@ -3,9 +3,9 @@ controller: motor_native_pd
 native_pd_verified: false
 absolute_joint_reference_verified: true
 commissioning_speed_limits_rad_s:
-- 8
-- 10
-- 10
+- 30.1
+- 30.1
+- 15.05
 commissioning_allowed_clips:
 - forward
 - forward_left
@@ -17,10 +17,10 @@ commissioning_allowed_clips:
 - forward_right
 - ccw
 - cw
-simulation_validation_report: results/command150/VALIDATION_SUMMARY.json
-bundle: ../policies/newurdf_command150_final500
-checkpoint_sha256: f9a9736547d8325949b03b0e3c635e69bf1fcbdb14431f4d60abd525c8772205
-stand_record: reports/operator_confirmed_stand_20261103_232516.json
+simulation_validation_report: results/flat_legged_a3/reports/native050_a3.json
+bundle: ../policies/newurdf_legged_a3_1000
+checkpoint_sha256: 758b3ebed59cdbd8a2c7d830d0a64c9cc22cf496fa964888d084054d462045ff
+stand_record: examples/policy_stand.yaml
 sdk_internal_gear_ratio: 6.33
 extra_ratio_per_leg:
 - 1
@@ -40,7 +40,7 @@ tilt_limit_deg: 30
 posture_tilt_limit_deg: 15
 entry_pose_tolerance_rad: 0.15
 imu:
-  device: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_YOUR_IMU_SERIAL-if00-port0
+  device: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_YOUR_SERIAL-if00-port0
   parser: vendor/hi12/hi12_monitor.py
   R_CI:
   - - 0
@@ -229,16 +229,18 @@ policy_kp_joint: 20.0
 policy_kd_joint: 0.5
 history_length: 5
 action_scale: 0.25
-training_physics_period_s: 0.005
-control_decimation: 4
+training_physics_period_s: 0.001
+control_decimation: 20
 sim2sim_verified: true
-training_project: experiments/command150
-physical_validation_report: reports/physical_prechecks_20261104.json
-policy_trial_note: 'All-direction final500: 60 MuJoCo and 14 native transmission cases
-  passed. Physical demonstration is linked from the repository README; no real speed measurement is included. Existing session
-  static, feedback and tilt guards retained.'
+training_project: experiments/flat_legged_a3
+physical_validation_report: local calibration required
+policy_trial_note: Experimental legged_control a3/1000. Reference lift8cm; CPU stability58/60,
+  gait57/60 at full1.5 caps; native0.5 trial22/22. Operator supplied0.5m/s command
+  real video; no measured body speed. Full-speed failures and stop-instability remain
+  documented.
 policy_trial_max_s: null
 stick_control: true
 continuous_forward: false
-commissioning_max_forward_mps: 1.5
-commissioning_max_yaw_rad_s: 1.5
+commissioning_max_forward_mps: 0.5
+commissioning_max_yaw_rad_s: 0.5
+policy_trial_full150_accepted: false

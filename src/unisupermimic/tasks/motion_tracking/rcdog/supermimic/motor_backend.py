@@ -1,4 +1,4 @@
-# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-10; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
 """RCDog motor-space saturation at every native physics substep.
 
@@ -13,9 +13,9 @@ import math
 def bounded_pd(target,q,qd,kp,kd,effort):
     return (kp*(target.clamp(-1.55,1.55)-q)-kd*qd).clamp(-effort,effort), torch.ones(q.shape[0],device=q.device,dtype=torch.bool)
 
-from .robot import KP,KD,EFFORT
+from .robot import KP,KD,EFFORT,VELOCITY_LIMIT
 
-def install_motor_pd(backend):
+def install_motor_pd(backend, physics_dt=.005):
     original=backend.step_tensor
     first=backend.get_state_views(('qpos','qvel'))
     device=first['qpos'].device
@@ -24,6 +24,11 @@ def install_motor_pd(backend):
     kd=torch.tensor(KD,device=device,dtype=torch.float32)
     effort=torch.tensor(EFFORT,device=device,dtype=torch.float32)
     backend.parallel_invalid=torch.zeros(first['qpos'].shape[0],device=device,dtype=torch.bool)
+    backend.substep_speed_peak=torch.zeros_like(first['qvel'][:,6:])
+    backend.substep_overspeed=torch.zeros_like(backend.parallel_invalid)
+    speed_limit=torch.tensor(VELOCITY_LIMIT,device=device)
+    check_peak=os.environ.get('RCDOG_SUBSTEP_SPEED_CHECK','0')=='1'
+    queue_length=max(1,round(.015/physics_dt)+1)
     compute=torch.compile(bounded_pd) if device.type=='cuda' else bounded_pd
     # Optional training-only latency and first-order torque response perturbations.
     # Motor feedback stays local/current; USB transport delays targets, not native PD.
@@ -34,9 +39,9 @@ def install_motor_pd(backend):
         blend=torch.rand(n,1,device=device)
         kp=kp+blend*(torch.floor(kp/ratio2*1280)/1280*ratio2-kp)
         kd=kd+blend*(torch.floor(kd/ratio2*1280)/1280*ratio2-kd)
-    delay=torch.randint(0,4,(n,),device=device) if randomized else torch.zeros(n,device=device,dtype=torch.long)
+    delay=torch.randint(0,queue_length,(n,),device=device) if randomized else torch.zeros(n,device=device,dtype=torch.long)
     lag=torch.rand(n,1,device=device)*.005 if randomized else torch.zeros(n,1,device=device)
-    response=1.-torch.exp(-.005/lag.clamp_min(1e-6))
+    response=1.-torch.exp(-physics_dt/lag.clamp_min(1e-6))
     queue=None;last_q=None;filtered=torch.zeros(n,12,device=device)
     index=torch.arange(n,device=device)
     def advance(self,target,nsteps):
@@ -48,7 +53,7 @@ def install_motor_pd(backend):
             view=self.get_state_views(('qpos','qvel'))
             q=view['qpos'][:,7:]
             if queue is None:
-                queue=target[None].repeat(4,1,1);last_q=q.clone()
+                queue=target[None].repeat(queue_length,1,1);last_q=q.clone()
             reset=(q-last_q).abs().amax(-1)>.3
             queue=torch.cat((target[None],queue[:-1]),0)
             queue[:,reset]=target[reset];filtered[reset]=0.
@@ -59,6 +64,10 @@ def install_motor_pd(backend):
             last_q=q.clone()
             self.parallel_invalid.logical_or_(~valid)
             result=original(torque,1)
+            if check_peak:
+                measured=self.get_state_views(('qvel',))['qvel'][:,6:].abs()
+                self.substep_speed_peak=torch.maximum(self.substep_speed_peak,measured)
+                self.substep_overspeed.logical_or_((measured>speed_limit).any(-1))
         return result
     def substeps(self,target,nsteps=1):
         # The backend writes torque controls during the loop. Preserve position

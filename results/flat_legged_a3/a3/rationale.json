@@ -1,0 +1,21 @@
+{
+  "parent": "results/flat_legged_a3/a2/ckpt_001500.pt",
+  "a2_stability": 57,
+  "a2_gait": 53,
+  "focus_clips": [
+    "flat_lc_100_ccw",
+    "flat_lc_150_bl",
+    "flat_lc_150_br",
+    "flat_lc_150_fl",
+    "flat_lc_150_left",
+    "flat_lc_150_right"
+  ],
+  "focus_fraction": 0.2,
+  "regular_adaptive_fraction": 0.8,
+  "iterations": 1000,
+  "learning_rate": 1e-05,
+  "reward_changed": false,
+  "physics_changed": false,
+  "acceptance_gates_changed": false,
+  "note": "Retain a0 and a2; no held-out mixed command is added to training. Review regressions before another run."
+}

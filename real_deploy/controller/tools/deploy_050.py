@@ -128,7 +128,7 @@ class Deployment(Session):
         self.initialized=False;self.policy_ready=False;self.maps={}
         self.session_pd_verified=False
 
-    def state(self):
+    def state(self,*,imu_sample=None):
         snapshots=self.require_ready();qs={};dqs={}
         for i,leg in enumerate(self.ctrl.legs):
             ms=snapshots[3*i:3*i+3]
@@ -138,7 +138,8 @@ class Deployment(Session):
             if any(m['temp']>=self.cfg['max_temperature_c'] for m in ms):raise RuntimeError('电机温度越限')
             qs[leg['code']],dqs[leg['code']]=self.maps[leg['code']].feedback(
                 [m['q_rotor_rad'] for m in ms],[math.radians(m['dq_deg'])*GEAR for m in ms])
-        imu=self.imu.snapshot();R_NI=quaternion_matrix(imu['quat_wxyz'])
+        imu=self.imu.snapshot() if imu_sample is None else imu_sample
+        R_NI=quaternion_matrix(imu['quat_wxyz'])
         R_CI=np.asarray(self.cfg['imu']['R_CI'],float)
         R_NC=R_NI@R_CI.T
         R=R_NC if self.R_WN is None else self.R_WN@R_NC

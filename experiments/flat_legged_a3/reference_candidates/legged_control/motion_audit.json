@@ -1,0 +1,9 @@
+{
+  "clips": 68,
+  "max_reference_joint_velocity_ratio": 0.7565950793628885,
+  "src_fps": 50,
+  "reference_family": "legged_control_trot",
+  "phase_labels_independent_of_height": true,
+  "neutral_root_velocity_immediate_zero": true,
+  "neutral_swing_settle_max_s": 0.3
+}

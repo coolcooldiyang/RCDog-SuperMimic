@@ -1,0 +1,300 @@
+{
+  "checkpoint": null,
+  "checkpoint_sha256": null,
+  "joint_names": [
+    "rr_hip_joint",
+    "rr_thigh_joint",
+    "rr_calf_joint",
+    "rl_hip_joint",
+    "rl_thigh_joint",
+    "rl_calf_joint",
+    "fr_hip_joint",
+    "fr_thigh_joint",
+    "fr_calf_joint",
+    "fl_hip_joint",
+    "fl_thigh_joint",
+    "fl_calf_joint"
+  ],
+  "joint_order_legs": [
+    "rr",
+    "rl",
+    "fr",
+    "fl"
+  ],
+  "motor_id_per_leg": {
+    "hip": 1,
+    "thigh": 2,
+    "calf": 3
+  },
+  "q0_rad": [
+    -0.018336079976392874,
+    -0.1324431034068085,
+    -0.0011705762584732558,
+    0.020723547214253048,
+    0.13309753174154132,
+    -4.601739209796582e-05,
+    0.018336072697256435,
+    -0.132148652334857,
+    -0.0011639516394655687,
+    -0.020723538608260556,
+    0.13279860403662302,
+    -4.303755189977567e-05
+  ],
+  "q0_deg": [
+    -1.05057999546165,
+    -7.588430850824863,
+    -0.06706907920873253,
+    1.187371791916794,
+    7.625926832398827,
+    -0.0026366023514121065,
+    1.0505795783978533,
+    -7.571560047128939,
+    -0.06668951649870991,
+    -1.1873712988297458,
+    7.608799536527477,
+    -0.002465870084432384
+  ],
+  "policy_period_s": 0.02,
+  "motor_period_s": 0.005,
+  "obs_hist_shape": [
+    1,
+    5,
+    48
+  ],
+  "goal_shape": [
+    1,
+    390
+  ],
+  "action_shape": [
+    1,
+    12
+  ],
+  "action_scale": 0.25,
+  "target_joint_clip_rad": [
+    -1.55,
+    1.55
+  ],
+  "joint_limits_rad": [
+    -1.57,
+    1.57
+  ],
+  "kp_joint": [
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0
+  ],
+  "kd_joint": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "effort_joint_Nm": [
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66,
+    23.7,
+    23.7,
+    42.66
+  ],
+  "velocity_joint_rad_s": [
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05,
+    30.1,
+    30.1,
+    15.05
+  ],
+  "extra_ratio": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2
+  ],
+  "obs_fields": [
+    {
+      "slice": [
+        0,
+        12
+      ],
+      "value": "q_joint-q0; rad"
+    },
+    {
+      "slice": [
+        12,
+        24
+      ],
+      "value": "dq_joint; rad/s, no manual scale"
+    },
+    {
+      "slice": [
+        24,
+        27
+      ],
+      "value": "gyro in URDF body frame C; rad/s"
+    },
+    {
+      "slice": [
+        27,
+        30
+      ],
+      "value": "gravity_C=-R_WC[2,:]"
+    },
+    {
+      "slice": [
+        30,
+        42
+      ],
+      "value": "previous raw action a_(t-1)"
+    },
+    {
+      "slice": [
+        42,
+        48
+      ],
+      "value": "R_WC.T @ R_ref(t), first two columns, row-major flatten"
+    }
+  ],
+  "reference_body_axes": {
+    "front": "-Y_C",
+    "left": "+X_C",
+    "up": "+Z_C"
+  },
+  "initial_R_WC": [
+    [
+      0,
+      -1,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "quat_order": "wxyz",
+  "manual_obs_scaling": false,
+  "normalization": "trained RunningNorm buffers are part of actor; do not normalize again",
+  "future_frames": "continuous command planner: next 10 frames at 50 Hz",
+  "goal_frame_fields": [
+    {
+      "slice": [
+        0,
+        3
+      ],
+      "value": "reference position delta in current reference yaw frame"
+    },
+    {
+      "slice": [
+        3,
+        9
+      ],
+      "value": "reference orientation in current reference yaw frame; first two columns row-major"
+    },
+    {
+      "slice": [
+        9,
+        12
+      ],
+      "value": "future reference local root linear velocity"
+    },
+    {
+      "slice": [
+        12,
+        15
+      ],
+      "value": "future reference local root angular velocity"
+    },
+    {
+      "slice": [
+        15,
+        27
+      ],
+      "value": "future reference joint position"
+    },
+    {
+      "slice": [
+        27,
+        39
+      ],
+      "value": "future reference joint velocity times 0.1"
+    }
+  ],
+  "history_order": "oldest first, newest last",
+  "hardware_ready": false,
+  "model_source_urdf_sha256": "a8265c6998848e1a66784e450e4fa7f374c95a4f67d88e0f92142798723423c7",
+  "mass_kg": 11.1134,
+  "continuous_body_commands": {
+    "forward_max": 1.5,
+    "backward_max": 1.5,
+    "lateral_max": 1.5,
+    "planar_norm_max": 1.5,
+    "yaw_rate_max": 1.5
+  },
+  "simulation_period_s": 0.001,
+  "control_decimation": 20,
+  "validation_simulation_period_s": 0.001,
+  "framework": "Uni-SuperMimic",
+  "mass_includes_battery_controller_wiring": true,
+  "command_limits": {
+    "forward_mps": 1.5,
+    "lateral_mps": 1.5,
+    "yaw_rad_s": 1.5,
+    "backward_mps": 1.5
+  },
+  "neutral_behavior": "zero_velocity_keep_policy",
+  "reference_period_s": null,
+  "training_tilt_termination_deg": 25,
+  "reference_period_range_s": [
+    0.4,
+    0.6
+  ],
+  "reference_family": "legged_control_trot",
+  "reference_table": "reference_candidates/legged_control/command_gait_table.npz",
+  "reference_clearance_m": 0.08,
+  "reference_provenance": "reference_candidates/legged_control/source_provenance.json",
+  "neutral_reference_velocity_immediate": true,
+  "neutral_swing_settle_max_s": 0.3
+}

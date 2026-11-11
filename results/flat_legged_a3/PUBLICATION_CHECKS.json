@@ -1,0 +1,76 @@
+{
+  "publication_date": "2026-11-11",
+  "timezone": "Asia/Shanghai",
+  "original_checkpoint_sha256": "758b3ebed59cdbd8a2c7d830d0a64c9cc22cf496fa964888d084054d462045ff",
+  "onnx_export_parity": {
+    "export_parity_max_abs_error": 2.1457672119140625e-06,
+    "samples": 680,
+    "repeats": 100,
+    "inference_ms_p50_p95_p99": [
+      0.11050949979107827,
+      0.14257735419960227,
+      0.17767693279893165
+    ],
+    "hardware_control_tested": false
+  },
+  "fresh_export_parity": {
+    "export_parity_max_abs_error": 2.1457672119140625e-06,
+    "samples": 680,
+    "repeats": 50,
+    "inference_ms_p50_p95_p99": [
+      0.08400449951295741,
+      0.10741944934125056,
+      0.120115447207354
+    ],
+    "hardware_control_tested": false
+  },
+  "framework_regression": {
+    "passed": 17,
+    "skipped": 1,
+    "skip": "MPS device unavailable"
+  },
+  "controller_offline_tests": {
+    "passed": 74
+  },
+  "posture_sim2sim": true,
+  "reference_validation": true,
+  "runtime_parity": {
+    "frames": 500,
+    "max_action_or_target_abs_error": 9.5367431640625e-07,
+    "compute_ms_p95": 1.107423750727321,
+    "compute_ms_max": 3.2144860015250742,
+    "same_lookahead_reference_and_applied_previous_action": true,
+    "hardware_accessed": false
+  },
+  "cpu_050_stability": [
+    8,
+    8
+  ],
+  "cpu_050_gait": [
+    8,
+    8
+  ],
+  "native_050_publication_subset": [
+    6,
+    6
+  ],
+  "original_full_speed_results": {
+    "stability": [
+      58,
+      60
+    ],
+    "gait": [
+      57,
+      60
+    ],
+    "all_passed": false
+  },
+  "training_launch_dry_runs": [
+    "a0",
+    "a2",
+    "a3"
+  ],
+  "hardware_devices_opened": false,
+  "private_paths_and_credential_scan": "passed",
+  "old_policy_reference_and_result_files_changed": false
+}

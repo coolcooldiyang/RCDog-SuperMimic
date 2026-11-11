@@ -1,0 +1,23 @@
+{
+  "benchmarks": [
+    {
+      "mode": "original",
+      "frames": 400,
+      "p50_ms": 5.4682214995409595,
+      "p95_ms": 5.914159549138276,
+      "p99_ms": 6.39004522232426,
+      "max_ms": 6.796457997552352
+    },
+    {
+      "mode": "batched",
+      "frames": 400,
+      "p50_ms": 0.5867035015398869,
+      "p95_ms": 0.6920693971551373,
+      "p99_ms": 0.7539307021215791,
+      "max_ms": 1.0122179992322344
+    }
+  ],
+  "max_action_target_error": 0.0,
+  "hardware_accessed": false,
+  "thresholds_unchanged": true
+}

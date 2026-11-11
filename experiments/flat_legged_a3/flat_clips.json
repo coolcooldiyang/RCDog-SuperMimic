@@ -1,0 +1,410 @@
+[
+  {
+    "name": "flat_lc_010_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6879548646771546
+  },
+  {
+    "name": "flat_lc_010_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6879350349859957
+  },
+  {
+    "name": "flat_lc_010_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.7051143381310645
+  },
+  {
+    "name": "flat_lc_010_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.704972387524123
+  },
+  {
+    "name": "flat_lc_010_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.09572706647846889
+  },
+  {
+    "name": "flat_lc_010_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_010_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.0886634759542027
+  },
+  {
+    "name": "flat_lc_025_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4433787434337358
+  },
+  {
+    "name": "flat_lc_025_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4433359011571082
+  },
+  {
+    "name": "flat_lc_025_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4957941967600283
+  },
+  {
+    "name": "flat_lc_025_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4957361885301254
+  },
+  {
+    "name": "flat_lc_025_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.1844063093320451
+  },
+  {
+    "name": "flat_lc_025_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_025_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.16502257707622836
+  },
+  {
+    "name": "flat_lc_050_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.34471862136048725
+  },
+  {
+    "name": "flat_lc_050_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.3447250404871363
+  },
+  {
+    "name": "flat_lc_050_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.40358927508539294
+  },
+  {
+    "name": "flat_lc_050_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.40355463260975594
+  },
+  {
+    "name": "flat_lc_050_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.27299073925039913
+  },
+  {
+    "name": "flat_lc_050_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.26767762027367736
+  },
+  {
+    "name": "flat_lc_075_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.7086896075332659
+  },
+  {
+    "name": "flat_lc_075_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.7086657715308194
+  },
+  {
+    "name": "flat_lc_075_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.7291908995188799
+  },
+  {
+    "name": "flat_lc_075_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.7293426075863825
+  },
+  {
+    "name": "flat_lc_075_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.36157516916875326
+  },
+  {
+    "name": "flat_lc_075_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_075_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.37033266347112614
+  },
+  {
+    "name": "flat_lc_100_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4635679166096499
+  },
+  {
+    "name": "flat_lc_100_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4636067650666746
+  },
+  {
+    "name": "flat_lc_100_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.5407369463069238
+  },
+  {
+    "name": "flat_lc_100_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.5407109227888545
+  },
+  {
+    "name": "flat_lc_100_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.3276621294886887
+  },
+  {
+    "name": "flat_lc_100_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.32766095023870334
+  },
+  {
+    "name": "flat_lc_150_forward",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_forward.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4921084975561007
+  },
+  {
+    "name": "flat_lc_150_back",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_back.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.4920123791002332
+  },
+  {
+    "name": "flat_lc_150_left",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_left.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6522093624704658
+  },
+  {
+    "name": "flat_lc_150_right",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_right.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6522054121672931
+  },
+  {
+    "name": "flat_lc_150_ccw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_ccw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.356243149181366
+  },
+  {
+    "name": "flat_lc_150_cw",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_cw.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.35624183600978476
+  },
+  {
+    "name": "flat_lc_050_fl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_fl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.38640855824796805
+  },
+  {
+    "name": "flat_lc_050_fr",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_fr.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.3864192012969425
+  },
+  {
+    "name": "flat_lc_050_bl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_bl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.38646550105830924
+  },
+  {
+    "name": "flat_lc_050_br",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_050_br.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.38636221643726326
+  },
+  {
+    "name": "flat_lc_100_fl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_fl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.5618232979454175
+  },
+  {
+    "name": "flat_lc_100_fr",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_fr.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.5616633055133078
+  },
+  {
+    "name": "flat_lc_100_bl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_bl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.56175764217693
+  },
+  {
+    "name": "flat_lc_100_br",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_100_br.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.5617289228420925
+  },
+  {
+    "name": "flat_lc_150_fl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_fl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6572756953220957
+  },
+  {
+    "name": "flat_lc_150_fr",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_fr.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6572026091208882
+  },
+  {
+    "name": "flat_lc_150_bl",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_bl.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6573195202221556
+  },
+  {
+    "name": "flat_lc_150_br",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_150_br.csv",
+    "seconds": 16,
+    "reference_joint_speed_ratio": 0.6571587962634936
+  },
+  {
+    "name": "flat_lc_stand0",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_stand0.csv",
+    "seconds": 12,
+    "reference_joint_speed_ratio": 0.0
+  },
+  {
+    "name": "flat_lc_stand1",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_stand1.csv",
+    "seconds": 12,
+    "reference_joint_speed_ratio": 0.0
+  },
+  {
+    "name": "flat_lc_stand2",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_stand2.csv",
+    "seconds": 12,
+    "reference_joint_speed_ratio": 0.0
+  },
+  {
+    "name": "flat_lc_stand3",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_stand3.csv",
+    "seconds": 12,
+    "reference_joint_speed_ratio": 0.0
+  },
+  {
+    "name": "flat_lc_transition0",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition0.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6487051748358339
+  },
+  {
+    "name": "flat_lc_transition1",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition1.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.7565950793628885
+  },
+  {
+    "name": "flat_lc_transition2",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition2.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.7455673795386912
+  },
+  {
+    "name": "flat_lc_transition3",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition3.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6605280810728782
+  },
+  {
+    "name": "flat_lc_transition4",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition4.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.7548531252225927
+  },
+  {
+    "name": "flat_lc_transition5",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition5.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6972524380781869
+  },
+  {
+    "name": "flat_lc_transition6",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition6.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6450904133441637
+  },
+  {
+    "name": "flat_lc_transition7",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition7.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.633943629176395
+  },
+  {
+    "name": "flat_lc_transition8",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition8.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6939835880419929
+  },
+  {
+    "name": "flat_lc_transition9",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition9.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6343736628571836
+  },
+  {
+    "name": "flat_lc_transition10",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition10.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.6555482673260214
+  },
+  {
+    "name": "flat_lc_transition11",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_transition11.csv",
+    "seconds": 30,
+    "reference_joint_speed_ratio": 0.7525917479380069
+  },
+  {
+    "name": "flat_lc_fast_restart0",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_fast_restart0.csv",
+    "seconds": 13,
+    "reference_joint_speed_ratio": 0.4998596186974308
+  },
+  {
+    "name": "flat_lc_fast_restart1",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_fast_restart1.csv",
+    "seconds": 13,
+    "reference_joint_speed_ratio": 0.648501646320858
+  },
+  {
+    "name": "flat_lc_fast_restart2",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_fast_restart2.csv",
+    "seconds": 13,
+    "reference_joint_speed_ratio": 0.356243149181366
+  },
+  {
+    "name": "flat_lc_fast_restart3",
+    "path": "src/unisupermimic/assets/motions/rcdog_flat_legged/flat_lc_fast_restart3.csv",
+    "seconds": 13,
+    "reference_joint_speed_ratio": 0.7392762335838396
+  }
+]

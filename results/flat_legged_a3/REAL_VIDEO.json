@@ -1,0 +1,14 @@
+{
+  "video": "docs/assets/rcdog/legged_a3_real050_20261111.mp4",
+  "video_sha256": "94a85643ea8e51f2d013127b83ae087f3628b04cc8e043b6568f95dc5d4b41bd",
+  "author_supplied_original_sha256": "27cfd5f2ffb78a68a23efb7e173352fef0a7d32d3f2043a3e650cc47ac449794",
+  "policy": "v3-flat-legged-a3",
+  "checkpoint_sha256": "758b3ebed59cdbd8a2c7d830d0a64c9cc22cf496fa964888d084054d462045ff",
+  "command_mps": 0.5,
+  "command_source": "author statement",
+  "measured_body_speed_available": false,
+  "synchronized_robot_telemetry": false,
+  "nominal_duration_s": 19.57,
+  "support": "operator holds robot handle",
+  "publication_processing": "HEVC to H264/AAC for browser compatibility; full duration preserved, source metadata removed"
+}

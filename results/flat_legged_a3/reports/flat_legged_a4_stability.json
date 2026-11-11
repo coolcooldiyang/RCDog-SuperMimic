@@ -1,0 +1,1450 @@
+{
+  "checkpoint": "/runs/flat_legged_a4/ckpt_001500.pt",
+  "cap": 1.5,
+  "all_passed": false,
+  "passed": 58,
+  "total": 60,
+  "real_hardware_accessed": false,
+  "results": [
+    {
+      "case": "forward_0.25",
+      "target": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.23225452687945813,
+        -0.007177484815729569,
+        -0.005096620124555804
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.8690469984380345,
+      "stop_joint_ptp_deg": 0.27430887096648393,
+      "stop_target_ptp_deg": 0.17765919672755542,
+      "stop_joint_speed_rms": 0.0012813779365681327,
+      "stop_action_ptp": 0.012402951717376709,
+      "stop_speed_mps": 0.0001465814602793514,
+      "stop_yaw_rad_s": 0.0002527757416917253,
+      "passed": true
+    },
+    {
+      "case": "backward_0.25",
+      "target": [
+        -0.25,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.23361885802385315,
+        -0.013142462411652204,
+        -0.007291657638232961
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.29022552118481,
+      "stop_joint_ptp_deg": 0.19990749418149356,
+      "stop_target_ptp_deg": 0.2566324052321816,
+      "stop_joint_speed_rms": 0.0008736719495253083,
+      "stop_action_ptp": 0.017916321754455566,
+      "stop_speed_mps": 9.835119111313242e-05,
+      "stop_yaw_rad_s": 2.999488786397603e-05,
+      "passed": true
+    },
+    {
+      "case": "left_0.25",
+      "target": [
+        0.0,
+        0.25,
+        0.0
+      ],
+      "measured": [
+        0.00135208275570001,
+        0.22599239334718263,
+        -0.0009810396400568883
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.280987532484656,
+      "stop_joint_ptp_deg": 0.10834726454917205,
+      "stop_target_ptp_deg": 0.06078014587665097,
+      "stop_joint_speed_rms": 0.0006034463595365714,
+      "stop_action_ptp": 0.004243254661560059,
+      "stop_speed_mps": 7.476269091528869e-05,
+      "stop_yaw_rad_s": 0.00010397980853724341,
+      "passed": true
+    },
+    {
+      "case": "right_0.25",
+      "target": [
+        0.0,
+        -0.25,
+        0.0
+      ],
+      "measured": [
+        0.0013523329874941194,
+        -0.2544894866447735,
+        -0.008745982695327214
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.19519555113938,
+      "stop_joint_ptp_deg": 0.1254729953140477,
+      "stop_target_ptp_deg": 0.14311978386844718,
+      "stop_joint_speed_rms": 0.0008113424794292282,
+      "stop_action_ptp": 0.009991645812988281,
+      "stop_speed_mps": 3.0605683344613357e-06,
+      "stop_yaw_rad_s": 0.00018525865304817993,
+      "passed": true
+    },
+    {
+      "case": "ccw_0.25",
+      "target": [
+        0.0,
+        0.0,
+        0.25
+      ],
+      "measured": [
+        -0.007679812957376858,
+        -0.005552156359324897,
+        0.24824515360834246
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.142524747463962,
+      "stop_joint_ptp_deg": 0.09878581704239692,
+      "stop_target_ptp_deg": 0.07697110930416619,
+      "stop_joint_speed_rms": 0.000427281730045611,
+      "stop_action_ptp": 0.005373597145080566,
+      "stop_speed_mps": 1.9308980146954693e-06,
+      "stop_yaw_rad_s": 9.686692581261586e-05,
+      "passed": true
+    },
+    {
+      "case": "cw_0.25",
+      "target": [
+        0.0,
+        0.0,
+        -0.25
+      ],
+      "measured": [
+        -0.01838840297118205,
+        0.0053744524820484715,
+        -0.25069830820492106
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 3.669011009900239,
+      "stop_joint_ptp_deg": 0.2200082010452298,
+      "stop_target_ptp_deg": 0.26933997218299033,
+      "stop_joint_speed_rms": 0.0009647057813799674,
+      "stop_action_ptp": 0.01880347728729248,
+      "stop_speed_mps": 3.249469466586639e-05,
+      "stop_yaw_rad_s": 0.0004301460031885497,
+      "passed": true
+    },
+    {
+      "case": "forward_0.5",
+      "target": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.4724243966583023,
+        -0.0059326867862239336,
+        -0.007251807840265752
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.8690469984380345,
+      "stop_joint_ptp_deg": 0.45613390442168683,
+      "stop_target_ptp_deg": 0.3374453892227742,
+      "stop_joint_speed_rms": 0.002281830322094837,
+      "stop_action_ptp": 0.023558132350444794,
+      "stop_speed_mps": 0.00022549816338804005,
+      "stop_yaw_rad_s": 0.0007743886028762531,
+      "passed": true
+    },
+    {
+      "case": "backward_0.5",
+      "target": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.4684789814786078,
+        -0.018306110048729545,
+        -0.005447325473575472
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.290273884946227,
+      "stop_joint_ptp_deg": 0.36856199095600634,
+      "stop_target_ptp_deg": 0.36792863021024685,
+      "stop_joint_speed_rms": 0.0016102378462624733,
+      "stop_action_ptp": 0.025686264038085938,
+      "stop_speed_mps": 0.00011521786034298504,
+      "stop_yaw_rad_s": 0.00034422397644010255,
+      "passed": true
+    },
+    {
+      "case": "left_0.5",
+      "target": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "measured": [
+        -0.005822932621838349,
+        0.46334872809541394,
+        -0.001511020756316971
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.280987532484656,
+      "stop_joint_ptp_deg": 0.15234996918903743,
+      "stop_target_ptp_deg": 0.11543660027556238,
+      "stop_joint_speed_rms": 0.0007316601926651905,
+      "stop_action_ptp": 0.008058995008468628,
+      "stop_speed_mps": 6.2653876687073e-05,
+      "stop_yaw_rad_s": 0.00010118134255458296,
+      "passed": true
+    },
+    {
+      "case": "right_0.5",
+      "target": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "measured": [
+        -0.0033800918735086027,
+        -0.4966601756543583,
+        -0.01014784202147613
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.195508103567593,
+      "stop_joint_ptp_deg": 0.17153596874190044,
+      "stop_target_ptp_deg": 0.21932078934369445,
+      "stop_joint_speed_rms": 0.000739980573405553,
+      "stop_action_ptp": 0.015311479568481445,
+      "stop_speed_mps": 3.7397080044312203e-05,
+      "stop_yaw_rad_s": 3.344915159043295e-05,
+      "passed": true
+    },
+    {
+      "case": "ccw_0.5",
+      "target": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "measured": [
+        -0.007729243550413535,
+        -0.010595819292422476,
+        0.49404319666037266
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.467653591255761,
+      "stop_joint_ptp_deg": 0.2545896708227533,
+      "stop_target_ptp_deg": 0.22077903473149216,
+      "stop_joint_speed_rms": 0.0009603397108150717,
+      "stop_action_ptp": 0.015413284301757812,
+      "stop_speed_mps": 3.3151488723920845e-05,
+      "stop_yaw_rad_s": 0.0002369688305198649,
+      "passed": true
+    },
+    {
+      "case": "cw_0.5",
+      "target": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "measured": [
+        -0.01845167802742462,
+        0.006721033065902129,
+        -0.5031012750628957
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.249979306312407,
+      "stop_joint_ptp_deg": 0.34322859026036484,
+      "stop_target_ptp_deg": 0.4413360883149589,
+      "stop_joint_speed_rms": 0.0014679697042746479,
+      "stop_action_ptp": 0.030811071395874023,
+      "stop_speed_mps": 7.24999898992594e-05,
+      "stop_yaw_rad_s": 0.0005444346353239552,
+      "passed": true
+    },
+    {
+      "case": "forward_1",
+      "target": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.9399683662351112,
+        0.009939450436436884,
+        -0.009198109477574358
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.8690469984380345,
+      "stop_joint_ptp_deg": 0.1573525187804011,
+      "stop_target_ptp_deg": 0.17201831424677114,
+      "stop_joint_speed_rms": 0.0007463176353128141,
+      "stop_action_ptp": 0.012009143829345703,
+      "stop_speed_mps": 8.035480828432333e-05,
+      "stop_yaw_rad_s": 9.454404993535829e-05,
+      "passed": true
+    },
+    {
+      "case": "backward_1",
+      "target": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.9468859759915915,
+        -0.034669330648820926,
+        -0.0033123211177886152
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.290273884946227,
+      "stop_joint_ptp_deg": 0.10484716726096957,
+      "stop_target_ptp_deg": 0.09838076414439509,
+      "stop_joint_speed_rms": 0.0005532042578677513,
+      "stop_action_ptp": 0.006868273019790649,
+      "stop_speed_mps": 2.38384533351343e-05,
+      "stop_yaw_rad_s": 0.000286343205726691,
+      "passed": true
+    },
+    {
+      "case": "left_1",
+      "target": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "measured": [
+        -0.024279799948895443,
+        0.9619597493875576,
+        0.001956555477257945
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.280987532484656,
+      "stop_joint_ptp_deg": 0.08218133299251164,
+      "stop_target_ptp_deg": 0.07164697684614126,
+      "stop_joint_speed_rms": 0.00043980972163274297,
+      "stop_action_ptp": 0.0050019025802612305,
+      "stop_speed_mps": 3.0514736773207273e-05,
+      "stop_yaw_rad_s": 7.379104312122732e-05,
+      "passed": true
+    },
+    {
+      "case": "right_1",
+      "target": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "measured": [
+        0.015823056554325764,
+        -0.9800521546980695,
+        -0.016230733135681817
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.329596590707438,
+      "stop_joint_ptp_deg": 0.26103391109647833,
+      "stop_target_ptp_deg": 0.25412572580678694,
+      "stop_joint_speed_rms": 0.0009663025853894559,
+      "stop_action_ptp": 0.01774132251739502,
+      "stop_speed_mps": 4.101874203415304e-05,
+      "stop_yaw_rad_s": 0.00010769815925615023,
+      "passed": true
+    },
+    {
+      "case": "ccw_1",
+      "target": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "measured": [
+        -0.008922831638579619,
+        0.00373057353414471,
+        0.9951468067050177
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.469969891084041,
+      "stop_joint_ptp_deg": 0.6438923193791052,
+      "stop_target_ptp_deg": 0.622160223949169,
+      "stop_joint_speed_rms": 0.002205197451627327,
+      "stop_action_ptp": 0.043434977531433105,
+      "stop_speed_mps": 0.00025711096691437675,
+      "stop_yaw_rad_s": 0.0010117507156173363,
+      "passed": true
+    },
+    {
+      "case": "cw_1",
+      "target": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "measured": [
+        -0.027544375021311414,
+        -0.0030524484148260534,
+        -1.0008653327617552
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.3419800975212475,
+      "stop_joint_ptp_deg": 0.6287389664669462,
+      "stop_target_ptp_deg": 0.7952679533685572,
+      "stop_joint_speed_rms": 0.0026206394227149725,
+      "stop_action_ptp": 0.05552017688751221,
+      "stop_speed_mps": 0.00012436196057703035,
+      "stop_yaw_rad_s": 0.0012015904121760366,
+      "passed": true
+    },
+    {
+      "case": "forward_1.5",
+      "target": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        1.3649232549660992,
+        0.006335844460658506,
+        -0.006379538671593435
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.8690469984380345,
+      "stop_joint_ptp_deg": 0.1272622637624746,
+      "stop_target_ptp_deg": 0.07906413539795197,
+      "stop_joint_speed_rms": 0.0005753104857311305,
+      "stop_action_ptp": 0.0055197179317474365,
+      "stop_speed_mps": 5.7935698485326104e-05,
+      "stop_yaw_rad_s": 0.0001059031400255401,
+      "passed": true
+    },
+    {
+      "case": "backward_1.5",
+      "target": [
+        -1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.4506062715605825,
+        -0.06078932730740728,
+        0.006293457032932172
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 8.189844091634443,
+      "stop_joint_ptp_deg": 0.43430247582360637,
+      "stop_target_ptp_deg": 0.4540795137589102,
+      "stop_joint_speed_rms": 0.0018193723016088799,
+      "stop_action_ptp": 0.031700730323791504,
+      "stop_speed_mps": 0.00016556529735955474,
+      "stop_yaw_rad_s": 0.0003506341370913388,
+      "passed": true
+    },
+    {
+      "case": "left_1.5",
+      "target": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "measured": [
+        -0.11431047837877577,
+        1.4294141308632649,
+        0.0071344691773904114
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.280987532484656,
+      "stop_joint_ptp_deg": 0.17637791955119594,
+      "stop_target_ptp_deg": 0.1174971829707906,
+      "stop_joint_speed_rms": 0.0007413265385583814,
+      "stop_action_ptp": 0.008202850818634033,
+      "stop_speed_mps": 4.60865043017575e-05,
+      "stop_yaw_rad_s": 0.0001679524926758736,
+      "passed": true
+    },
+    {
+      "case": "right_1.5",
+      "target": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "measured": [
+        0.0033072634289359336,
+        -1.4777114963364362,
+        -0.011792080217704825
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 6.005294852333809,
+      "stop_joint_ptp_deg": 0.7339903130360885,
+      "stop_target_ptp_deg": 0.6575798774375626,
+      "stop_joint_speed_rms": 0.003188683419583366,
+      "stop_action_ptp": 0.04590773582458496,
+      "stop_speed_mps": 0.0001599182986377845,
+      "stop_yaw_rad_s": 0.00023896818521612517,
+      "passed": true
+    },
+    {
+      "case": "ccw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "measured": [
+        -0.001286624253023655,
+        0.0011979467344007807,
+        1.4964381307022276
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.469969891084041,
+      "stop_joint_ptp_deg": 0.3651108636850549,
+      "stop_target_ptp_deg": 0.34176046795263554,
+      "stop_joint_speed_rms": 0.001287419539548458,
+      "stop_action_ptp": 0.023859381675720215,
+      "stop_speed_mps": 0.00014525945136561734,
+      "stop_yaw_rad_s": 0.0005535820584809195,
+      "passed": true
+    },
+    {
+      "case": "cw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        -1.5
+      ],
+      "measured": [
+        -0.05001282664807954,
+        -0.034619979602041925,
+        -1.5011496990888904
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 4.344367467359157,
+      "stop_joint_ptp_deg": 0.176943498337446,
+      "stop_target_ptp_deg": 0.23127874303309426,
+      "stop_joint_speed_rms": 0.0009027427898547277,
+      "stop_action_ptp": 0.016146302223205566,
+      "stop_speed_mps": 0.00020194677932666496,
+      "stop_yaw_rad_s": 0.0001447856122739531,
+      "passed": true
+    },
+    {
+      "case": "stand",
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.0176929266426434e-07,
+        1.6998118222034713e-05,
+        -7.391909126926849e-05
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 2.099652513557007,
+      "stop_joint_ptp_deg": 0.013842208101498556,
+      "stop_target_ptp_deg": 0.005390726802432563,
+      "stop_joint_speed_rms": 5.226956316696032e-05,
+      "stop_action_ptp": 0.0003763437271118164,
+      "stop_speed_mps": 1.2221018029182679e-06,
+      "stop_yaw_rad_s": 2.9141165971302688e-05,
+      "passed": true
+    },
+    {
+      "case": "mixed",
+      "target": [
+        0.3,
+        0.8999999999999999,
+        0.75
+      ],
+      "measured": [
+        0.3410743469057241,
+        0.8199983888978506,
+        0.750269835138535
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.5220211140251445,
+      "stop_joint_ptp_deg": 0.2004882213060099,
+      "stop_target_ptp_deg": 0.15505297812210572,
+      "stop_joint_speed_rms": 0.0008034510416558855,
+      "stop_action_ptp": 0.010824739933013916,
+      "stop_speed_mps": 7.095778128057319e-05,
+      "stop_yaw_rad_s": 0.00016841910319085154,
+      "passed": true
+    },
+    {
+      "case": "diag_fl",
+      "target": [
+        1.0606601717798212,
+        1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        0.9290501825989376,
+        1.0612636301908085,
+        0.0008659764690999161
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 13.594735694540573,
+      "stop_joint_ptp_deg": 0.3179160118378145,
+      "stop_target_ptp_deg": 0.19708724293483357,
+      "stop_joint_speed_rms": 0.0010979252243479762,
+      "stop_action_ptp": 0.01375928521156311,
+      "stop_speed_mps": 1.8516929456741744e-06,
+      "stop_yaw_rad_s": 2.1274606384320218e-05,
+      "passed": true
+    },
+    {
+      "case": "diag_fr",
+      "target": [
+        1.0606601717798212,
+        -1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        99,
+        99,
+        99
+      ],
+      "fault": "joint_speed",
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 5.0044559385159015,
+      "stop_joint_ptp_deg": 999,
+      "stop_target_ptp_deg": 999,
+      "stop_joint_speed_rms": null,
+      "stop_action_ptp": null,
+      "stop_speed_mps": 999,
+      "stop_yaw_rad_s": 999,
+      "passed": false
+    },
+    {
+      "case": "diag_bl",
+      "target": [
+        -1.0606601717798212,
+        1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        -0.9964448483891889,
+        0.9672101015264168,
+        0.0043719278580650915
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 6.709708822323529,
+      "stop_joint_ptp_deg": 0.6191788361204792,
+      "stop_target_ptp_deg": 0.4074600575789882,
+      "stop_joint_speed_rms": 0.002270541237421635,
+      "stop_action_ptp": 0.028446078300476074,
+      "stop_speed_mps": 0.00018092079538811995,
+      "stop_yaw_rad_s": 0.0008391201205386621,
+      "passed": true
+    },
+    {
+      "case": "diag_br",
+      "target": [
+        -1.0606601717798212,
+        -1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        -0.9588107939634564,
+        -1.0836172274760099,
+        -0.004332359433803601
+      ],
+      "fault": null,
+      "delay_ms": 0,
+      "noise": false,
+      "tilt_max_deg": 9.495687247976601,
+      "stop_joint_ptp_deg": 0.18009820091483714,
+      "stop_target_ptp_deg": 0.20504825529930654,
+      "stop_joint_speed_rms": 0.0009151092258753882,
+      "stop_action_ptp": 0.01431506872177124,
+      "stop_speed_mps": 2.45369897913673e-05,
+      "stop_yaw_rad_s": 0.00015526620058500953,
+      "passed": true
+    },
+    {
+      "case": "forward_0.25",
+      "target": [
+        0.25,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.2326424132453417,
+        0.0025372478372302832,
+        -0.003606397534637469
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.366652416494748,
+      "stop_joint_ptp_deg": 0.6431272596678087,
+      "stop_target_ptp_deg": 3.2673281380682044,
+      "stop_joint_speed_rms": 0.019371611616504327,
+      "stop_action_ptp": 0.22810253500938416,
+      "stop_speed_mps": 0.0055001605742151,
+      "stop_yaw_rad_s": 0.010154847086317751,
+      "passed": true
+    },
+    {
+      "case": "backward_0.25",
+      "target": [
+        -0.25,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.2388574978911924,
+        -0.01585868860641616,
+        -0.0020905063614999777
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.439366943576337,
+      "stop_joint_ptp_deg": 0.7055063313893291,
+      "stop_target_ptp_deg": 3.2311102062205657,
+      "stop_joint_speed_rms": 0.01893657225198359,
+      "stop_action_ptp": 0.2255740463733673,
+      "stop_speed_mps": 0.0053629441777871545,
+      "stop_yaw_rad_s": 0.010017945929998077,
+      "passed": true
+    },
+    {
+      "case": "left_0.25",
+      "target": [
+        0.0,
+        0.25,
+        0.0
+      ],
+      "measured": [
+        -0.0013144241476408093,
+        0.23704401112800264,
+        0.0008446302819757401
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.709766755311108,
+      "stop_joint_ptp_deg": 0.6228515935892601,
+      "stop_target_ptp_deg": 3.139630494458823,
+      "stop_joint_speed_rms": 0.018738207374402724,
+      "stop_action_ptp": 0.21918755769729614,
+      "stop_speed_mps": 0.005323632242046457,
+      "stop_yaw_rad_s": 0.00979683535441719,
+      "passed": true
+    },
+    {
+      "case": "right_0.25",
+      "target": [
+        0.0,
+        -0.25,
+        0.0
+      ],
+      "measured": [
+        -0.0016370513526029664,
+        -0.25199748250215626,
+        -0.004436493624416621
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.461530636321864,
+      "stop_joint_ptp_deg": 0.6610787279614967,
+      "stop_target_ptp_deg": 3.2116787449187028,
+      "stop_joint_speed_rms": 0.018974159138159856,
+      "stop_action_ptp": 0.2242174744606018,
+      "stop_speed_mps": 0.005389156111889544,
+      "stop_yaw_rad_s": 0.009972051909778066,
+      "passed": true
+    },
+    {
+      "case": "ccw_0.25",
+      "target": [
+        0.0,
+        0.0,
+        0.25
+      ],
+      "measured": [
+        -0.006690227406021659,
+        -0.00016284073214685118,
+        0.25207870594963866
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.361943536743422,
+      "stop_joint_ptp_deg": 0.695432518004699,
+      "stop_target_ptp_deg": 3.3979106828282704,
+      "stop_joint_speed_rms": 0.019584894826257627,
+      "stop_action_ptp": 0.2372189164161682,
+      "stop_speed_mps": 0.005567063108749755,
+      "stop_yaw_rad_s": 0.010454224873207265,
+      "passed": true
+    },
+    {
+      "case": "cw_0.25",
+      "target": [
+        0.0,
+        0.0,
+        -0.25
+      ],
+      "measured": [
+        -0.015418206145492918,
+        0.004832181386034536,
+        -0.2481654714874662
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.134600335570116,
+      "stop_joint_ptp_deg": 0.6992397881223675,
+      "stop_target_ptp_deg": 3.0486024289559475,
+      "stop_joint_speed_rms": 0.018524496007849032,
+      "stop_action_ptp": 0.21283259987831116,
+      "stop_speed_mps": 0.005240531583017073,
+      "stop_yaw_rad_s": 0.00961484829545152,
+      "passed": true
+    },
+    {
+      "case": "forward_0.5",
+      "target": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.47013285422109996,
+        0.009072360659476897,
+        -0.003632910924338079
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.542583006317461,
+      "stop_joint_ptp_deg": 0.703563286688667,
+      "stop_target_ptp_deg": 3.3607028004378026,
+      "stop_joint_speed_rms": 0.01994316180393389,
+      "stop_action_ptp": 0.2346213161945343,
+      "stop_speed_mps": 0.005631612753102139,
+      "stop_yaw_rad_s": 0.01045025351220308,
+      "passed": true
+    },
+    {
+      "case": "backward_0.5",
+      "target": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.47804618799275495,
+        -0.01934767430426398,
+        -0.00385547865838404
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.791211858949061,
+      "stop_joint_ptp_deg": 0.7548988229481347,
+      "stop_target_ptp_deg": 3.258374186953141,
+      "stop_joint_speed_rms": 0.018960766106282893,
+      "stop_action_ptp": 0.22747743129730225,
+      "stop_speed_mps": 0.005351248513311865,
+      "stop_yaw_rad_s": 0.010111073012186217,
+      "passed": true
+    },
+    {
+      "case": "left_0.5",
+      "target": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "measured": [
+        -0.010235726241725189,
+        0.4881667998372991,
+        0.0005904920967407128
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.883161314943321,
+      "stop_joint_ptp_deg": 0.5544198828253204,
+      "stop_target_ptp_deg": 2.844393860037729,
+      "stop_joint_speed_rms": 0.017833027263985918,
+      "stop_action_ptp": 0.1985761523246765,
+      "stop_speed_mps": 0.005077143979844458,
+      "stop_yaw_rad_s": 0.00918497799712318,
+      "passed": true
+    },
+    {
+      "case": "right_0.5",
+      "target": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "measured": [
+        -0.007032734629498126,
+        -0.493104304608288,
+        -0.006254779281715526
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.224482760892294,
+      "stop_joint_ptp_deg": 0.5440442882328536,
+      "stop_target_ptp_deg": 2.8751318457369024,
+      "stop_joint_speed_rms": 0.017842051016256407,
+      "stop_action_ptp": 0.20072206854820251,
+      "stop_speed_mps": 0.005093835931294187,
+      "stop_yaw_rad_s": 0.009219267791257653,
+      "passed": true
+    },
+    {
+      "case": "ccw_0.5",
+      "target": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "measured": [
+        -0.005141792223434749,
+        -0.0015074691170871035,
+        0.4980767778734543
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.851166551646153,
+      "stop_joint_ptp_deg": 0.8874864041869539,
+      "stop_target_ptp_deg": 3.6971207797990187,
+      "stop_joint_speed_rms": 0.021024645608690853,
+      "stop_action_ptp": 0.2581077218055725,
+      "stop_speed_mps": 0.005928859619295608,
+      "stop_yaw_rad_s": 0.011277719553248976,
+      "passed": true
+    },
+    {
+      "case": "cw_0.5",
+      "target": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "measured": [
+        -0.011959198794964694,
+        0.005571969213134767,
+        -0.4977075272291824
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.06829965481355,
+      "stop_joint_ptp_deg": 0.7524133467019868,
+      "stop_target_ptp_deg": 2.96363786388875,
+      "stop_joint_speed_rms": 0.018211377190425877,
+      "stop_action_ptp": 0.206900954246521,
+      "stop_speed_mps": 0.00512753607331504,
+      "stop_yaw_rad_s": 0.009340293471595384,
+      "passed": true
+    },
+    {
+      "case": "forward_1",
+      "target": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        0.9524552907557847,
+        0.016230354920662514,
+        -0.003215950393381353
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.646367348479374,
+      "stop_joint_ptp_deg": 0.7513812369127251,
+      "stop_target_ptp_deg": 3.3507973185939917,
+      "stop_joint_speed_rms": 0.019503453349153065,
+      "stop_action_ptp": 0.23392978310585022,
+      "stop_speed_mps": 0.005523805987801765,
+      "stop_yaw_rad_s": 0.010383769137079328,
+      "passed": true
+    },
+    {
+      "case": "backward_1",
+      "target": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.9573085956860348,
+        -0.018748241803116013,
+        -0.0015872424395413454
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.641478053730681,
+      "stop_joint_ptp_deg": 0.6149606632512129,
+      "stop_target_ptp_deg": 2.76204696496994,
+      "stop_joint_speed_rms": 0.017789107090510677,
+      "stop_action_ptp": 0.1928272545337677,
+      "stop_speed_mps": 0.005047928739447559,
+      "stop_yaw_rad_s": 0.009005660664728694,
+      "passed": true
+    },
+    {
+      "case": "left_1",
+      "target": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "measured": [
+        -0.03678829772575357,
+        0.9652354295216689,
+        -0.003149743045470484
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.268534333275037,
+      "stop_joint_ptp_deg": 0.6784963723300338,
+      "stop_target_ptp_deg": 3.2035234990497075,
+      "stop_joint_speed_rms": 0.018866228407670205,
+      "stop_action_ptp": 0.22364813089370728,
+      "stop_speed_mps": 0.005358249822956491,
+      "stop_yaw_rad_s": 0.009984126973940048,
+      "passed": true
+    },
+    {
+      "case": "right_1",
+      "target": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "measured": [
+        0.026321159837245964,
+        -0.9624756961223546,
+        -0.01431471698837377
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.277354472258737,
+      "stop_joint_ptp_deg": 0.8715752347260614,
+      "stop_target_ptp_deg": 3.6427768065546355,
+      "stop_joint_speed_rms": 0.020716344645702343,
+      "stop_action_ptp": 0.25431379675865173,
+      "stop_speed_mps": 0.0058711030776788875,
+      "stop_yaw_rad_s": 0.011105119580529703,
+      "passed": true
+    },
+    {
+      "case": "ccw_1",
+      "target": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "measured": [
+        -0.00806906819809519,
+        0.015449465528897975,
+        0.9968196850277565
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.716572132947184,
+      "stop_joint_ptp_deg": 1.2490118751971615,
+      "stop_target_ptp_deg": 4.028711096077505,
+      "stop_joint_speed_rms": 0.02336367292774928,
+      "stop_action_ptp": 0.28125709295272827,
+      "stop_speed_mps": 0.006440964606576018,
+      "stop_yaw_rad_s": 0.012249584234546402,
+      "passed": true
+    },
+    {
+      "case": "cw_1",
+      "target": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "measured": [
+        -0.013651148251205442,
+        -0.0008267135984800122,
+        -0.9997618879702855
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.621277319978993,
+      "stop_joint_ptp_deg": 0.9170850209617005,
+      "stop_target_ptp_deg": 3.1496614810286325,
+      "stop_joint_speed_rms": 0.018428043079173975,
+      "stop_action_ptp": 0.2198878526687622,
+      "stop_speed_mps": 0.005115968337243248,
+      "stop_yaw_rad_s": 0.009409402841854736,
+      "passed": true
+    },
+    {
+      "case": "forward_1.5",
+      "target": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        1.3974513917567455,
+        0.0001399547077370989,
+        -0.013720067155355264
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.4892915482850295,
+      "stop_joint_ptp_deg": 0.7279683232695059,
+      "stop_target_ptp_deg": 3.2766440892092787,
+      "stop_joint_speed_rms": 0.01924920770923564,
+      "stop_action_ptp": 0.22875291109085083,
+      "stop_speed_mps": 0.005449864119968974,
+      "stop_yaw_rad_s": 0.010168987109345252,
+      "passed": true
+    },
+    {
+      "case": "backward_1.5",
+      "target": [
+        -1.5,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -1.441481812515202,
+        -0.024423310348633133,
+        0.004753286032135656
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 9.030917213272957,
+      "stop_joint_ptp_deg": 1.066620712981114,
+      "stop_target_ptp_deg": 3.9225524540157592,
+      "stop_joint_speed_rms": 0.023032282864389193,
+      "stop_action_ptp": 0.2738458216190338,
+      "stop_speed_mps": 0.006246942001112294,
+      "stop_yaw_rad_s": 0.0121672397580306,
+      "passed": true
+    },
+    {
+      "case": "left_1.5",
+      "target": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "measured": [
+        -0.09182261713265502,
+        1.4203470618337708,
+        -0.0013848374993589336
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 6.021663636190418,
+      "stop_joint_ptp_deg": 0.49440974231287194,
+      "stop_target_ptp_deg": 2.633159160897683,
+      "stop_joint_speed_rms": 0.017460094909715246,
+      "stop_action_ptp": 0.1838291883468628,
+      "stop_speed_mps": 0.004975806737317773,
+      "stop_yaw_rad_s": 0.008910998188644208,
+      "passed": true
+    },
+    {
+      "case": "right_1.5",
+      "target": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "measured": [
+        99,
+        99,
+        99
+      ],
+      "fault": "joint_speed",
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.74819574640735,
+      "stop_joint_ptp_deg": 999,
+      "stop_target_ptp_deg": 999,
+      "stop_joint_speed_rms": null,
+      "stop_action_ptp": null,
+      "stop_speed_mps": 999,
+      "stop_yaw_rad_s": 999,
+      "passed": false
+    },
+    {
+      "case": "ccw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "measured": [
+        -0.0005223233121449079,
+        0.011313023088603252,
+        1.496729156241804
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.716572132947184,
+      "stop_joint_ptp_deg": 1.1803452383074449,
+      "stop_target_ptp_deg": 4.1827600363916195,
+      "stop_joint_speed_rms": 0.025102717054063316,
+      "stop_action_ptp": 0.29201173782348633,
+      "stop_speed_mps": 0.006748559130503298,
+      "stop_yaw_rad_s": 0.013130311074777055,
+      "passed": true
+    },
+    {
+      "case": "cw_1.5",
+      "target": [
+        0.0,
+        0.0,
+        -1.5
+      ],
+      "measured": [
+        -0.020925088024045146,
+        -0.014139530731517361,
+        -1.4988347762698109
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 4.497956094149141,
+      "stop_joint_ptp_deg": 0.5986366005840564,
+      "stop_target_ptp_deg": 2.7531621695202224,
+      "stop_joint_speed_rms": 0.01729040240873345,
+      "stop_action_ptp": 0.1922069787979126,
+      "stop_speed_mps": 0.00481799471416432,
+      "stop_yaw_rad_s": 0.00862031998193913,
+      "passed": true
+    },
+    {
+      "case": "stand",
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured": [
+        -0.0006812937042968255,
+        7.753576982324616e-05,
+        0.0009306963421193418
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 2.388708093222504,
+      "stop_joint_ptp_deg": 0.594171518837571,
+      "stop_target_ptp_deg": 2.9983087578893817,
+      "stop_joint_speed_rms": 0.018336427868179097,
+      "stop_action_ptp": 0.20932143926620483,
+      "stop_speed_mps": 0.00522653071624337,
+      "stop_yaw_rad_s": 0.009522836886946318,
+      "passed": true
+    },
+    {
+      "case": "mixed",
+      "target": [
+        0.3,
+        0.8999999999999999,
+        0.75
+      ],
+      "measured": [
+        0.35193270770780616,
+        0.8271838525436779,
+        0.7544165696279038
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.312848500542011,
+      "stop_joint_ptp_deg": 0.5867216010571592,
+      "stop_target_ptp_deg": 3.1284136162943694,
+      "stop_joint_speed_rms": 0.01851882482366179,
+      "stop_action_ptp": 0.21840447187423706,
+      "stop_speed_mps": 0.005269938405539347,
+      "stop_yaw_rad_s": 0.00976495885309168,
+      "passed": true
+    },
+    {
+      "case": "diag_fl",
+      "target": [
+        1.0606601717798212,
+        1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        0.966451677666643,
+        1.030406345258721,
+        0.0011263772265880014
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 13.996518376259582,
+      "stop_joint_ptp_deg": 0.6655079356297724,
+      "stop_target_ptp_deg": 2.638738571675938,
+      "stop_joint_speed_rms": 0.017408041768820243,
+      "stop_action_ptp": 0.18421870470046997,
+      "stop_speed_mps": 0.004936971898943823,
+      "stop_yaw_rad_s": 0.008934621862017203,
+      "passed": true
+    },
+    {
+      "case": "diag_fr",
+      "target": [
+        1.0606601717798212,
+        -1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        0.9423397434431083,
+        -1.0301257829649435,
+        -0.01773479875799808
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 5.957331600960672,
+      "stop_joint_ptp_deg": 0.9607566502082999,
+      "stop_target_ptp_deg": 3.7034741363876003,
+      "stop_joint_speed_rms": 0.021009618466384626,
+      "stop_action_ptp": 0.2585512697696686,
+      "stop_speed_mps": 0.0059523687689069064,
+      "stop_yaw_rad_s": 0.011263532544630354,
+      "passed": true
+    },
+    {
+      "case": "diag_bl",
+      "target": [
+        -1.0606601717798212,
+        1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        -1.0563351642339134,
+        0.9659305862391875,
+        0.0005645208729899911
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 6.384567286061838,
+      "stop_joint_ptp_deg": 0.94231781621263,
+      "stop_target_ptp_deg": 3.4522952103208504,
+      "stop_joint_speed_rms": 0.01947639418266117,
+      "stop_action_ptp": 0.24101567268371582,
+      "stop_speed_mps": 0.005470967229230909,
+      "stop_yaw_rad_s": 0.010491987891508568,
+      "passed": true
+    },
+    {
+      "case": "diag_br",
+      "target": [
+        -1.0606601717798212,
+        -1.0606601717798212,
+        0.0
+      ],
+      "measured": [
+        -1.0058845924744908,
+        -1.0539298690339092,
+        0.0018289028485310363
+      ],
+      "fault": null,
+      "delay_ms": 8,
+      "noise": true,
+      "tilt_max_deg": 11.627456826745258,
+      "stop_joint_ptp_deg": 0.7418612765524653,
+      "stop_target_ptp_deg": 2.5949869411737745,
+      "stop_joint_speed_rms": 0.017339449712966012,
+      "stop_action_ptp": 0.18116426467895508,
+      "stop_speed_mps": 0.004891489745006242,
+      "stop_yaw_rad_s": 0.008863638815155417,
+      "passed": true
+    }
+  ]
+}

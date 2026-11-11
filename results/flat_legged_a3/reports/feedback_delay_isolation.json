@@ -1,0 +1,33 @@
+{
+  "checkpoint": "a3/ckpt_001000.pt",
+  "results": [
+    {
+      "target_delay_ms": 8,
+      "feedback_delay_ms": 0,
+      "fault": "joint_speed",
+      "end_time_s": 5.94,
+      "highest_joint": 5,
+      "velocity_rad_s": -15.186328199055628,
+      "limit_rad_s": 15.05
+    },
+    {
+      "target_delay_ms": 0,
+      "feedback_delay_ms": 8,
+      "fault": "joint_speed",
+      "end_time_s": 5.94,
+      "highest_joint": 5,
+      "velocity_rad_s": -15.186328128768109,
+      "limit_rad_s": 15.05
+    },
+    {
+      "target_delay_ms": 8,
+      "feedback_delay_ms": 8,
+      "fault": "joint_speed",
+      "end_time_s": 5.54,
+      "highest_joint": 5,
+      "velocity_rad_s": -15.065811537368859,
+      "limit_rad_s": 15.05
+    }
+  ],
+  "hardware_accessed": false
+}

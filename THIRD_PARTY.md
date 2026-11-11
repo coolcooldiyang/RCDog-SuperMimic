@@ -26,7 +26,7 @@
 
 本发布版的 RCDog 扩展与上游框架组合后按根目录 `LICENSE`（GPL-3.0-only）提供；原有 Apache-2.0 与 MIT 文件的版权、许可与 NOTICE 保留。机器人模型、参考动作、训练权重与依赖不被一概声明为 GPL。上游 README 中的 Apache-2.0 声明描述上游版本，不能替代本文件对 RCDog 发布版的范围说明。
 
-## 2026-11-10当前实机版本
+## 2026-11-10 V2实机版本（保留）
 
 - 当前机器人源文件为11.1134 kg的新URDF及其STL。`src/unisupermimic/assets/robots/rcdog/`、RCDog任务与 `experiments/command150/` 更新到command150训练版本；早期版本的代码固定在提交b2251f5，权重和原报告仍保留。
 - `results/command150/` 的父策略、final500权重和参考动作均由本项目生成/训练。实机速度未经录像同步测量；平滑启停与即时回中专项结果分别发布。
@@ -34,3 +34,11 @@
 - 宇树电机依赖使用 [Unitree Actuator SDK](https://github.com/unitreerobotics/unitree_actuator_sdk/tree/5b79a42d81cd69adac1367db79efdb972a898fd1)，BSD-3-Clause许可保留在 `LICENSES/BSD-3-Clause-Unitree-SDK.txt`。仅发布绑定补丁和获取/构建脚本，SDK源码与核心预编译库由安装脚本从上游获取，不纳入本次Git提交。
 - 控制配置参考 [wty-yy/unitree_cpp_deploy](https://github.com/wty-yy/unitree_cpp_deploy/tree/go2) 的GYM配套Kp20/Kd0.5、5帧历史；本项目未用该仓库策略权重替代SuperMimic策略。
 - `docs/assets/rcdog/rcdog_real_20261110.mp4` 为用户提供并授权发布的本项目实机录像，首页GIF与封面由该录像截取；`command150_mujoco.mp4` 为本项目CPU MuJoCo渲染结果。
+
+## 2026-11-11 V3高抬脚平地实验版
+
+- 参考方法为qiayuanl/legged_control固定提交a7f381c0367e98e31c01336e678eef47e304d40d中的Go1 gait/task配置，以及OCS2的SplineCpg双段三次样条。前者BSD-3-Clause见 `LICENSES/BSD-3-Clause-legged_control.txt`，后者Farbod Farshidian的源码内BSD-3-Clause通知保留于 `LICENSES/BSD-3-Clause-OCS2-SplineCpg.txt` 和实验upstream副本。
+- `legged_gait.py`、RCDog IK生成参考与速度相关时序是本项目适配；不是下载的Go1实录或MPC rollout。生成CSV及相位侧文件在 `src/unisupermimic/assets/motions/rcdog_flat_legged/`。
+- Uni-SuperMimic框架新增动态参考标签、滑移/高度奖励、重置采样、1ms子步检查、位置目标变化率限制和可选观测老化；a3选中链未启用观测老化。actor没有视觉或地形扫描输入。原有版权与软件许可保留。
+- a0/a2/a3网络权重、配置、日志和各候选评估由本项目生成，置于 `results/flat_legged_a3/`；优化器/回放缓冲、云端连接资料和私人运行日志不发布。
+- `docs/assets/rcdog/legged_a3_real050_20261111.mp4`是作者提供的0.5m/s指令实机视频，转码为H264/AAC并去除源元数据以便网页预览。原始文件SHA和转码说明见 `REAL_VIDEO.json`。有扶手跟随，无同步实际速度测量。

@@ -35,3 +35,14 @@ The Unitree SDK binding patch is based on unitreerobotics/unitree_actuator_sdk
 at 5b79a42d81cd69adac1367db79efdb972a898fd1; the BSD-3-Clause notice is
 preserved in LICENSES/BSD-3-Clause-Unitree-SDK.txt. The core SDK is fetched
 as a build dependency and is not vendored in this update.
+
+2026-11-11 V3 update: flat_legged_a3/1000 with legged_control-style Go1
+trot/flying_trot timing and OCS2 SplineCpg swing trajectory adaptation.
+legged_control copyright and BSD-3-Clause notice are retained in
+LICENSES/BSD-3-Clause-legged_control.txt and experiment upstream copies.
+OCS2 SplineCpg copyright(c)2021 Farbod Farshidian and its BSD-3-Clause
+notice are retained in LICENSES/BSD-3-Clause-OCS2-SplineCpg.txt and source.
+These trajectory methods are adapted to RCDog IK; no MPC rollout or
+third-party motion-capture dataset is redistributed. New training weights,
+generated references and author-supplied0.5m/s-command real video are
+versioned separately from command150/final500. See docs/VERSIONS.md.

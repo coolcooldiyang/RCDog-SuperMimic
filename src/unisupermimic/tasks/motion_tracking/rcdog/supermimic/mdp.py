@@ -1,10 +1,11 @@
-# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-10; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
 """Differentiable SuperMimic observations, goals, rewards, and terminations."""
 
 from __future__ import annotations
 
 import copy
+import os
 from dataclasses import dataclass
 from typing import Literal, overload
 
@@ -15,11 +16,19 @@ from unisupermimic.rl.algos.supermimic.geometry import (
     mat_to_6d,
     rot_angle_sq,
     yaw_mat,
+    so3_exp,
+    so3_log,
 )
 from unisupermimic.rl.contracts.supermimic import State
 
 from .kinematics import RCDogKinematics
 from .motion import CONTROL_DT, MotionLib
+from . import terrain
+from .robot import VELOCITY_LIMIT
+REFERENCE_BEZIER = os.environ.get('RCDOG_REFERENCE_BEZIER','0') == '1'
+FLAT_GAIT = os.environ.get('RCDOG_FLAT_GAIT','0') == '1'
+FLAT_SLIP_V3 = os.environ.get('RCDOG_FLAT_SLIP_V3','0') == '1'
+POSITION_RATE_LIMIT = os.environ.get('RCDOG_POSITION_RATE_LIMIT','0') == '1'
 
 STATE_DIM = 37
 NUM_J = 12
@@ -96,6 +105,10 @@ class MDP:
         self.motion = motion
         self.cfg = RewardCfg() if cfg is None else cfg
         self.coupled_limits = coupled_limits
+        # Observation age is training augmentation, not native motor PD delay.
+        delay_ms=float(os.environ.get('RCDOG_FEEDBACK_DELAY_MS','0'))
+        if not 0<=delay_ms<=15:raise ValueError('Feedback latency must be in [0,15] ms')
+        self.feedback_delay_fraction_max=delay_ms/(1000*CONTROL_DT)
         self.default_q = default_q
         middle = (kin.q_lo + kin.q_hi) / 2
         half_range = (kin.q_hi - kin.q_lo) / 2
@@ -141,6 +154,29 @@ class MDP:
             ),
             -1,
         )
+
+    def feedback_state(self, previous: State, current: State, age_fraction: torch.Tensor) -> State:
+        """Approximate sub-frame sensor age between adjacent 20ms states.
+
+        Rewards/world-model targets always use current true states. CPU audits
+        retain exact 1ms delayed samples rather than this training interpolation.
+        """
+        f=age_fraction.unsqueeze(-1)
+        parts=[c+(p-c)*(f.unsqueeze(-1) if i==1 else f) for i,(p,c) in enumerate(zip(previous,current))]
+        parts[1]=so3_exp(f*so3_log(previous[1]@current[1].transpose(-1,-2)))@current[1]
+        return tuple(parts)
+
+    def limit_action(self, action: torch.Tensor, previous_action: torch.Tensor, context: torch.Tensor) -> torch.Tensor:
+        """Saturate desired position velocity; never modify measured joint state."""
+        if not POSITION_RATE_LIMIT:
+            return action
+        action = action.float()
+        previous_action = previous_action.float()
+        base = self.default_q + context[..., 1:13]
+        desired = (base + .25*action).clamp(-1.55, 1.55)
+        desired_action = (desired-base)/.25
+        delta = torch.tensor(VELOCITY_LIMIT, device=action.device, dtype=action.dtype)*CONTROL_DT/.25
+        return previous_action + torch.maximum(torch.minimum(desired_action-previous_action, delta), -delta)
 
     def add_noise(self, obs: torch.Tensor) -> torch.Tensor:
         return obs + (2 * torch.rand_like(obs) - 1) * self.obs_noise
@@ -188,13 +224,23 @@ class MDP:
             joint_vel,
         )
         ref_p, ref_R = motion.root_p[frames], motion.root_R[frames]
+        if terrain.ENABLED:
+            ref_p = torch.cat((ref_p[..., :2], (.35+terrain.support_height(position)).unsqueeze(-1)), -1)
         delta_rotation = yaw_mat(rotation @ ref_R.transpose(-1, -2))
         anchor = torch.cat((position[..., :2], ref_p[..., 2:3]), -1)
         ref_body_p = anchor.unsqueeze(-2) + (
             delta_rotation.unsqueeze(-3)
-            @ (motion.body_p[frames] - ref_p.unsqueeze(-2)).unsqueeze(-1)
+            @ (motion.body_p[frames] - motion.root_p[frames].unsqueeze(-2)).unsqueeze(-1)
         ).squeeze(-1)
         ref_body_R = delta_rotation.unsqueeze(-3) @ motion.body_R[frames]
+        if terrain.ENABLED and terrain.REWARD_V2:
+            # The old common-height foot reference pulled stance feet toward
+            # a plane even when front and rear feet stood on different steps.
+            feet_idx = [3, 6, 9, 12]
+            lane = position[..., 1:2] > -2
+            local_ref_z = terrain.height(body_p[..., feet_idx, :2]) + motion.body_p[frames][..., feet_idx, 2]
+            ref_body_p = ref_body_p.clone()
+            ref_body_p[..., feet_idx, 2] = torch.where(lane, local_ref_z, ref_body_p[..., feet_idx, 2])
         error_pos = ((ref_body_p - body_p) ** 2).sum(-1).mean(-1)
         error_ori = rot_angle_sq(ref_body_R, body_R).mean(-1)
         error_linvel = ((motion.body_v[frames] - body_v) ** 2).sum(-1).mean(-1)
@@ -219,23 +265,84 @@ class MDP:
         # The four sole origins are tracked indices 3,6,9,12.
         feet = [3, 6, 9, 12]
         foot_p, ref_foot = body_p[..., feet, :], ref_body_p[..., feet, :]
-        foot_z = ((foot_p[..., 2]-ref_foot[..., 2])**2).mean(-1)
+        if terrain.ENABLED:
+            # Phase comes from the same flat reference supplied at deployment.
+            flat_z = motion.body_p[frames][..., feet, 2]
+            swing = motion.swing[frames] if REFERENCE_BEZIER else ((flat_z-.02)/.025).clamp(0,1)
+            terrain_z = terrain.height(foot_p[..., :2])
+            terrain_lane = (position[..., 1:2] > -2).to(swing.dtype)
+            target_z = terrain_z+.02+(.025+.075*terrain_lane)*swing
+            if terrain.REWARD_V2:
+                target_z = torch.where(terrain_lane.bool(), terrain.swing_clearance_target(foot_p, swing, motion.root_v[frames], motion.swing_lift[frames] if REFERENCE_BEZIER else .04), target_z)
+            foot_z = (foot_p[..., 2]-target_z).square().mean(-1)
+        else:
+            foot_z = ((foot_p[..., 2]-ref_foot[..., 2])**2).mean(-1)
         foot_xy = ((foot_p[..., :2]-ref_foot[..., :2])**2).sum(-1).mean(-1)
-        stance = torch.exp(-((ref_foot[..., 2]-.02)/.012)**2)
+        stance = motion.stance[frames] if REFERENCE_BEZIER else torch.exp(-((motion.body_p[frames][..., feet, 2]-.02)/.012)**2)
         slip = (body_v[..., feet, :2].square().sum(-1)*stance).mean(-1)
-        speeds = torch.tensor([8.,10.,10.]*4,device=joint_vel.device)
+        speeds = torch.tensor(VELOCITY_LIMIT if REFERENCE_BEZIER else [8.,10.,10.]*4,device=joint_vel.device)
         overspeed = torch.relu(joint_vel.abs()/(.8*speeds)-1).square().mean(-1)
         reward = reward + (2*torch.exp(-foot_z/.025**2)
                             +torch.exp(-foot_xy/.05**2)-1.0*slip-1.0*overspeed)*CONTROL_DT
+        if FLAT_GAIT:
+            # Reference phase labels stay independent of measured foot height.
+            # Increase world-frame stance-foot slip cost and penalize missing
+            # the requested 8cm swing without rewarding exaggerated high steps.
+            shortfall = (torch.relu(ref_foot[..., 2]-foot_p[..., 2]-.01)/.04).square()
+            swing_weight = motion.swing[frames]
+            swing_shortfall = (shortfall*swing_weight).mean(-1)
+            # Reference timing misses early touchdown and delayed liftoff. Use
+            # a smooth measured-height weight as well, without contact sensors
+            # in the actor or non-differentiable contact labels in imagination.
+            near_ground = torch.sigmoid((.035-foot_p[..., 2])/.005)
+            ground_slip = (body_v[..., feet, :2].square().sum(-1)*near_ground).mean(-1)
+            if FLAT_SLIP_V3:
+                # Penalize only excess near-ground foot speed. The strong v2
+                # all-speed cost traded away directional tracking during tuning.
+                foot_xy_speed = torch.sqrt(body_v[..., feet, :2].square().sum(-1)+1e-8)
+                excess_ground_slip = (torch.relu(foot_xy_speed-.1).square()*near_ground).mean(-1)
+                ref_xy = motion.root_v[frames, :2]
+                ref_norm = torch.linalg.vector_norm(ref_xy, dim=-1)
+                direction = ref_xy/ref_norm.clamp_min(.05).unsqueeze(-1)
+                cross_velocity = linear_velocity[...,0]*direction[...,1]-linear_velocity[...,1]*direction[...,0]
+                moving = ref_norm.square()/(ref_norm.square()+.05**2)
+                reward = reward - (9.*slip+10.*excess_ground_slip+.6*swing_shortfall
+                                    +.5*moving*(cross_velocity/.15).square())*CONTROL_DT
+            else:
+                reward = reward - (19.*slip+20.*ground_slip+.6*swing_shortfall)*CONTROL_DT
+        if terrain.ENABLED and terrain.REWARD_V2:
+            # Dense clearance gradients survive a missed step; punish abrupt
+            # targets before the physical joint reaches the unchanged limit.
+            active = terrain_lane.squeeze(-1)
+            clearance_error = (foot_p[..., 2]-target_z).square()
+            per_foot_bonus = torch.exp(-clearance_error/.025**2).mean(-1)
+            clearance_shortfall = (torch.relu(target_z-foot_p[..., 2])/.05).square().mean(-1)
+            target_jump = (.25*(action-previous_action)).abs().amax(-1)
+            jump_cost = torch.relu(target_jump/.12-1).square()
+            early_speed_cost = torch.relu(joint_vel.abs()/(.65*speeds)-1).square().mean(-1)
+            reward = reward + active*(2*(per_foot_bonus-torch.exp(-foot_z/.025**2))
+                                      -.5*clearance_shortfall-.3*jump_cost-2*early_speed_cost)*CONTROL_DT
+        if terrain.ENABLED and terrain.REWARD_V3:
+            active = terrain_lane.squeeze(-1)
+            calf_cost = terrain.calf_clearance_cost(body_p[..., [2,5,8,11], :], foot_p)
+            reward = reward - 2.*active*calf_cost*CONTROL_DT
         # Explicit translation and yaw-rate tracking make standing a poor
         # solution for small lateral and turning references.
-        root_velocity_error = (linear_velocity-motion.root_v[frames]).square().sum(-1)
+        root_velocity_error = (linear_velocity[..., :2]-motion.root_v[frames, :2]).square().sum(-1) if terrain.ENABLED else (linear_velocity-motion.root_v[frames]).square().sum(-1)
         yaw_rate_error = (angular_velocity[..., 2]-motion.root_w[frames, 2]).square()
         reward = reward + (4.0*torch.exp(-root_velocity_error/.35**2)-0.5*root_velocity_error
                            +torch.exp(-yaw_rate_error/.3**2))*CONTROL_DT
+        if terrain.ENABLED and terrain.REWARD_V3:
+            ref_xy = motion.root_v[frames, :2]
+            ref_norm = torch.linalg.vector_norm(ref_xy, dim=-1)
+            direction = ref_xy/ref_norm.clamp_min(.05).unsqueeze(-1)
+            cross_velocity = linear_velocity[...,0]*direction[...,1]-linear_velocity[...,1]*direction[...,0]
+            moving = ref_norm.square()/(ref_norm.square()+.05**2)
+            # Works for forward, reverse and lateral commands, in world axes.
+            reward = reward - .5*moving*(cross_velocity/.15).square()*CONTROL_DT
         # Absolute uprightness, independent of yaw; small lean is allowed.
         tilt_sin_sq = rotation[..., 2, :2].square().sum(-1)
-        excess_tilt = torch.relu(0.9659258263-rotation[..., 2, 2]) / 0.0596180393
+        excess_tilt = torch.relu((0.9271838546 if terrain.ENABLED else 0.9659258263)-rotation[..., 2, 2]) / 0.0596180393
         body_omega = (rotation.transpose(-1,-2) @ angular_velocity.unsqueeze(-1)).squeeze(-1)
         roll_pitch_rate = body_omega[..., :2].square().sum(-1)
         # Only penalize stillness where the reference is genuinely stationary;
@@ -247,7 +354,7 @@ class MDP:
         stop_joint_speed = stop_weight*joint_vel.square().mean(-1)
         stop_action_rate = stop_weight*action_rate
         stop_body_speed = stop_weight*(linear_velocity.square().sum(-1)+.1*angular_velocity.square().sum(-1))
-        stability = (cfg.w_upright*tilt_sin_sq/.2588190451**2
+        stability = ((.2 if terrain.ENABLED else 1.)*cfg.w_upright*tilt_sin_sq/.2588190451**2
                      +cfg.w_excess_tilt*excess_tilt.square()
                      +cfg.w_roll_pitch_rate*roll_pitch_rate
                      +cfg.w_stop_joint_speed*stop_joint_speed
@@ -262,6 +369,9 @@ class MDP:
                 "e_root_pos": error_root_pos,
                 "action_rate": action_rate,
                 "joint_limit": joint_limit,
+                "stance_slip_m2_s2": slip,
+                "near_ground_slip_m2_s2": ground_slip if FLAT_GAIT else torch.zeros_like(slip),
+                "foot_z_error_m2": foot_z,
                 "tilt_sin_sq": tilt_sin_sq,
                 "stop_weight": stop_weight,
                 "stop_joint_speed": stop_joint_speed,
@@ -273,9 +383,11 @@ class MDP:
         """Return hard termination from root height and tilt deviations."""
         position, rotation = state[0], state[1]
         ref_p, ref_R = self.motion.root_p[frames], self.motion.root_R[frames]
+        if terrain.ENABLED:
+            ref_p = torch.cat((ref_p[..., :2], (.35+terrain.support_height(position)).unsqueeze(-1)), -1)
         error_height = (ref_p[..., 2] - position[..., 2]).abs()
         error_tilt = (ref_R[..., 2, 2] - rotation[..., 2, 2]).abs()
-        speed_limits=torch.tensor([8.,10.,10.]*4,device=state[5].device)
+        speed_limits=torch.tensor(VELOCITY_LIMIT if POSITION_RATE_LIMIT else [8.,10.,10.]*4,device=state[5].device)
         overspeed=(state[5].abs()>speed_limits).any(-1)
         done=(error_height > self.cfg.term_height) | (error_tilt > self.cfg.term_tilt) | overspeed
         return done
@@ -290,12 +402,14 @@ class MDP:
         """Return the differentiable imagined-rollout termination probability."""
         position, rotation = state[0], state[1]
         ref_p, ref_R = self.motion.root_p[frames], self.motion.root_R[frames]
+        if terrain.ENABLED:
+            ref_p = torch.cat((ref_p[..., :2], (.35+terrain.support_height(position)).unsqueeze(-1)), -1)
         error_height = (ref_p[..., 2] - position[..., 2]).abs()
         error_tilt = (ref_R[..., 2, 2] - rotation[..., 2, 2]).abs()
         alive = (1 - torch.sigmoid((error_height - self.cfg.term_height) / height_temperature)) * (
             1 - torch.sigmoid((error_tilt - self.cfg.term_tilt) / tilt_temperature)
         )
-        speed_limits=torch.tensor([8.,10.,10.]*4,device=state[5].device)
+        speed_limits=torch.tensor(VELOCITY_LIMIT if POSITION_RATE_LIMIT else [8.,10.,10.]*4,device=state[5].device)
         alive=alive*(1-torch.sigmoid((state[5].abs()-speed_limits)/.25)).prod(-1)
         return 1 - alive
 
@@ -310,6 +424,8 @@ class MDP:
         position, rotation, linear_velocity, angular_velocity, joint_pos, joint_vel = state
         heading_t = yaw_mat(rotation).transpose(-1, -2)
         ref_p, ref_R = motion.root_p[frames], motion.root_R[frames]
+        if terrain.ENABLED:
+            ref_p = torch.cat((ref_p[..., :2], (.35+terrain.support_height(position)).unsqueeze(-1)), -1)
         body_p = self.kin.forward(
             position,
             rotation,
@@ -322,7 +438,7 @@ class MDP:
         anchor = torch.cat((position[..., :2], ref_p[..., 2:3]), -1)
         ref_body_p = anchor.unsqueeze(-2) + (
             delta_rotation.unsqueeze(-3)
-            @ (motion.body_p[frames] - ref_p.unsqueeze(-2)).unsqueeze(-1)
+            @ (motion.body_p[frames] - motion.root_p[frames].unsqueeze(-2)).unsqueeze(-1)
         ).squeeze(-1)
         body_error = (
             (heading_t.unsqueeze(-3) @ (ref_body_p - body_p).unsqueeze(-1)).squeeze(-1).flatten(-2)
@@ -337,6 +453,7 @@ class MDP:
                 root_error,
                 relative_rotation,
                 normalized_context,
+                terrain.scan(state) if terrain.ENABLED else position[..., :0],
             ),
             -1,
         )

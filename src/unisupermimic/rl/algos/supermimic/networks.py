@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+import os
 
 import torch
 import torch.nn as nn
@@ -96,7 +97,8 @@ class WorldModel(nn.Module):
         super().__init__()
         self.num_joints = num_joints
         self.context_dim = context_dim
-        self.in_dim = 13 + 3 * num_joints + context_dim
+        self.terrain_enabled = bool(os.environ.get("RCDOG_TERRAIN_MANIFEST"))
+        self.in_dim = 13 + 3 * num_joints + context_dim + (25 if self.terrain_enabled else 0)
         self.out_dim = 12 + 2 * num_joints
         self.net = mlp(self.in_dim, hidden, self.out_dim, act=nn.SiLU, layer_norm=True)
         output = self.net[-1]
@@ -109,7 +111,11 @@ class WorldModel(nn.Module):
     def inputs(
         self, state: State, action: torch.Tensor, normalized_context: torch.Tensor
     ) -> torch.Tensor:
-        return torch.cat((invariant_features(state), action, normalized_context), -1)
+        features = (invariant_features(state), action, normalized_context)
+        if self.terrain_enabled:
+            from unisupermimic.tasks.motion_tracking.rcdog.supermimic.terrain import scan
+            features += (scan(state),)
+        return torch.cat(features, -1)
 
     @staticmethod
     def targets(state: State, next_state: State) -> torch.Tensor:

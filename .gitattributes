@@ -1,2 +1,6 @@
 # Vendor patches preserve the exact whitespace of upstream context lines.
 real_deploy/controller/patches/*.patch -whitespace
+
+# Keep upstream reference copies byte-identical to their provenance hashes.
+experiments/flat_legged_a3/reference_candidates/legged_control/upstream/** -whitespace
+real_deploy/policies/newurdf_legged_a3_1000/upstream_attribution/** -whitespace

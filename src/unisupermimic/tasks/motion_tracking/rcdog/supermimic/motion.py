@@ -1,6 +1,6 @@
-# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-10; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
-"""Reference RPO motions resampled to 50 Hz with tracked-body forward kinematics."""
+"""Reference RCDog motions resampled to 50 Hz with tracked-body forward kinematics."""
 
 from __future__ import annotations
 
@@ -41,6 +41,7 @@ class MotionLib:
         self.names = [os.path.splitext(os.path.basename(file))[0] for file in files]
         positions, quaternions, joint_positions = [], [], []
         lengths = []
+        gait_swing,gait_stance,gait_lift=[],[],[]
         for file in files:
             raw = _load_csv(file)
             if raw.shape[0] < 2 or raw.shape[1] != 19:
@@ -60,7 +61,16 @@ class MotionLib:
             quaternions.append(quaternion)
             joint_positions.append(joints)
             lengths.append(num_frames)
+            if os.environ.get('RCDOG_REFERENCE_BEZIER','0')=='1':
+                import numpy as np
+                sidecar=np.load(os.path.splitext(file)[0]+'.gait.npz')
+                for key,out in [('swing',gait_swing),('stance',gait_stance),('lift',gait_lift)]:
+                    values=torch.as_tensor(sidecar[key],dtype=torch.float32)
+                    if values.shape!=(source_frames,4):raise ValueError(f'Invalid {key} sidecar: {file}')
+                    out.append(values[lower]*(1-alpha[:,None])+values[lower+1]*alpha[:,None])
 
+        if gait_swing:
+            self.swing,self.stance,self.swing_lift=(torch.cat(v).to(self.device) for v in (gait_swing,gait_stance,gait_lift))
         self.clip_len = torch.tensor(lengths, dtype=torch.long, device=self.device)
         self.clip_start = torch.cumsum(
             torch.tensor([0, *lengths[:-1]], dtype=torch.long, device=self.device), 0

@@ -21,14 +21,27 @@ class ContinuousActor(Actor):
                 raise ValueError('连续参考文件校验失败: '+name)
         spec=importlib.util.spec_from_file_location('verified_command_reference',self.bundle/'command_reference.py')
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        self.reference_family=self.contract.get('reference_family','legacy')
+        self.position_rate_limit=bool(self.contract.get('position_rate_limit',False))
+        if self.position_rate_limit:
+            self.target_velocity_limits=finite(self.contract['target_velocity_limits_rad_s'],(12,))
+            if (np.any(self.target_velocity_limits<=0) or
+                    np.any(self.target_velocity_limits>np.tile([30.1,30.1,15.05],4))):
+                raise ValueError('策略位置目标限速参数不合法')
+        self.bootstrap_reference=self.contract.get('bootstrap_reference','references/cmd025_forward.npz')
+        if self.reference_family=='legged_control_trot':
+            name='legged_gait.py'
+            if hashlib.sha256((self.bundle/name).read_bytes()).hexdigest()!=self.file_hashes[name]:
+                raise ValueError('步态生成文件校验失败：'+name)
         self.planner_class=immediate_center_reference(module.CommandReference)
         self.reset_planner()
     def reset_planner(self):self.planner=self.planner_class(self.bundle/'command_gait_table.npz')
     def reference(self,name):
         if name not in ('forward','forward_left','left','back_left','back','back_right','right','forward_right','ccw','cw'):raise ValueError('未知移动方向')
         # Bootstrap pose only; runtime motion uses the continuous 3-D command planner.
-        p=self.bundle/'references/cmd025_forward.npz'
-        if hashlib.sha256(p.read_bytes()).hexdigest()!=self.file_hashes['references/'+p.name]:raise ValueError('参考校验失败')
+        p=self.bundle/self.bootstrap_reference
+        if not p.resolve().is_relative_to((self.bundle/'references').resolve()):raise ValueError('无效起始参考路径')
+        if hashlib.sha256(p.read_bytes()).hexdigest()!=self.file_hashes[self.bootstrap_reference]:raise ValueError('参考校验失败')
         with np.load(p) as z:return {k:z[k].copy() for k in z.files}
     def tick_command(self,q,dq,R,gyro,command,immediate_zero=True):
         R=finite(R,(3,3));command=finite(command,(3,))
@@ -37,7 +50,19 @@ class ContinuousActor(Actor):
         self.planner.immediate_zero=immediate_zero
         self.planner.prepare_command(command)
         obs=np.r_[finite(q,(12,))-self.q0,finite(dq,(12,)),finite(gyro,(3,)),-R[2],self.previous,(R.T@self.planner.rotation())[:,:2].reshape(6)]
-        result=self.infer(obs,fast_goal(self.planner,command));self.planner.advance(command);return result
+        # Batched interpolation preserves dynamic timing and the distinct
+        # settling gait command; exported source remains the parity oracle.
+        goal=fast_goal(self.planner,command)
+        previous=self.previous.copy()
+        action,desired=self.infer(obs,goal)
+        if self.position_rate_limit:
+            applied=(desired-self.q0)/self.scale
+            delta=self.target_velocity_limits*float(self.contract['policy_period_s'])/self.scale
+            self.previous=previous+np.clip(applied-previous,-delta,delta)
+            desired=np.clip(self.q0+self.scale*self.previous,-1.55,1.55)
+            action=self.previous.copy()
+        self.planner.advance(command)
+        return action,desired
 
 class NewDeployment(USBReconnect,Deployment):
     def __init__(self,gamepad=False):
@@ -77,6 +102,9 @@ class NewDeployment(USBReconnect,Deployment):
             feedback_wait_events=list(getattr(self,'feedback_wait_events',[])))
         d['deployment']['neutral_behavior']='zero_velocity_keep_policy'
         d['deployment']['neutral_reference_immediate']=True
+        d['deployment']['reference_family']=getattr(self.actor,'reference_family','legacy')
+        d['deployment']['position_target_rate_limit']=getattr(self.actor,'position_rate_limit',False)
+        d['deployment']['reference_clearance_m']=self.actor.contract.get('reference_clearance_m')
         d['deployment']['stick_gate']={'stop_on_neutral':self.stick_gate.stop_on_neutral,
                                       'start_threshold':self.stick_gate.start_threshold}
         d['deployment']['usb_reconnect']=getattr(self,'usb_status',{})
@@ -94,6 +122,7 @@ class NewDeployment(USBReconnect,Deployment):
         self.walk_unlocked=False
         first=not self.fault
         timing=dict(trigger_monotonic_s=time.monotonic(),reason=reason,gc_events=list(getattr(self,'gc_events',[])))
+        timing['feedback_gate_at_rejection']=getattr(self,'last_feedback_gate',None)
         # Capture even expired IMU evidence; snapshot() deliberately raises
         # after30ms, so it cannot be used to diagnose a stalled reader.
         if hasattr(self.imu,'lock'):
@@ -112,16 +141,18 @@ class NewDeployment(USBReconnect,Deployment):
         # host scheduling jitter. Never return the stale snapshot to the actor.
         deadline=time.perf_counter()+.008
         while True:
+            self.check_feedback_hard_deadline()
+            imu=self.imu.snapshot()
             try:
-                result=super().state()
-                break
+                if imu['age_s']<=self.cfg['imu_age_max_s']:
+                    # Pass the frame actually checked, rather than accepting
+                    # an old pose because a newer frame arrived afterwards.
+                    return super().state(imu_sample=imu)
             except FeedbackStaleError:
-                self.check_feedback_hard_deadline()
-                remaining=deadline-time.perf_counter()
-                if remaining<=0:raise
-                time.sleep(min(.0005,remaining))
-        if self.imu.snapshot()['age_s']>self.cfg['imu_age_max_s']:raise RuntimeError('新策略IMU反馈超过20毫秒')
-        return result
+                if time.perf_counter()>=deadline:raise
+            remaining=deadline-time.perf_counter()
+            if remaining<=0:raise RuntimeError('新策略IMU反馈超过20毫秒；等待新帧未恢复')
+            time.sleep(min(.0005,remaining))
 
     def check_feedback_hard_deadline(self):
         # Match the existing bus watchdog: waiting never extends its 20 ms
@@ -130,7 +161,9 @@ class NewDeployment(USBReconnect,Deployment):
         if any(m['feedback_age_s']>=.02 for m in snapshots):
             raise FeedbackStaleError('关节反馈超过20毫秒硬时限（新目标仍要求12毫秒内）')
         imu=self.imu.snapshot()
-        if imu['age_s']>self.cfg['imu_age_max_s']:raise RuntimeError('等待关节回传时IMU反馈超过20毫秒')
+        age=float(imu['age_s'])
+        if not math.isfinite(age) or age<0 or age>=.03:
+            raise RuntimeError('IMU反馈达到30毫秒硬时限或时间戳无效')
     def begin(self,mode,clip):
         if mode=='PLAY' and not self.walk_unlocked:raise RuntimeError('本轮行走未解锁；完成静态检查、确认地面条件后 arm-walk')
         # Reject missing inputs before the parent installs native-PD targets.
@@ -186,15 +219,21 @@ class NewDeployment(USBReconnect,Deployment):
             snapshots=self.require_ready()
             joint_age=max(m['feedback_age_s'] for m in snapshots)
             imu_age=self.imu.snapshot()['age_s']
-            if imu_age>self.cfg['imu_age_max_s']:raise RuntimeError('目标计算后IMU反馈超过20毫秒')
-            if joint_age<=self.cfg['joint_age_max_s']:
+            self.last_feedback_gate=dict(phase='after_compute',monotonic_s=time.monotonic(),
+                joint_age_ms=joint_age*1000,imu_age_ms=imu_age*1000,
+                waited_ms=(time.perf_counter()-started)*1000)
+            if not math.isfinite(imu_age) or imu_age<0 or imu_age>=.03:
+                raise RuntimeError('IMU反馈达到30毫秒硬时限或时间戳无效')
+            if joint_age>=.02:raise FeedbackStaleError('目标计算后关节反馈超过20毫秒硬时限（新目标仍要求12毫秒内）')
+            if joint_age<=self.cfg['joint_age_max_s'] and imu_age<=self.cfg['imu_age_max_s']:
                 waited=(time.perf_counter()-started)*1000
                 if waited>=2 and hasattr(self,'feedback_wait_events'):
                     self.feedback_wait_events.append(dict(monotonic_s=time.monotonic(),wait_ms=waited,phase='after_compute'))
                 return joint_age,imu_age,waited
-            if joint_age>=.02:raise FeedbackStaleError('目标计算后关节反馈超过20毫秒硬时限（新目标仍要求12毫秒内）')
             remaining=deadline-time.perf_counter()
-            if remaining<=0:raise FeedbackStaleError('目标计算后关节反馈超过12毫秒')
+            if remaining<=0:
+                if imu_age>self.cfg['imu_age_max_s']:raise RuntimeError('目标计算后IMU反馈超过20毫秒；等待新帧未恢复')
+                raise FeedbackStaleError('目标计算后关节反馈超过12毫秒')
             time.sleep(min(.0005,remaining))
     def tick(self):
         if self.usb_reconnect_step():return

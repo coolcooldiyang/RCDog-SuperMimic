@@ -84,7 +84,9 @@ def report_failure(command,result,call,root,stream):
                   '看到 {"online": 12, ...} 后再执行 clear-fault',file=stream)
         else:
             print(f'后台状态不可用：{exc}\n后台重启用：./dognew serve --gamepad',file=stream)
-    log=root/'reports/newurdf_service.log'
+    logs=list((root/'reports').glob('newurdf_service*.log'))
+    log=max(logs,key=lambda p:p.stat().st_mtime) if logs else root/'reports/newurdf_service.log'
+    diagnostic['service_log_path']=str(log)
     diagnostic['service_log_tail']=tail_log(log)
     stamp=datetime.fromtimestamp(log.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds') if log.exists() else '无'
     hint='；后台未运行，以下内容不是本次失败原因' if unavailable else ''

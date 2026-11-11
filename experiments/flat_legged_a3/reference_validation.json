@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "goal_max_abs_error": 3.397464752641355e-06,
+  "fk_lifts": {
+    "[0.1, 0, 0]": {
+      "min_lift_m": 0.08000000036248464,
+      "max_lift_m": 0.08000000036443983,
+      "reference_stance_xy_speed_max_mps": 5.1868456336531826e-06,
+      "period_s": 0.6,
+      "duty": 0.5
+    },
+    "[0.5, 0, 0]": {
+      "min_lift_m": 0.07999999968954671,
+      "max_lift_m": 0.07999999968986621,
+      "reference_stance_xy_speed_max_mps": 0.0005268518385109414,
+      "period_s": 0.6,
+      "duty": 0.5
+    },
+    "[1.5, 0, 0]": {
+      "min_lift_m": 0.07995880858473223,
+      "max_lift_m": 0.0799588085850571,
+      "reference_stance_xy_speed_max_mps": 0.004021744368375977,
+      "period_s": 0.39999999999999997,
+      "duty": 0.375
+    },
+    "[0, 1.5, 0]": {
+      "min_lift_m": 0.07995880857895113,
+      "max_lift_m": 0.07995880858592186,
+      "reference_stance_xy_speed_max_mps": 0.006044449191942299,
+      "period_s": 0.39999999999999997,
+      "duty": 0.375
+    },
+    "[0, 0, 1.5]": {
+      "min_lift_m": 0.07999999966231192,
+      "max_lift_m": 0.07999999969556817,
+      "reference_stance_xy_speed_max_mps": 0.0022091689724522234,
+      "period_s": 0.6,
+      "duty": 0.5
+    },
+    "[0.8, 0.8, 0.8]": {
+      "min_lift_m": 0.07916087898007396,
+      "max_lift_m": 0.07934554956272943,
+      "reference_stance_xy_speed_max_mps": 0.027810820649690163,
+      "period_s": 0.43040150809372285,
+      "duty": 0.39400094255857687
+    }
+  },
+  "max_reference_stance_speed_mps": 0.027810820649690163,
+  "finite_reward_gradients": true,
+  "immediate_zero_reference_root_velocity": true,
+  "terrain_enabled": false,
+  "hardware_accessed": false,
+  "gpu_smoke_completed": false
+}

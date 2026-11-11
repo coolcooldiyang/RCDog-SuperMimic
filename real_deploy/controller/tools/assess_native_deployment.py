@@ -105,10 +105,11 @@ class NativePlant:
         self.data=mujoco.MjData(self.model);mujoco.mj_setConst(self.model,self.data)
         mujoco.mj_resetDataKeyframe(self.model,self.data,0)
         self.effort=np.tile([23.7,23.7,42.66],4)
-        legs=yaml.safe_load((ROOT/'config/leg_direction_mapping.yaml').read_text())['legs']
+        calibration=ROOT/('config' if (ROOT/'config/leg_direction_mapping.yaml').exists() else 'examples')
+        legs=yaml.safe_load((calibration/'leg_direction_mapping.yaml').read_text())['legs']
         for leg in legs:leg['ids']=[1,2,3];leg['joints']=['髋','大腿','小腿']
         self.codes=[leg['code'] for leg in legs]
-        stand=yaml.safe_load((ROOT/'config/stand_poses.yaml').read_text())['stand']
+        stand=yaml.safe_load((calibration/'stand_poses.yaml').read_text())['stand']
         self.ctrl=SimpleNamespace(legs=legs,buses=[],is_enabled=True,is_moving=False,kp=60.,kd=3.,stand=stand,pose=stand)
         self.ctrl.apply_pose=lambda pose:setattr(self.ctrl,'pose',list(pose))
         self.delay=int(round(delay_ms));self.period=int(round(period_ms))

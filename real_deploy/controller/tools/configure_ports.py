@@ -11,6 +11,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--motor-prefix',help='by-id path before -if00-port0')
     p.add_argument('--imu',help='IMU stable by-id path')
+    p.add_argument('--policy',choices=['legged-a3','command150'],default='legged-a3',help='version-specific deployment example')
     p.add_argument('--force',action='store_true',help='overwrite existing local configuration')
     a=p.parse_args()
     links=Path('/dev/serial/by-id')
@@ -27,7 +28,7 @@ def main():
     names=['config.json','deploy_newurdf.yaml','leg_direction_mapping.yaml','stand_poses.yaml','policy_stand.yaml']
     existing=[str(target/n) for n in names if (target/n).exists()]
     if existing and not a.force:p.error('已有本机配置，未覆盖；需要覆盖时加 --force：'+', '.join(existing))
-    for name in names:shutil.copy2(ROOT/'examples'/name,target/name)
+    for name in names:shutil.copy2(ROOT/'examples'/({'legged-a3':'deploy_legged_a3.yaml','command150':'deploy_command150.yaml'}[a.policy] if name=='deploy_newurdf.yaml' else name),target/name)
     f=target/'leg_direction_mapping.yaml';mapping=yaml.safe_load(f.read_text())
     interface={'FL':0,'FR':1,'RL':2,'RR':3}
     for leg in mapping['legs']:leg['port']=a.motor_prefix+f'-if{interface[leg["code"]]:02d}-port0'

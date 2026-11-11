@@ -1,10 +1,11 @@
-# RCDog adaptation, 2026-11-07; derived from Uni-SuperMimic where applicable.
+# RCDog adaptation, 2026-11-10; derived from Uni-SuperMimic where applicable.
 # RCDog extension / combined software: GPL-3.0-only. See LICENSE and THIRD_PARTY.md.
 """Manager-Based terms for the RCDog SuperMimic mjwarp task."""
 
 from __future__ import annotations
 
 import math
+import os
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, cast
 
@@ -31,6 +32,7 @@ from unisupermimic.rl.contracts.supermimic import State
 
 from .kinematics import RCDogKinematics
 from .mdp import MAX_STEP_REWARD, MDP, NUM_J, XI_DIM
+from . import terrain
 from .motion import BIN_FRAMES, MotionLib
 from .robot import RCDOG_JOINT_NAMES, action_scale
 
@@ -61,9 +63,14 @@ def sample_start_frames(
     gamma: float,
     num_samples: int,
     rng: ManagerRng,
+    focus_bins: torch.Tensor | None = None,
+    focus_fraction: float = 0.0,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """Sample one-second bins and uniformly sample a frame inside each bin."""
     probabilities = start_bin_probabilities(bin_G, bin_w_avg, gamma)
+    if focus_bins is not None:
+        focus = focus_bins.to(probabilities.dtype)
+        probabilities = (1-focus_fraction)*probabilities + focus_fraction*focus/focus.sum()
     bins = rng.choice(motion.num_bins, (num_samples,), p=probabilities)
     start = motion.bin_start[bins]
     end = torch.minimum(start + BIN_FRAMES, motion.clip_end[motion.bin_clip[bins]])
@@ -230,6 +237,40 @@ class SuperMimicCommand(CommandTerm):
         self.last_episode_stats: dict[str, torch.Tensor] = {}
         self._requested_frames: torch.Tensor | None = None
         self._read_phase_bound = False
+        self._rehearsal_prob = None
+        self._flat_focus_bins = None
+        self._flat_focus_fraction = 0.0
+        focus_names = [x for x in os.environ.get('RCDOG_FLAT_FOCUS_CLIPS','').split(',') if x]
+        if focus_names and not cfg.eval_mode:
+            if terrain.ENABLED:raise ValueError('Flat focus must not enable terrain')
+            missing = set(focus_names)-set(self.motion.names)
+            if missing:raise ValueError(f'Unknown flat focus clips: {missing}')
+            fraction=float(os.environ.get('RCDOG_FLAT_FOCUS_FRACTION','.2'))
+            if not 0<fraction<.5:raise ValueError('Flat focus fraction must be in (0,.5)')
+            clip_ids=torch.tensor([self.motion.names.index(n) for n in focus_names],device=device)
+            offsets=self.motion.bin_start-self.motion.clip_start[self.motion.bin_clip]
+            mask=torch.isin(self.motion.bin_clip,clip_ids)&(offsets>=250)&(offsets<500)
+            if not bool(mask.any()):raise ValueError('No steady-motion focus bins')
+            self._flat_focus_bins=mask
+            self._flat_focus_fraction=fraction
+            print('Flat focus:',focus_names,'steady bins:',int(mask.sum()),'mixture:',fraction,flush=True)
+        if terrain.ENABLED and os.environ.get('RCDOG_TERRAIN_REHEARSAL','0') == '1':
+            groups = ['flat' if name.startswith('flat_') else name.split('_')[0] for name in self.motion.names]
+            terrain_groups = sorted(set(groups)-{'flat'})
+            if 'flat' not in groups or not terrain_groups:
+                raise ValueError('Rehearsal needs flat and terrain clips')
+            weights = [.5/groups.count(g) if g=='flat' else .5/len(terrain_groups)/groups.count(g) for g in groups]
+            focus = os.environ.get('RCDOG_TERRAIN_FOCUS_CLIP','')
+            # Level1 focus must not displace samples from later courses.
+            if focus and focus in self.motion.names and terrain_groups == ['l1']:
+                fraction=float(os.environ.get('RCDOG_TERRAIN_FOCUS_FRACTION','.2'))
+                if not 0<fraction<.5:raise ValueError('Focus fraction must be between0 and.5')
+                weights=[w if g=='flat' else w*(.5-fraction)/.5 for w,g in zip(weights,groups)]
+                weights[self.motion.names.index(focus)]+=fraction
+                print('Focus reset probability:',focus,weights[self.motion.names.index(focus)],flush=True)
+            if abs(sum(weights)-1)>1e-6:raise ValueError('Invalid reset probabilities')
+            self._rehearsal_prob = torch.tensor(weights,device=device,dtype=torch.float32)
+            print('Rehearsal reset probability:', {g:sum(w for w,k in zip(weights,groups) if k==g) for g in sorted(set(groups))}, flush=True)
 
     @staticmethod
     def _validate_cfg(cfg: SuperMimicCommandCfg) -> None:
@@ -331,6 +372,8 @@ class SuperMimicCommand(CommandTerm):
                 self.gamma,
                 ids.numel(),
                 self._rng,
+                self._flat_focus_bins,
+                self._flat_focus_fraction,
             )
         else:
             if not bool(reset_mask.all()):
@@ -339,6 +382,14 @@ class SuperMimicCommand(CommandTerm):
             self._requested_frames = None
             bins = self.motion.frame_bin[frames]
 
+        if terrain.ENABLED and self._requested_frames is None and not self.eval_mode:
+            # Physical episode starts on a level apron / landing, not intersecting
+            # a riser at a random reference frame. Downhill has separate starts.
+            frames = self.motion.clip_start[self.motion.clip_id[frames]]
+            if self._rehearsal_prob is not None:
+                clips = self._rng.choice(len(self.motion.names), (ids.numel(),), p=self._rehearsal_prob)
+                frames = self.motion.clip_start[clips]
+            bins = self.motion.frame_bin[frames]
         full_frames = self.f.clone()
         full_frames[ids] = frames
         p, rotation, v, w, q, qd = (value.clone() for value in self.motion.ref_state(full_frames))
@@ -377,6 +428,8 @@ class SuperMimicCommand(CommandTerm):
                 selected_w,
                 selected_q,
             )
+        if terrain.ENABLED:
+            p[ids, 2] += terrain.height(p[ids, :2])
         q = torch.clamp(q, self.kin.q_lo, self.kin.q_hi)
         root_state = torch.cat((p + self._env_origins, mat_to_quat(rotation), v, w), dim=-1)
         self.robot.write_motion_state_tensor_to_sim(
@@ -521,6 +574,8 @@ def supermimic_termination(env: ManagerBasedRlEnv, command_name: str = "motion")
     command = _command(env, command_name)
     done=command.mdp.termination(command.state(), command.f + 1)
     invalid=getattr(cast('RuntimeEnv',env).backend,'parallel_invalid',None)
+    peak=getattr(cast('RuntimeEnv',env).backend,'substep_overspeed',None)
+    if peak is not None:done=done|peak.to(done.device)
     return done if invalid is None else done|invalid.to(done.device)
 
 

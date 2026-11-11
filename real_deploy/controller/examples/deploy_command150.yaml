@@ -1,0 +1,244 @@
+version: 1
+controller: motor_native_pd
+native_pd_verified: false
+absolute_joint_reference_verified: true
+commissioning_speed_limits_rad_s:
+- 8
+- 10
+- 10
+commissioning_allowed_clips:
+- forward
+- forward_left
+- left
+- back_left
+- back
+- back_right
+- right
+- forward_right
+- ccw
+- cw
+simulation_validation_report: results/command150/VALIDATION_SUMMARY.json
+bundle: ../policies/newurdf_command150_final500
+checkpoint_sha256: f9a9736547d8325949b03b0e3c635e69bf1fcbdb14431f4d60abd525c8772205
+stand_record: reports/operator_confirmed_stand_20261103_232516.json
+sdk_internal_gear_ratio: 6.33
+extra_ratio_per_leg:
+- 1
+- 1
+- 2
+policy_leg_order:
+- RR
+- RL
+- FR
+- FL
+motor_period_s: 0.005
+policy_period_s: 0.02
+joint_age_max_s: 0.012
+imu_age_max_s: 0.02
+max_temperature_c: 70
+tilt_limit_deg: 30
+posture_tilt_limit_deg: 15
+entry_pose_tolerance_rad: 0.15
+imu:
+  device: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_YOUR_IMU_SERIAL-if00-port0
+  parser: vendor/hi12/hi12_monitor.py
+  R_CI:
+  - - 0
+    - 1
+    - 0
+  - - -1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+  axes_user_confirmed: sensor +X forward, +Y left, +Z up
+  orientation_verified: true
+  verification_report: reports/imu_nose_up_check_20261104.json
+gamepad:
+  device: /dev/input/by-id/usb-shanwan_Android_GamePad-joystick
+  axes:
+  - 1
+  - 0
+  - 3
+  deadzone: 0.12
+  start: RB+Y
+  posture: LB+A without RB
+  stop: A or release RB
+  lie: B; decelerate first during PLAY
+  emergency: LB+RB+A
+legs:
+  FL:
+    A_joint_from_motor_output:
+    - - -1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - -1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - -0.5
+    mapping_verified: true
+    candidate_source: legacy direction table only; URDF signs not yet measured
+    measured_stand_relative_motor_output_deg:
+    - -0.21278478103601295
+    - 104.87862937755065
+    - 110.40886399340506
+    axis_verification:
+      hip:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 10
+        observation: all legs adduct inward
+        raw_motor_output_to_urdf_sign: -1
+      thigh:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 5
+        observation: all knee axes move forward
+        raw_motor_output_to_urdf_sign: -1
+      calf:
+        verified: true
+        method: operator_observed_positive_legacy_command_thigh_fixed
+        legacy_delta_deg: 20
+        observation: feet move backward relative to body while thighs fixed
+        raw_motor_output_to_urdf_sign: -1
+        extra_ratio: 2
+    mapping_source: 2026-11-04 operator-observed hip/thigh/calf directions, known
+      housing follows thigh, SDK6.33 and user-confirmed belt2:1
+  FR:
+    A_joint_from_motor_output:
+    - - -1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - -1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - -0.5
+    mapping_verified: true
+    candidate_source: legacy direction table only; URDF signs not yet measured
+    measured_stand_relative_motor_output_deg:
+    - -0.06358053769041222
+    - 104.1154635945188
+    - 110.09090670659972
+    axis_verification:
+      hip:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 10
+        observation: all legs adduct inward
+        raw_motor_output_to_urdf_sign: -1
+      thigh:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 5
+        observation: all knee axes move forward
+        raw_motor_output_to_urdf_sign: -1
+      calf:
+        verified: true
+        method: operator_observed_positive_legacy_command_thigh_fixed
+        legacy_delta_deg: 20
+        observation: feet move backward relative to body while thighs fixed
+        raw_motor_output_to_urdf_sign: -1
+        extra_ratio: 2
+    mapping_source: 2026-11-04 operator-observed hip/thigh/calf directions, known
+      housing follows thigh, SDK6.33 and user-confirmed belt2:1
+  RR:
+    A_joint_from_motor_output:
+    - - -1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - -1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - -0.5
+    mapping_verified: true
+    candidate_source: legacy direction table only; URDF signs not yet measured
+    measured_stand_relative_motor_output_deg:
+    - 0.020219841930242885
+    - 106.99042462463953
+    - 110.8751663008543
+    axis_verification:
+      hip:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 10
+        observation: all legs adduct inward
+        raw_motor_output_to_urdf_sign: -1
+      thigh:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 5
+        observation: all knee axes move forward
+        raw_motor_output_to_urdf_sign: -1
+      calf:
+        verified: true
+        method: operator_observed_positive_legacy_command_thigh_fixed
+        legacy_delta_deg: 20
+        observation: feet move backward relative to body while thighs fixed
+        raw_motor_output_to_urdf_sign: -1
+        extra_ratio: 2
+    mapping_source: 2026-11-04 operator-observed hip/thigh/calf directions, known
+      housing follows thigh, SDK6.33 and user-confirmed belt2:1
+  RL:
+    A_joint_from_motor_output:
+    - - -1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - -1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - -0.5
+    mapping_verified: true
+    candidate_source: legacy direction table only; URDF signs not yet measured
+    measured_stand_relative_motor_output_deg:
+    - -0.011340056392787306
+    - 107.35275871924593
+    - 110.61757148595328
+    axis_verification:
+      hip:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 10
+        observation: all legs adduct inward
+        raw_motor_output_to_urdf_sign: -1
+      thigh:
+        verified: true
+        method: operator_observed_positive_legacy_command
+        legacy_delta_deg: 5
+        observation: all knee axes move forward
+        raw_motor_output_to_urdf_sign: -1
+      calf:
+        verified: true
+        method: operator_observed_positive_legacy_command_thigh_fixed
+        legacy_delta_deg: 20
+        observation: feet move backward relative to body while thighs fixed
+        raw_motor_output_to_urdf_sign: -1
+        extra_ratio: 2
+    mapping_source: 2026-11-04 operator-observed hip/thigh/calf directions, known
+      housing follows thigh, SDK6.33 and user-confirmed belt2:1
+framework: Uni-SuperMimic
+policy_kp_joint: 20.0
+policy_kd_joint: 0.5
+history_length: 5
+action_scale: 0.25
+training_physics_period_s: 0.005
+control_decimation: 4
+sim2sim_verified: true
+training_project: experiments/command150
+physical_validation_report: reports/physical_prechecks_20261104.json
+policy_trial_note: 'All-direction final500: 60 MuJoCo and 14 native transmission cases
+  passed. Physical demonstration is linked from the repository README; no real speed measurement is included. Existing session
+  static, feedback and tilt guards retained.'
+policy_trial_max_s: null
+stick_control: true
+continuous_forward: false
+commissioning_max_forward_mps: 1.5
+commissioning_max_yaw_rad_s: 1.5

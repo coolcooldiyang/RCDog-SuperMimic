@@ -1,0 +1,9 @@
+{
+  "rejected": "flat_legged_a1",
+  "stability_passed": 33,
+  "gait_passed": 33,
+  "total": 60,
+  "parent": "results/flat_legged_a3/a0/ckpt_005000.pt",
+  "change": "Restore stance total weight 10; near-ground excess speed above .1m/s weight10; add cross-track .5*(v_cross/.15)^2; lr2e-5 and1500 iterations.",
+  "reason": "Stronger all-speed contact penalty induced translation cross-track errors; keep completed a0 as parent and keep all gates unchanged."
+}

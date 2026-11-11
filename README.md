@@ -1,178 +1,154 @@
 # RCDog-SuperMimic
 
-基于 [Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic) 的自研12自由度四足机器人运动控制。使用 SuperMimic 可微世界模型训练参考动作条件策略，通过连续参考生成器接收手柄速度指令，实现前进、后退、横移和旋转，并接入实机起立、趴下状态机。
+基于 [Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic) 的自研12自由度四足机器人运动控制。SuperMimic学习参考动作条件策略，连续参考生成器将手柄指令转换为前进、后退、横移、旋转和停步目标，实机端接入起立、趴下状态机。
 
-当前版本为 **command150 / final500**：新URDF总质量 **11.1134 kg**，策略 **50 Hz**，电机指令 **200 Hz**，关节侧 **Kp=20、Kd=0.5**，5帧观测历史。平移指令合速度上限 **1.5 m/s**，旋转上限 **1.5 rad/s**。
+当前新增 **V3：flat_legged_a3 / 1000，高抬脚平地实验版**。它采用 [legged_control](https://github.com/qiayuanl/legged_control) 的Go1步态时序及OCS2摆腿样条方法，经RCDog逆运动学生成8 cm抬脚参考；训练仍使用Uni-SuperMimic，没有运行MPC/WBC。旧版权重、演示、参考和报告均保留。
 
 ## 效果演示
 
-| 实机：地面手柄测试 | 仿真：前进、后退、横移、旋转与停步 |
+| V3：新步态，0.5 m/s指令实机表现 | V2：原command150步态实机表现 |
 | --- | --- |
-| [![实机演示](docs/assets/rcdog/rcdog_real_preview.gif)](docs/assets/rcdog/rcdog_real_20261110.mp4) | [![MuJoCo仿真](docs/assets/rcdog/command150_cover.jpg)](docs/assets/rcdog/command150_mujoco.mp4) |
+| [![新步态0.5m/s实机](docs/assets/rcdog/legged_a3_real050_preview.gif)](docs/assets/rcdog/legged_a3_real050_20261111.mp4) | [![原步态实机](docs/assets/rcdog/rcdog_real_preview.gif)](docs/assets/rcdog/rcdog_real_20261110.mp4) |
 
-点击预览查看完整MP4。实机视频约23秒，现场有人持扶手跟随；没有同步速度测量。下文的速度与通过率来自仿真评估。
+点击预览查看完整MP4。新视频由作者提供，约19.6秒，现场有人手持扶手跟随；0.5 m/s是作者说明的指令设置，没有同步机身速度或抬脚高度测量。下文仿真结果单独统计。
+
+## 版本分类
+
+| 版本 | 策略与参考 | 状态与入口 |
+| --- | --- | --- |
+| **V3 / flat_legged_a3** | a3第1000次迭代；8 cm抬脚参考，动态周期0.4～0.6 s，5帧历史；训练物理1 ms | 新实机演示；全速CPU稳定性58/60、步态57/60，尚未全通过；[完整说明](docs/FLAT_LEGGED_A3.md) |
+| **V2 / command150** | final500；最高2.5 cm抬脚参考，周期0.32 s，5帧历史；训练物理5 ms | 保留原策略、训练链与报告；[原版首页](https://github.com/coolcooldiyang/RCDog-SuperMimic/tree/v2-command150-final500)、[训练说明](docs/COMMAND150.md) |
+| **V1 / omni050–150** | 早期10帧历史的全向策略 | 归档；[使用说明](docs/LEGACY_OMNI150.md) |
+
+版本对应的路径、提交及兼容性见 [版本索引](docs/VERSIONS.md)。V3的训练指令覆盖平移1.5 m/s、旋转1.5 rad/s；公开实机配置默认限制为0.5 m/s、0.5 rad/s。全速失败项和实机停步倾角、USB/UART问题保留在版本说明中。
 
 ## 目录
 
 ```text
-src/unisupermimic/
-  rl/algos/supermimic/                     世界模型、策略、critic和训练循环
-  tasks/motion_tracking/rcdog/supermimic/   RCDog观测、奖励、传动与动力学配置
-  assets/robots/rcdog/                     当前URDF转换的MJCF与网格
-  assets/motions/rcdog/                    速度、旋转、对角与启停参考动作
-source/                                   当前CAD导出的URDF与STL
-experiments/command150/                    参考生成、训练、导出、CPU MuJoCo与手柄仿真
-results/command150/                        final500权重、父策略、训练配置和评估记录
-real_deploy/policies/newurdf_command150_final500/
-                                          ONNX、TorchScript、参考表与接口契约
-real_deploy/controller/                    实机通信、起立趴下、手柄、IMU与日志
-real_deploy/README.md                      实机安装、标定与运行步骤
-real_deploy/COMMANDS.md                    常用命令与故障排查
+src/unisupermimic/                         Uni-SuperMimic训练框架与RCDog适配
+  assets/robots/rcdog/                     11.1134kg RCDog MJCF与网格
+  assets/motions/rcdog_flat_legged/        V3的68段CSV及独立相位/接触侧文件
+  assets/motions/rcdog/                    V2参考动作，保留
+source/                                   作者CAD导出的URDF与STL
+experiments/flat_legged_a3/                V3参考构建、训练、CPU仿真、步态评估与导出
+experiments/command150/                    V2训练与仿真入口，保留
+results/flat_legged_a3/                    V3的a0/a2/a3权重、训练配置、成功与失败报告
+results/command150/                        V2的final500及父策略，保留
+real_deploy/policies/                      按版本分开的ONNX/TorchScript配套部署包
+real_deploy/controller/                    通信、手柄、起立趴下、日志与离线测试
 ```
-
-早期 `omni050 / omni100 / omni150` 的权重和报告保留在原目录。它们使用10帧历史，不能与当前5帧部署程序混用；对应代码见 [早期版本说明](docs/LEGACY_OMNI150.md)。
 
 ## 安装
 
-克隆后，以下仿真和训练命令均在仓库根目录执行：
+以下命令均从仓库根目录执行。CPU仿真与ONNX推理不需要GPU或ROS：
 
 ```bash
 git clone https://github.com/coolcooldiyang/RCDog-SuperMimic.git
 cd RCDog-SuperMimic
-```
-
-只运行ONNX策略与CPU MuJoCo，不需要GPU或ROS：
-
-```bash
 python3 -m venv .venv-sim
 source .venv-sim/bin/activate
-python -m pip install -r experiments/command150/requirements-sim.txt
+python -m pip install -r experiments/flat_legged_a3/requirements-sim.txt
 python real_deploy/verify_bundle.py \
-  --bundle real_deploy/policies/newurdf_command150_final500
+  --bundle real_deploy/policies/newurdf_legged_a3_1000
 ```
 
-训练使用Linux、CUDA GPU、Python 3.10–3.13和 [uv](https://docs.astral.sh/uv/)。按框架环境安装：
+训练使用Linux、CUDA GPU和 [uv](https://docs.astral.sh/uv/)：
 
 ```bash
 uv sync
 uv pip install scipy onnx onnxruntime
 ```
 
-训练机的完整依赖记录见 [requirements-training.txt](experiments/command150/requirements-training.txt)；它是环境快照，CPU仿真使用上面的独立依赖文件。
+云端训练的依赖快照见 [requirements-training-snapshot.txt](experiments/flat_legged_a3/requirements-training-snapshot.txt)。根目录锁文件沿用框架环境；实际V3训练配置与依赖另行归档。
 
-## 手柄与键盘仿真
+## 手柄或键盘sim2sim
 
-直接使用发布的ONNX，无需先训练：
-
-```bash
-python experiments/command150/sim2sim_gamepad.py
-```
-
-仿真手柄：`LB+A` 起立，`RB+Y` 接入策略，左摇杆平移、右摇杆旋转，`B` 趴下。键盘：`1` 起立、`2` 接策略、`W/S/A/D` 平移、`Q/E` 旋转、空格停止、`B` 趴下。键盘速度指令会保持至空格清零。
-
-没有手柄时：
+使用已发布的V3 ONNX，默认0.5 m/s、0.5 rad/s：
 
 ```bash
-python experiments/command150/sim2sim_gamepad.py --keyboard-only
+python experiments/flat_legged_a3/sim2sim_gamepad.py
+# 没有手柄：
+python experiments/flat_legged_a3/sim2sim_gamepad.py --keyboard-only
 ```
 
-仿真只打开MuJoCo与输入设备，不打开电机串口。不要让实机后台和仿真同时读取同一个手柄。
+手柄：`LB+A`起立、`RB+Y`接入策略、左摇杆平移、右摇杆旋转、`B`趴下。键盘：`1`起立、`2`接策略、`W/S/A/D`平移、`Q/E`旋转、空格清零、`B`趴下。键盘速度保持至空格清零。
+
+V3回中时当前帧根速度参考置零，步态相位、历史与航向不重置，最后的摆腿幅度约0.3秒收束；指令归零不等于实物瞬时停止。添加 `--cap 1.5` 可在仿真中检查全速实验范围。此入口不打开电机串口。
 
 ## 参考动作与训练
 
-仓库已包含当前模型和72段训练参考。参考由足端轨迹经RCDog逆运动学生成，速度网格覆盖前后、左右与旋转，另有静止、方向切换和对角动作；没有使用第三方动作捕捉数据。
-
-重建参考表和CSV：
+仓库已包含预计算参考表和68段动作。修改步态时才需重新构建：
 
 ```bash
-python experiments/command150/build_references.py
+python experiments/flat_legged_a3/build_legged_reference.py
+python experiments/flat_legged_a3/prepare_flat_motions.py
+uv run python experiments/flat_legged_a3/validate_flat_reference.py
 ```
 
-输出为 `experiments/command150/command_gait_table.npz`、`plan.json` 和 `src/unisupermimic/assets/motions/rcdog/*.csv`。当前参考周期0.32秒、占空比0.5、最大抬脚高度0.025米，面向平地运动。
+输出为 `experiments/flat_legged_a3/reference_candidates/legged_control/command_gait_table.npz`、`flat_clips.json` 和 `src/unisupermimic/assets/motions/rcdog_flat_legged/`。参考按Go1普通trot（0.6 s、占空比0.5）与flying trot（0.4 s、占空比0.375）插值；8 cm是参考高度上限，极低足速会缩小幅度；本次0.5m/s平移CPU完整摆腿约7.4～7.8cm，0.5rad/s纯旋转约4.7～4.9cm。实机视频没有高度测量。
 
-当前训练链从仓库内的横移父策略开始，先扩展前后速度，再做全向速度跟踪与停步微调：
+当前选中训练链为 **V2 final500 → a0 → a2 → a3**。a1和a4未采用；其评估报告仍保留。重训对应阶段：
 
 ```bash
-# 前后速度扩展到1.0 m/s；继承父策略的横移、旋转能力
-uv run python experiments/command150/train.py --stage mid \
-  --parent results/command150/parent_lateral150.pt
-
-# 前后速度扩展到1.5 m/s
-uv run python experiments/command150/train.py --stage high \
-  --parent runs/command150_mid/ckpt_000750.pt
-
-# 全向速度跟踪和停步微调
-uv run python experiments/command150/train.py --stage final \
-  --parent runs/command150_high/ckpt_002000.pt
+uv run python experiments/flat_legged_a3/train.py --stage a0 \
+  --parent results/command150/ckpt_000500.pt
+uv run python experiments/flat_legged_a3/train.py --stage a2 \
+  --parent runs/flat_legged_a0/ckpt_005000.pt
+uv run python experiments/flat_legged_a3/train.py --stage a3 \
+  --parent runs/flat_legged_a2/ckpt_001500.pt
 ```
 
-每阶段输出在 `runs/command150_<stage>/`。训练使用1024个并行环境、世界模型 `[512,512,512]`、策略网络 `[512,256,128]`、5帧历史、动作比例0.25。`--parent` 加载网络权重，优化器与经验缓冲重新建立。已有同名目录时拒绝覆盖，可用 `--name` 指定新目录。
+a0/a2/a3分别训练5000/1500/1000次，学习率为1e-4/2e-5/1e-5，512个环境。加载父策略网络权重，重新建立优化器与回放缓冲。输出在 `runs/flat_legged_<stage>/`；同名目录拒绝覆盖，可用 `--name`指定新目录。加 `--smoke`做两次小规模GPU迭代，或 `--print-command`仅检查命令。
 
-正式训练前可加 `--smoke` 跑2次小规模迭代，或加 `--print-command` 只检查命令。奖励中包含机身倾斜、横滚/俯仰角速度，以及零速时的关节速度、动作变化和机身速度惩罚。
+关节侧Kp20、Kd0.5，物理1 ms、策略50 Hz、5帧历史、动作比例0.25；髋/大腿位置目标变化率上限30.1 rad/s，小腿15.05 rad/s，反馈速度不截断。a2/a3奖励包含支撑脚及贴地滑移、横向跑偏、摆腿高度不足、倾角和停步抖动；a3将20%重置样本分给失败动作族，80%保留普通自适应采样。actor不使用视觉或地形扫描。
 
-发布权重选取最后微调的第500次迭代：`results/command150/ckpt_000500.pt`。第750次候选在连续混合指令测试中后退横向漂移超限，因此未采用。训练配置与选择记录见 [训练与结果说明](docs/COMMAND150.md)。
+## CPU评估与导出
 
-## sim2sim评估
-
-独立CPU MuJoCo使用1 ms物理步长、50 Hz策略；测试不固定机身，不施加辅助支撑力。全方向、多速度与8 ms延迟/观测噪声测试：
+全方向、多速度、停步及0/8 ms延迟噪声测试；第一条生成逐帧NPZ，第二条据此测量实际摆腿与触地滑移：
 
 ```bash
-python experiments/command150/evaluate_stability.py \
-  --checkpoint real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx \
-  --output outputs/command150/recheck.json --cap 1.5 --stress
+python experiments/flat_legged_a3/evaluate_stability.py \
+  --checkpoint real_deploy/policies/newurdf_legged_a3_1000/actor_fp32.onnx \
+  --output outputs/flat_legged_a3/stability.json --cap 1.5 --stress
+python experiments/flat_legged_a3/evaluate_flat_gait.py \
+  --stability-report outputs/flat_legged_a3/stability.json \
+  --output outputs/flat_legged_a3/gait.json
 ```
 
-连续启停、换向和旋转测试：
+| 候选 | 稳定性 | 实际步态 | 选择 |
+| --- | --- | --- | --- |
+| a0 / 5000 | 60/60 | 53/60 | 保留父策略 |
+| a1 / 2500 | 33/60 | 33/60 | 拒绝，过强滑移惩罚导致退化 |
+| a2 / 1500 | 57/60 | 53/60 | a3父策略 |
+| **a3 / 1000** | **58/60** | **57/60** | 本次实机演示候选，实验状态 |
+| a4 / 1500 | 58/60 | 53/60 | 未采用 |
+
+a3剩余：无延迟左后斜向滑移、8 ms噪声下右横移关节越速，以及左转停步目标摆幅超限。0.5档实际部署链测试22/22通过，是另一组仿真，不代表全速验收。原始结果见 [VERSION.json](results/flat_legged_a3/VERSION.json) 和 [reports/](results/flat_legged_a3/reports/)。
+
+导出配套包：
 
 ```bash
-python experiments/command150/evaluate_mixed.py \
-  --checkpoint real_deploy/policies/newurdf_command150_final500/actor_fp32.onnx \
-  --output outputs/command150/mixed.json --delay 8 --noise
+uv run python experiments/flat_legged_a3/export_bundle.py \
+  --checkpoint results/flat_legged_a3/a3/ckpt_001000.pt \
+  --output outputs/flat_legged_a3_export
 ```
 
-报告保存速度误差、倾角、停步关节抖动和保护原因；同目录生成逐帧NPZ。发布时的结果为 **60/60** 个CPU MuJoCo案例、**14/14** 个电机传动仿真案例通过，以及 **98.6秒** 连续混合指令测试通过，详见 [VALIDATION_SUMMARY.json](results/command150/VALIDATION_SUMMARY.json)。
+包内包含ONNX、TorchScript、固定输入、步态表与生成器、离线模型、来源及接口契约。部署时同时使用位置目标限速和实际应用的previous_action，不能只替换actor。
 
-| 指令 | 无延迟仿真实测 | 8 ms延迟与噪声仿真实测 |
-| --- | --- | --- |
-| 前进1.5 m/s | 1.490 m/s | 1.481 m/s |
-| 后退−1.5 m/s | −1.469 m/s | −1.491 m/s |
-| 左移1.5 m/s | 1.468 m/s | 1.474 m/s |
-| 右移−1.5 m/s | −1.465 m/s | −1.467 m/s |
-| 左转1.5 rad/s | 1.500 rad/s | 见原始报告 |
-| 右转−1.5 rad/s | −1.499 rad/s | 见原始报告 |
+## 实机部署与版本选择
 
-导出四格仿真视频：
+使用GO-M8010-6、宇树USB四路485、HI12M0-MI1-000和ShanWan手柄。每腿ID1/2/3对应髋/大腿/小腿；UART1/2/3/4对应左前/右前/左后/右后。电机内部减速6.33:1，小腿另有2:1皮带传动。
 
-```bash
-MUJOCO_GL=egl python experiments/command150/render_comparison.py \
-  --rollout-dir outputs/command150/recheck \
-  --output ../../outputs/command150/recheck.mp4
-```
-
-当前实机版另加了“摇杆回中立即清零参考”的处理。其专项电机传动仿真为 **10/12通过**，1.5 m/s横移急停在0/8 ms延迟下均触发调试关节速度保护；它与上面的平滑参考评估是两组测试，见 [停步专项记录](results/command150/neutral_continuity_20261110.json)。
-
-## 导出与实机部署
-
-需要重新导出自己训练的checkpoint时，在训练环境执行：
-
-```bash
-uv run python experiments/command150/export_bundle.py \
-  --checkpoint results/command150/ckpt_000500.pt \
-  --output outputs/command150_export
-```
-
-输出ONNX/TorchScript、固定输入、参考表、参考生成器与接口契约；新权重应配套保留这些文件。
-
-实机使用 **GO-M8010-6** 电机、宇树USB转四路RS-485、HI12M0-MI1-000 IMU与ShanWan手柄。UART1/2/3/4分别连接左前/右前/左后/右后，每腿ID1/2/3分别为髋/大腿/小腿。电机内部减速比6.33:1，小腿另有2:1皮带减速。
-
-完整步骤见 [实机部署](real_deploy/README.md)，日常操作见 [常用命令](real_deploy/COMMANDS.md)。完成SDK安装和本机标定后，控制器内执行：
+完整安装与标定见 [实机部署](real_deploy/README.md)，常用操作见 [COMMANDS.md](real_deploy/COMMANDS.md)。在控制器目录生成对应版本的本机配置：
 
 ```bash
 cd real_deploy/controller
+python tools/configure_ports.py --policy legged-a3
+# 使用旧V2时选择 --policy command150；已有配置不会自动覆盖。
 ./dognew serve --gamepad
 ```
 
-另开终端进入同一目录，原标定趴姿、手柄松键回中后：
+另一个终端进入同一目录，从原标定趴姿开始：
 
 ```bash
 ./dognew init-lie &&
@@ -182,11 +158,11 @@ sleep 8 &&
 ./dognew arm-walk
 ```
 
-实机左摇杆平移、右摇杆旋转，回中立即给零速度参考并保持策略；`B` 或 `./dognew lie` 停止策略后趴下。回中指令清零不等于机器人实际速度瞬间归零。
+实机回中给零速度并保持策略，`B`或 `./dognew lie`趴下。公开版默认0.5档；1.5档仍为实验范围。已有实机日志记录了USB公共链路断联、右后UART4超时，以及回中后倾角增长，尚未完成全部硬件与停步问题的修复。
 
 ## 来源与许可
 
-- 框架：[Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic)，保留上游历史、Apache-2.0许可与NOTICE。原始方法：[SuperMimic](https://supermimic.github.io/)。
-- 电机通信：[Unitree Actuator SDK](https://github.com/unitreerobotics/unitree_actuator_sdk)，BSD-3-Clause；安装脚本获取固定版本，并对Python绑定应用释放GIL补丁，核心SDK动态库不随本次更新重新打包。
-- 训练控制参数参考：[unitree_cpp_deploy](https://github.com/wty-yy/unitree_cpp_deploy/tree/go2)，采用GYM配套的20/0.5与5帧历史；本项目策略由Uni-SuperMimic训练。
-- RCDog模型、生成参考、训练权重和实机视频由本项目提供。软件组合按GPL-3.0-only分发，详见 [THIRD_PARTY.md](THIRD_PARTY.md) 与 [NOTICE](NOTICE)。
+- 训练框架：[Motphys/Uni-SuperMimic](https://github.com/Motphys/Uni-SuperMimic)，原始方法 [SuperMimic](https://supermimic.github.io/)。保留上游历史与许可。
+- 新步态方法：[qiayuanl/legged_control](https://github.com/qiayuanl/legged_control) 的Go1配置与 [OCS2](https://github.com/leggedrobotics/ocs2) 的SplineCpg；BSD-3-Clause。来源、固定提交和副本见 [reference_candidates](experiments/flat_legged_a3/reference_candidates/legged_control/)。这些是轨迹方法适配，没有下载Go1实录或MPC rollout。
+- 通信：[Unitree Actuator SDK](https://github.com/unitreerobotics/unitree_actuator_sdk)，BSD-3-Clause；固定版本的安装与释放GIL绑定补丁保留。
+- RCDog模型、生成参考、权重和实机视频由本项目提供。组合软件许可及各资产范围见 [THIRD_PARTY.md](THIRD_PARTY.md)、[NOTICE](NOTICE)、[LICENSES/](LICENSES/)。

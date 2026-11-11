@@ -1,0 +1,19 @@
+{
+  "family": "legged_control_trot",
+  "upstream_commit": "a7f381c0367e98e31c01336e678eef47e304d40d",
+  "lift_m": 0.08,
+  "base_period_s": 0.6,
+  "period_range_s": [
+    0.39999999999999997,
+    0.6
+  ],
+  "duty_range": [
+    0.375,
+    0.5
+  ],
+  "max_ik_error_m": 6.127208963967718e-09,
+  "max_joint_speed_ratio": 0.7955918147073401,
+  "max_abs_joint_rad": 0.6997680237228951,
+  "samples": 36300,
+  "dynamic_validation_pending": true
+}

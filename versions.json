@@ -1,0 +1,32 @@
+{
+  "latest": "v3-flat-legged-a3",
+  "versions": [
+    {
+      "id": "v1-omni",
+      "history_frames": 10,
+      "source_ref": "b2251f5",
+      "status": "archived",
+      "docs": "docs/LEGACY_OMNI150.md"
+    },
+    {
+      "id": "v2-command150-final500",
+      "history_frames": 5,
+      "source_ref": "v2-command150-final500",
+      "checkpoint": "results/command150/ckpt_000500.pt",
+      "experiment": "experiments/command150",
+      "bundle": "real_deploy/policies/newurdf_command150_final500",
+      "status": "previous version retained"
+    },
+    {
+      "id": "v3-flat-legged-a3",
+      "history_frames": 5,
+      "source_ref": "v3-flat-legged-a3",
+      "checkpoint": "results/flat_legged_a3/a3/ckpt_001000.pt",
+      "experiment": "experiments/flat_legged_a3",
+      "bundle": "real_deploy/policies/newurdf_legged_a3_1000",
+      "status": "experimental; full stability58/60, gait57/60",
+      "video": "docs/assets/rcdog/legged_a3_real050_20261111.mp4",
+      "docs": "docs/FLAT_LEGGED_A3.md"
+    }
+  ]
+}

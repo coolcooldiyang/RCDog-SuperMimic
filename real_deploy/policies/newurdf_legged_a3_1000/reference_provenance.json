@@ -1,0 +1,57 @@
+{
+  "upstream": "https://github.com/qiayuanl/legged_control",
+  "commit": "a7f381c0367e98e31c01336e678eef47e304d40d",
+  "license": "BSD-3-Clause",
+  "reference_is_motion_capture": false,
+  "reference_is_mpc_rollout": false,
+  "reference_is_adapted_trajectory_generator": true,
+  "go1_trot": {
+    "period": 0.6,
+    "duty": 0.5
+  },
+  "go1_flying_trot": {
+    "period": 0.4,
+    "duty": 0.375
+  },
+  "swing_height_m": 0.08,
+  "lift_off_velocity": 0.05,
+  "touch_down_velocity": -0.1,
+  "swing_time_scale": 0.15,
+  "adaptations": [
+    "RCDog IK",
+    "speed-dependent interpolation from trot to flying_trot",
+    "exact SE(2) zero-slip support path",
+    "cubic horizontal swing matching zero world touchdown velocity",
+    "immediate zero root command with short swing settling"
+  ],
+  "source_files": [
+    {
+      "path": "reference_candidates/legged_control/upstream/README.md",
+      "sha256": "6ccbd57cf68d7252f9a18a8efa15c54612abbab2ec1b71c5d3df163d41ff6eab"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/LICENSE",
+      "sha256": "a589fc75b3483509a7607135d6acc0c0f861c177bc731e247cb6d7c1656181dc"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/legged_controllers/config/go1/gait.info",
+      "sha256": "cad4da4ac05edff45f2244feb7b436112f2ed7cf9d456a6650bb120c10e2708f"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/legged_controllers/config/go1/task.info",
+      "sha256": "42510ac2b437e5a46c51a80cd9fe83d4d5f518bdfd0ccd1d436c8f87f682111e"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/legged_interface/include/legged_interface/constraint/SwingTrajectoryPlanner.h",
+      "sha256": "cfe591a3a1272332287a7547d90e92b0dfff2ce2b59584a0253f3b72436d169c"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/legged_interface/src/constraint/SwingTrajectoryPlanner.cpp",
+      "sha256": "15de5861c17edca68a1e7c500ed3ad1c819944936ae65fd60e63e22a9ce27fd0"
+    },
+    {
+      "path": "reference_candidates/legged_control/upstream/ocs2/SplineCpg.cpp",
+      "sha256": "49c46e6ad963de7830bd62deed58d0ecd432825513344dd4dc0fa631a810c97f"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "note": "Diagnostic only; existing acceptance gates remain unchanged.",
+  "results": [
+    {
+      "run": "a0",
+      "case": "forward_1.5",
+      "body_origin_mean": 0.11083704682760566,
+      "body_origin_p95": 0.34071255365725567,
+      "contact_point_mean": 0.07218118457197306,
+      "contact_point_p95": 0.30201057844666823,
+      "loaded_contact_point_mean": 0.07597589671008667,
+      "loaded_contact_point_p95": 0.49341143192125286
+    },
+    {
+      "run": "a0",
+      "case": "left_1.5",
+      "body_origin_mean": 0.15745450562004348,
+      "body_origin_p95": 0.7287031123167288,
+      "contact_point_mean": 0.13158421220459895,
+      "contact_point_p95": 0.6888133834348901,
+      "loaded_contact_point_mean": 0.13571452390410552,
+      "loaded_contact_point_p95": 0.6889431193427753
+    },
+    {
+      "run": "a0",
+      "case": "right_1.5",
+      "body_origin_mean": 0.1137454541793617,
+      "body_origin_p95": 0.42439053027212115,
+      "contact_point_mean": 0.08133333743751095,
+      "contact_point_p95": 0.3597094467397135,
+      "loaded_contact_point_mean": 0.08314489994114233,
+      "loaded_contact_point_p95": 0.36044802483594457
+    },
+    {
+      "run": "a2",
+      "case": "forward_1.5",
+      "body_origin_mean": 0.07288316668116171,
+      "body_origin_p95": 0.1594232727697503,
+      "contact_point_mean": 0.04757841108980161,
+      "contact_point_p95": 0.13623352800166555,
+      "loaded_contact_point_mean": 0.0474335197913106,
+      "loaded_contact_point_p95": 0.13639916911065103
+    },
+    {
+      "run": "a2",
+      "case": "left_1.5",
+      "body_origin_mean": 0.13537371163497353,
+      "body_origin_p95": 0.400568880376738,
+      "contact_point_mean": 0.10216904288537046,
+      "contact_point_p95": 0.3508327657915919,
+      "loaded_contact_point_mean": 0.10589000067072045,
+      "loaded_contact_point_p95": 0.3573895384222979
+    },
+    {
+      "run": "a2",
+      "case": "right_1.5",
+      "body_origin_mean": 0.09887188346284506,
+      "body_origin_p95": 0.22885298097493817,
+      "contact_point_mean": 0.07109834704992682,
+      "contact_point_p95": 0.1639411743957344,
+      "loaded_contact_point_mean": 0.07466754771402902,
+      "loaded_contact_point_p95": 0.16416806416070714
+    }
+  ]
+}

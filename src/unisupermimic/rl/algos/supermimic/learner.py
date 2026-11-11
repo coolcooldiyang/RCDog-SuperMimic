@@ -122,6 +122,9 @@ class SuperMimicLearner:
         self._bridged = self.device != self.env_device
         mdp = get_supermimic_mdp(env)
         self.mdp = mdp.to(self.device) if self._bridged else mdp
+        self.feedback_delay_fraction_max=float(getattr(self.mdp,'feedback_delay_fraction_max',0.))
+        self._feedback_last_state=None
+        self._feedback_fraction=torch.zeros(env.num_envs,device=self.device)
 
         # TF32 only pays off for fp32 (amp="none") training: under bf16 autocast
         # the heavy GEMMs already run in bf16, while on ROCm a TF32 bmm over the
@@ -277,11 +280,18 @@ class SuperMimicLearner:
         context: torch.Tensor,
         normalized_context: torch.Tensor,
         goal: torch.Tensor,
+        feedback_fraction: torch.Tensor | None = None,
     ) -> tuple[State, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         action = self.pi(obs_hist, goal)
+        if hasattr(self.mdp, 'limit_action'):
+            action = self.mdp.limit_action(action, previous_action, context)
         next_state = self.wm.step(state, action, normalized_context)
         next_frames = frames + 1
-        obs = self.mdp.add_noise(self.mdp.obs(next_state, action, context, next_frames))
+        sensor_state=next_state
+        if self.feedback_delay_fraction_max>0:
+            if feedback_fraction is None:feedback_fraction=torch.zeros_like(frames,dtype=torch.float32)
+            sensor_state=self.mdp.feedback_state(state,next_state,feedback_fraction)
+        obs = self.mdp.add_noise(self.mdp.obs(sensor_state, action, context, next_frames))
         next_hist = torch.cat((obs_hist[:, 1:], obs.unsqueeze(1)), 1)
         next_goal = self.mdp.goal(next_frames, self.cfg.goal_frames)
         return next_state, action, next_hist, next_frames, next_goal
@@ -311,8 +321,16 @@ class SuperMimicLearner:
         for _ in range(n_steps):
             info = self._state_info()
             state = unflatten_state(info["s"])
-            obs = self.mdp.add_noise(self.mdp.obs(state, info["a_prev"], info["xi"], info["f"]))
             fresh = info["ep_step"] == 0
+            sensor_state=state
+            if self.feedback_delay_fraction_max>0:
+                old=state if self._feedback_last_state is None else self._feedback_last_state
+                old=tuple(torch.where(fresh.reshape(fresh.shape+(1,)*(c.ndim-1)),c,p) for p,c in zip(old,state))
+                sampled=torch.rand_like(self._feedback_fraction)*self.feedback_delay_fraction_max
+                self._feedback_fraction=torch.where(fresh,sampled,self._feedback_fraction)
+                sensor_state=self.mdp.feedback_state(old,state,self._feedback_fraction)
+                self._feedback_last_state=tuple(x.detach().clone() for x in state)
+            obs = self.mdp.add_noise(self.mdp.obs(sensor_state, info["a_prev"], info["xi"], info["f"]))
             shifted = torch.cat((self.obs_hist[:, 1:], obs.unsqueeze(1)), 1)
             self.obs_hist = torch.where(
                 fresh[:, None, None], obs.unsqueeze(1).expand_as(self.obs_hist), shifted
@@ -322,6 +340,8 @@ class SuperMimicLearner:
             self.pi.goal_norm.update(goal)
             action = self.pi(self.obs_hist, goal)
             action = torch.clamp(action + self.cfg.action_noise * torch.randn_like(action), -20, 20)
+            if hasattr(self.mdp, 'limit_action'):
+                action = self.mdp.limit_action(action, info['a_prev'], info['xi'])
             if self._bridged:
                 step_state = self.env.step(action.to(self.env_device))
             else:
@@ -367,7 +387,8 @@ class SuperMimicLearner:
         histories = []
         count = 0
         while count < batch_size:
-            start, history = self.buffer.sample_starts(2 * batch_size, self.cfg.hist)
+            history_length=self.cfg.hist+(1 if self.feedback_delay_fraction_max>0 else 0)
+            start, history = self.buffer.sample_starts(2 * batch_size, history_length)
             valid = self.mdp.valid_imagination_start(start["f"], self.cfg.horizon)
             indices = valid.nonzero(as_tuple=False).squeeze(-1)[: batch_size - count]
             starts.append({key: value[indices] for key, value in start.items()})
@@ -386,9 +407,17 @@ class SuperMimicLearner:
         state = unflatten_state(start["s"])
         context, frames, previous_action = start["xi"], start["f"], start["a_prev"]
         normalized_context = self.mdp.normalize_context(context)
+        feedback_fraction=(torch.rand(self.cfg.pi_batch,device=self.device)*self.feedback_delay_fraction_max
+            if self.feedback_delay_fraction_max>0 else torch.zeros(self.cfg.pi_batch,device=self.device))
         with torch.no_grad():
+            sensor_history=unflatten_state(history["s"])
+            if self.feedback_delay_fraction_max>0:
+                before=tuple(x[:,:-1] for x in sensor_history)
+                current=tuple(x[:,1:] for x in sensor_history)
+                sensor_history=self.mdp.feedback_state(before,current,feedback_fraction[:,None])
+                history={k:v[:,1:] for k,v in history.items()}
             obs_hist = self.mdp.obs(
-                unflatten_state(history["s"]),
+                sensor_history,
                 history["a_prev"],
                 history["xi"],
                 history["f"],
@@ -413,6 +442,7 @@ class SuperMimicLearner:
                     context,
                     normalized_context,
                     goal,
+                    feedback_fraction,
                 )
                 states.append(state)
                 actions.append(previous_action)
